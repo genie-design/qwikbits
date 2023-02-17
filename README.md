@@ -1,4 +1,4 @@
-# QwikBits
+# Qwik Bits
 
 Low level, unstyled, accessible, and fast ui components and other helpers for Qwik
 
