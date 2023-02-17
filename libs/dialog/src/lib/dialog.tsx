@@ -1,207 +1,172 @@
 import { Portal } from '@qwikbits/portal';
-import type { NoSerialize, QRL, Signal } from '@builder.io/qwik';
+import {
+  QwikIntrinsicElements,
+  Signal,
+  useBrowserVisibleTask$,
+  useSignal,
+  useTask$,
+} from '@builder.io/qwik';
 import {
   Slot,
   component$,
-  useBrowserVisibleTask$,
   useStore,
-  useTask$,
-  useSignal,
-  noSerialize,
+  useContext,
+  useContextProvider,
+  createContextId,
   $,
 } from '@builder.io/qwik';
-import A11yDialogLib from 'a11y-dialog';
+import { moveFocusToDialog, trapTabKey, useUniqueId } from '@qwikbits/utils';
+import { JSX } from '@builder.io/qwik/jsx-runtime';
 
-export interface DialogProps {
-  role?: 'dialog' | 'alertdialog';
+export type DialogState = {
+  role: 'dialog' | 'alertdialog';
+  open: Signal<boolean>;
   id: string;
-  title: any;
-  dialogSignal?: Signal<NoSerialize<A11yDialogLib | undefined>>;
-  titleId?: string;
-  closeButtonLabel?: string;
-  closeButtonContent?: any | string;
-  closeButtonPosition?: 'first' | 'last' | 'none';
-  dialogRoot?: string;
-  classes?: {
-    container?: string;
-    overlay?: string;
-    dialog?: string;
-    title?: string;
-    closeButton?: string;
-  };
-  children?: any;
-}
-export interface DialogState {
-  instance: NoSerialize<A11yDialogLib | undefined>;
-  isMounted: boolean;
   titleId: string;
-}
-export const attributes = function attributes(
-  props: DialogProps,
-  state: DialogState
-) {
-  return {
-    container: {
-      id: props.id,
-      role: props.role ?? 'dialog',
-      tabIndex: -1,
-      'aria-modal': true,
-      'aria-hidden': true,
-      'aria-labelledby': state.titleId,
-    },
-    dialog: {
-      role: 'document',
-    },
-    // Using a paragraph with accessibility mapping can be useful to work
-    // around SEO concerns of having multiple <h1> per page.
-    // See: https://twitter.com/goetsu/status/1261253532315004930
-    title: {
-      role: 'heading',
-      'aria-level': 1,
-      id: state.titleId,
-    },
-  };
+  descriptionId: string;
 };
-export const button = function button(props: {
-  class?: string;
-  closeButtonContent?: any;
-  closeButtonLabel?: string;
-  onClick?: QRL;
-}) {
-  return (
-    <button
-      type="button"
-      onClick$={props.onClick}
-      class={props.class}
-      aria-label={props.closeButtonLabel}
-      key="button"
-    >
-      {props.closeButtonContent}
-    </button>
-  );
-};
-export const target = function target(props: DialogProps) {
-  let targetEl = props.dialogRoot
-    ? document.querySelector(props.dialogRoot)
-    : document.body;
-  targetEl = targetEl ?? document.body;
-  return targetEl as HTMLElement;
-};
-export const Dialog = component$((props: DialogProps) => {
-  const ref = useSignal<HTMLDivElement>();
+export type DialogProps = Partial<DialogState> & QwikIntrinsicElements['div'];
+
+export const DialogContext = createContextId<DialogState>('qwikbits-dialog');
+export const DialogRoot = component$((props: DialogProps) => {
+  const defaultSignal = useSignal(false);
   const state = useStore({
-    instance: noSerialize(undefined as A11yDialogLib | undefined),
-    isMounted: false,
-    titleId: '',
     role: props.role ?? 'dialog',
-    closeButtonLabel: props.closeButtonLabel ?? 'Close this dialog window',
-    closeButtonContent: props.closeButtonContent ?? '\u00D7',
-    closeButtonPosition: props.closeButtonPosition ?? 'first',
-    classes: {
-      container: props.classes?.container ?? 'dialog-container',
-      overlay: props.classes?.overlay ?? 'dialog-overlay',
-      dialog: props.classes?.dialog ?? 'dialog-content',
-      title: props.classes?.title ?? 'dialog-title',
-      closeButton: props.classes?.closeButton ?? 'dialog-close-button',
-    },
-    dialogSignal: props.dialogSignal ?? undefined,
-    children: props.children ?? [],
+    open: props.open ?? defaultSignal,
+    id: props.id ?? useUniqueId(),
+    titleId: props.titleId ?? useUniqueId(),
+    descriptionId: props.descriptionId ?? useUniqueId(),
   });
-  useBrowserVisibleTask$(
-    () => {
-      if (!state.titleId) {
-        state.titleId = props.titleId ?? props.id + '-title';
-      }
-      if (!state.isMounted) {
-        state.isMounted = true;
-      }
-    },
-    {
-      strategy: 'document-ready',
-    }
-  );
-  useBrowserVisibleTask$(
-    ({ track }) => {
-      track(() => ref.value);
-      if (ref.value && !state.instance) {
-        state.instance = noSerialize(new A11yDialogLib(ref.value));
-      }
-    },
-    {
-      strategy: 'document-ready',
-    }
-  );
-  useTask$(({ track }) => {
-    track(() => state.dialogSignal);
-    track(() => state.instance);
-    if (state.instance && state.dialogSignal)
-      state.dialogSignal.value = noSerialize(state.instance);
-    return () => {
-      if (state.dialogSignal) {
-        state.dialogSignal.value = undefined;
-      }
-    };
-  });
-  useTask$(() => {
-    return () => state.instance?.destroy();
-  });
-  const close = $(() => {
-    state.instance?.hide();
-  });
+  useContextProvider(DialogContext, state);
   return (
-    <>
-      {state.isMounted ? (
-        <Portal>
-          <div
-            ref={ref}
-            {...attributes(props, state).container}
-            class={state.classes?.container}
-          >
-            <div
-              onClick$={() => {
-                props.role !== 'alertdialog' && close();
-              }}
-              class={state.classes?.overlay}
-            ></div>
-            <div
-              {...attributes(props, state).dialog}
-              class={state.classes?.dialog}
-            >
-              {state.closeButtonPosition === 'first' ? (
-                <>
-                  {button({
-                    class: state.classes?.closeButton,
-                    closeButtonContent: state.closeButtonContent,
-                    closeButtonLabel: state.closeButtonLabel,
-                    onClick: close,
-                  })}
-                </>
-              ) : null}
-              <p
-                key="title"
-                // {...attributes(props, state).title}
-                class={state.classes?.title}
-              >
-                {props.title}
-              </p>
-              <Slot></Slot>
-              {state.closeButtonPosition === 'last' ? (
-                <>
-                  {button({
-                    class: state.classes?.closeButton,
-                    closeButtonContent: state.closeButtonContent,
-                    closeButtonLabel: state.closeButtonLabel,
-                    onClick: close,
-                  })}
-                </>
-              ) : null}
-            </div>
-          </div>
-        </Portal>
-      ) : (
-        <div></div>
-      )}
-    </>
+    <div {...props}>
+      <Slot />
+    </div>
   );
 });
-export default Dialog;
+
+export const DialogTrigger = component$(
+  (props: QwikIntrinsicElements['button']) => {
+    const state = useContext<DialogState>(DialogContext);
+    return (
+      <button
+        type="button"
+        aria-haspopup="dialog"
+        aria-expanded
+        {...props}
+        onClick$={() => (state.open.value = true)}
+      >
+        <Slot />
+      </button>
+    );
+  }
+);
+
+export const DialogPortal = Portal;
+
+export const DialogOverlay = component$(
+  (props: QwikIntrinsicElements['div']) => {
+    const state = useContext<DialogState>(DialogContext);
+    return (
+      <div
+        role="presentation"
+        aria-modal="true"
+        aria-hidden={!state.open.value}
+        tabIndex={-1}
+        {...props}
+        onClick$={() => (state.open.value = false)}
+      ></div>
+    );
+  }
+);
+
+export const DialogContent = component$(
+  (props: QwikIntrinsicElements['div']) => {
+    const state = useContext<DialogState>(DialogContext);
+    const dialog = useSignal<HTMLDivElement>();
+    useBrowserVisibleTask$(
+      ({ track }) => {
+        track(() => state.open.value);
+        console.log('state.open', state.open.value);
+        console.log('dialog.value', dialog.value);
+        if (dialog.value && state.open.value) {
+          moveFocusToDialog(dialog.value);
+        }
+      },
+      {
+        strategy: 'document-ready',
+      }
+    );
+    return (
+      <div
+        ref={dialog}
+        role={state.role}
+        aria-modal="true"
+        aria-hidden={!state.open.value}
+        aria-labelledby={state.titleId}
+        aria-describedby={state.descriptionId}
+        {...props}
+        onClick$={(event) => event.stopPropagation()}
+        preventdefault:keydown
+        onKeyDown$={(e) => {
+          console.log('e', e);
+          if (dialog.value) {
+            if (e.key === 'Tab') {
+              trapTabKey(dialog.value, e);
+              return;
+            } else {
+              dialog.value.dispatchEvent(new Event(e.type, e));
+            }
+          }
+        }}
+      >
+        <Slot />
+      </div>
+    );
+  }
+);
+
+export const DialogClose = component$(
+  (props: QwikIntrinsicElements['button']) => {
+    const state = useContext<DialogState>(DialogContext);
+    return (
+      <button
+        type="button"
+        {...props}
+        onClick$={() => (state.open.value = false)}
+      >
+        <Slot />
+      </button>
+    );
+  }
+);
+
+export const DialogTitle = component$((props: QwikIntrinsicElements['h2']) => {
+  const state = useContext<DialogState>(DialogContext);
+  return (
+    <h2 id={state.titleId} {...props}>
+      <Slot />
+    </h2>
+  );
+});
+
+export const DialogDescription = component$(
+  (props: QwikIntrinsicElements['p']) => {
+    const state = useContext<DialogState>(DialogContext);
+    return (
+      <p id={state.descriptionId} {...props}>
+        <Slot />
+      </p>
+    );
+  }
+);
+
+const Root = DialogRoot;
+const Trigger = DialogTrigger;
+const Overlay = DialogOverlay;
+const Content = DialogContent;
+const Close = DialogClose;
+const Title = DialogTitle;
+const Description = DialogDescription;
+
+export { Root, Trigger, Portal, Overlay, Content, Close, Title, Description };

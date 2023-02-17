@@ -1,19 +1,13 @@
-import {
-  component$,
-  useStyles$,
-  useSignal,
-  NoSerialize,
-} from '@builder.io/qwik';
+import { component$, useStyles$ } from '@builder.io/qwik';
 import {
   QwikCityProvider,
   RouterOutlet,
   ServiceWorkerRegister,
 } from '@builder.io/qwik-city';
-import { Dialog } from '@qwikbits/dialog';
-import A11yDialog from 'a11y-dialog';
 import { RouterHead } from './components/router-head/router-head';
 
 import globalStyles from './global.css?inline';
+import { dialogStyles } from '@qwikbits/dialog';
 
 export default component$(() => {
   /**
@@ -23,8 +17,6 @@ export default component$(() => {
    * Don't remove the `<head>` and `<body>` elements.
    */
   useStyles$(globalStyles);
-  const dialog = useSignal<NoSerialize<A11yDialog | undefined>>();
-  const alert = useSignal<NoSerialize<A11yDialog | undefined>>();
   return (
     <QwikCityProvider>
       <head>
@@ -35,26 +27,6 @@ export default component$(() => {
       <body lang="en">
         <RouterOutlet />
         <ServiceWorkerRegister />
-        TEST
-        <button onClick$={() => dialog.value?.show()}>Show</button>
-        <button onClick$={() => alert.value?.show()}>Alert</button>
-        <Dialog
-          title="Hello World"
-          id="hello-world-dialog"
-          closeButtonPosition="last"
-          dialogSignal={dialog}
-        >
-          Hello World
-        </Dialog>
-        <Dialog
-          title="Hello World Alert"
-          id="hello-world-alert"
-          closeButtonPosition="last"
-          dialogSignal={alert}
-          role="alertdialog"
-        >
-          Hello World Alert
-        </Dialog>
       </body>
     </QwikCityProvider>
   );

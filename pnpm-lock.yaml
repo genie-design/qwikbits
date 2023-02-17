@@ -15,6 +15,7 @@ specifiers:
   eslint: ~8.15.0
   eslint-config-prettier: 8.1.0
   eslint-plugin-qwik: ~0.17.5
+  focusable-selectors: 0.8.0
   jsdom: ~20.0.3
   node-fetch: ~3.3.0
   nx: 15.7.1
@@ -47,6 +48,7 @@ devDependencies:
   eslint: 8.15.0
   eslint-config-prettier: 8.1.0_eslint@8.15.0
   eslint-plugin-qwik: 0.17.5_eslint@8.15.0
+  focusable-selectors: 0.8.0
   jsdom: 20.0.3
   node-fetch: 3.3.0
   nx: 15.7.1
@@ -3117,6 +3119,10 @@ packages:
 
   /focusable-selectors/0.4.0:
     resolution: {integrity: sha512-tc/236hUU3xemsRLu1RKhRQ5UWHjRM9iJTli1zdac43h7b1biRSgG0mILM0qrcsKaGCHcOPJ6NKbk12ouKHLpw==}
+    dev: true
+
+  /focusable-selectors/0.8.0:
+    resolution: {integrity: sha512-lKyq/Cth8mTEzJk2CLHLdMDYl2zmMicQflfrUMs0CZ3Boc5Ca/63d7z+GgKV3nKm79KqrPtCWrwTdoV9RTjVCA==}
     dev: true
 
   /follow-redirects/1.15.2:
