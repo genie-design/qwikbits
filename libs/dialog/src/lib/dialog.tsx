@@ -1,10 +1,10 @@
 import { Portal } from '@qwikbits/portal';
 import {
+  ContextId,
   QwikIntrinsicElements,
   Signal,
   useBrowserVisibleTask$,
   useSignal,
-  useTask$,
 } from '@builder.io/qwik';
 import {
   Slot,
@@ -15,29 +15,40 @@ import {
   createContextId,
   $,
 } from '@builder.io/qwik';
-import { moveFocusToDialog, trapTabKey, useUniqueId } from '@qwikbits/utils';
-import { JSX } from '@builder.io/qwik/jsx-runtime';
+import {
+  getActiveElement,
+  moveFocusToDialog,
+  trapTabKey,
+  useUniqueId,
+} from '@qwikbits/utils';
 
 export type DialogState = {
-  role: 'dialog' | 'alertdialog';
+  role: `dialog` | `alertdialog`;
   open: Signal<boolean>;
   id: string;
   titleId: string;
   descriptionId: string;
+  previouslyFocused: HTMLElement | undefined;
 };
-export type DialogProps = Partial<DialogState> & QwikIntrinsicElements['div'];
+export type DialogProps = Partial<DialogState> &
+  QwikIntrinsicElements[`div`] & { context: ContextId<DialogState> };
+export const getUniqueId = (i = 36) => {
+  return Math.round(Math.random() * Number.MAX_SAFE_INTEGER)
+    .toString(i)
+    .toLowerCase();
+};
 
-export const DialogContext = createContextId<DialogState>('qwikbits-dialog');
 export const DialogRoot = component$((props: DialogProps) => {
   const defaultSignal = useSignal(false);
-  const state = useStore({
-    role: props.role ?? 'dialog',
+  const state = useStore<DialogState>({
+    role: props.role ?? `dialog`,
     open: props.open ?? defaultSignal,
     id: props.id ?? useUniqueId(),
     titleId: props.titleId ?? useUniqueId(),
     descriptionId: props.descriptionId ?? useUniqueId(),
+    previouslyFocused: undefined,
   });
-  useContextProvider(DialogContext, state);
+  useContextProvider(props.context, state);
   return (
     <div {...props}>
       <Slot />
@@ -46,8 +57,10 @@ export const DialogRoot = component$((props: DialogProps) => {
 });
 
 export const DialogTrigger = component$(
-  (props: QwikIntrinsicElements['button']) => {
-    const state = useContext<DialogState>(DialogContext);
+  (
+    props: QwikIntrinsicElements[`button`] & { context: ContextId<DialogState> }
+  ) => {
+    const state = useContext<DialogState>(props.context);
     return (
       <button
         type="button"
@@ -65,8 +78,10 @@ export const DialogTrigger = component$(
 export const DialogPortal = Portal;
 
 export const DialogOverlay = component$(
-  (props: QwikIntrinsicElements['div']) => {
-    const state = useContext<DialogState>(DialogContext);
+  (
+    props: QwikIntrinsicElements[`div`] & { context: ContextId<DialogState> }
+  ) => {
+    const state = useContext<DialogState>(props.context);
     return (
       <div
         role="presentation"
@@ -74,51 +89,62 @@ export const DialogOverlay = component$(
         aria-hidden={!state.open.value}
         tabIndex={-1}
         {...props}
-        onClick$={() => (state.open.value = false)}
+        onClick$={() =>
+          state.role !== `alertdialog` ? (state.open.value = false) : ``
+        }
       ></div>
     );
   }
 );
 
 export const DialogContent = component$(
-  (props: QwikIntrinsicElements['div']) => {
-    const state = useContext<DialogState>(DialogContext);
+  (
+    props: QwikIntrinsicElements[`div`] & { context: ContextId<DialogState> }
+  ) => {
+    const state = useContext<DialogState>(props.context);
     const dialog = useSignal<HTMLDivElement>();
     useBrowserVisibleTask$(
       ({ track }) => {
         track(() => state.open.value);
-        console.log('state.open', state.open.value);
-        console.log('dialog.value', dialog.value);
         if (dialog.value && state.open.value) {
+          state.previouslyFocused = getActiveElement() as HTMLElement;
           moveFocusToDialog(dialog.value);
+        } else if (state.previouslyFocused) {
+          state.previouslyFocused.focus();
+          state.previouslyFocused = undefined;
         }
       },
       {
-        strategy: 'document-ready',
+        strategy: `document-ready`,
+      }
+    );
+    useBrowserVisibleTask$(
+      () => {
+        const handler = (e: KeyboardEvent) => {
+          if (dialog.value) {
+            if (e.key === `Tab`) {
+              trapTabKey(dialog.value, e);
+            }
+          }
+        };
+        dialog.value?.addEventListener(`keydown`, handler);
+        return () => dialog.value?.addEventListener(`keydown`, handler);
+      },
+      {
+        strategy: `document-ready`,
       }
     );
     return (
       <div
         ref={dialog}
         role={state.role}
+        tabIndex={-1}
         aria-modal="true"
         aria-hidden={!state.open.value}
         aria-labelledby={state.titleId}
         aria-describedby={state.descriptionId}
         {...props}
         onClick$={(event) => event.stopPropagation()}
-        preventdefault:keydown
-        onKeyDown$={(e) => {
-          console.log('e', e);
-          if (dialog.value) {
-            if (e.key === 'Tab') {
-              trapTabKey(dialog.value, e);
-              return;
-            } else {
-              dialog.value.dispatchEvent(new Event(e.type, e));
-            }
-          }
-        }}
       >
         <Slot />
       </div>
@@ -127,8 +153,10 @@ export const DialogContent = component$(
 );
 
 export const DialogClose = component$(
-  (props: QwikIntrinsicElements['button']) => {
-    const state = useContext<DialogState>(DialogContext);
+  (
+    props: QwikIntrinsicElements[`button`] & { context: ContextId<DialogState> }
+  ) => {
+    const state = useContext<DialogState>(props.context);
     return (
       <button
         type="button"
@@ -141,18 +169,22 @@ export const DialogClose = component$(
   }
 );
 
-export const DialogTitle = component$((props: QwikIntrinsicElements['h2']) => {
-  const state = useContext<DialogState>(DialogContext);
-  return (
-    <h2 id={state.titleId} {...props}>
-      <Slot />
-    </h2>
-  );
-});
+export const DialogTitle = component$(
+  (
+    props: QwikIntrinsicElements[`h2`] & { context: ContextId<DialogState> }
+  ) => {
+    const state = useContext<DialogState>(props.context);
+    return (
+      <h2 id={state.titleId} {...props}>
+        <Slot />
+      </h2>
+    );
+  }
+);
 
 export const DialogDescription = component$(
-  (props: QwikIntrinsicElements['p']) => {
-    const state = useContext<DialogState>(DialogContext);
+  (props: QwikIntrinsicElements[`p`] & { context: ContextId<DialogState> }) => {
+    const state = useContext<DialogState>(props.context);
     return (
       <p id={state.descriptionId} {...props}>
         <Slot />

@@ -185,16 +185,15 @@ export function getActiveElement(
   // If not, we can just return the active element
   return activeEl;
 }
-
 /**
- * Trap the focus inside the given element
+ * Trap the focus inside the given element, can only be used inside manually added synchronous events due to conditional prevent default
  */
-export function trapTabKey(el: HTMLElement, event: QwikKeyboardEvent) {
+export function trapTabKey(el: HTMLElement, event: KeyboardEvent) {
   const [firstFocusableChild, lastFocusableChild] = getFocusableEdges(el);
 
   // If there are no focusable children in the dialog, prevent the user from
   // tabbing out of it
-  if (!firstFocusableChild) return;
+  if (!firstFocusableChild) return event.preventDefault();
 
   const activeElement = getActiveElement();
 
@@ -203,6 +202,7 @@ export function trapTabKey(el: HTMLElement, event: QwikKeyboardEvent) {
   // focusable item from the dialog element
   if (event.shiftKey && activeElement === firstFocusableChild) {
     lastFocusableChild?.focus();
+    event.preventDefault();
   }
 
   // If the SHIFT key is not pressed (moving forwards) and the currently focused
@@ -210,6 +210,7 @@ export function trapTabKey(el: HTMLElement, event: QwikKeyboardEvent) {
   // dialog element
   else if (!event.shiftKey && activeElement === lastFocusableChild) {
     firstFocusableChild.focus();
+    event.preventDefault();
   }
 }
 

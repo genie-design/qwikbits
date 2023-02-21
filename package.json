@@ -2,7 +2,12 @@
   "name": "qwikbits",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "new:app": "nx generate qwik-nx:app",
+    "new:lib": "nx generate qwik-nx:lib",
+    "new:comp": "nx generate qwik-nx:component",
+    "new:route": "nx generate qwik-nx:route"
+  },
   "private": true,
   "dependencies": {
     "qwik-nx": "0.10.0"

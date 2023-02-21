@@ -7,7 +7,6 @@ import {
 import { RouterHead } from './components/router-head/router-head';
 
 import globalStyles from './global.css?inline';
-import { dialogStyles } from '@qwikbits/dialog';
 
 export default component$(() => {
   /**
