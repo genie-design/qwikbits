@@ -4,17 +4,18 @@ import {
   useSignal,
   useStyles$,
 } from '@builder.io/qwik';
-import type { DocumentHead } from '@builder.io/qwik-city';
+import { DocumentHead } from '@builder.io/qwik-city';
 import * as Dialog from '@qwikbits/dialog';
 import { DialogState, dialogStyles } from '@qwikbits/dialog';
 export default component$(() => {
   useStyles$(dialogStyles);
-  const dialog_signal = useSignal(false);
+  const dialogSignal = useSignal(false);
+  const alertDialogSignal = useSignal(false);
   const DialogContext = createContextId<DialogState>(`qb-dialog`);
   const AlertDialogContext = createContextId<DialogState>(`qb-alertdialog`);
   return (
     <>
-      <Dialog.Root context={DialogContext} open={dialog_signal}>
+      <Dialog.Root context={DialogContext} open={dialogSignal}>
         <Dialog.Trigger context={DialogContext}>Open Dialog</Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay context={DialogContext} class="dialog-overlay" />
@@ -26,23 +27,23 @@ export default component$(() => {
             </Dialog.Description>
             Hello World
             <br />
-            <button onClick$={() => (dialog_signal.value = false)}>
+            <button onClick$={() => (dialogSignal.value = false)}>
               Cancel
             </button>
             <br />
-            <button onClick$={() => (dialog_signal.value = false)}>
+            <button onClick$={() => (dialogSignal.value = false)}>
               Submit
             </button>
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
-      <button onClick$={() => (dialog_signal.value = true)}>
-        Custom open. Is open: {dialog_signal.value}
+      <button onClick$={() => (dialogSignal.value = true)}>
+        Custom open. Is open: {String(dialogSignal.value)}
       </button>
       <Dialog.Root
         context={AlertDialogContext}
         role="alertdialog"
-        open={dialog_signal}
+        open={alertDialogSignal}
       >
         <Dialog.Trigger context={AlertDialogContext}>Open Alert</Dialog.Trigger>
         <Dialog.Portal>
@@ -57,11 +58,11 @@ export default component$(() => {
             </Dialog.Description>
             Hello World
             <br />
-            <button onClick$={() => (dialog_signal.value = false)}>
+            <button onClick$={() => (alertDialogSignal.value = false)}>
               Cancel
             </button>
             <br />
-            <button onClick$={() => (dialog_signal.value = false)}>
+            <button onClick$={() => (alertDialogSignal.value = false)}>
               Submit
             </button>
           </Dialog.Content>

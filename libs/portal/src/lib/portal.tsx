@@ -6,7 +6,6 @@ import {
 } from '@builder.io/qwik';
 export interface PortalProps {
   target?: HTMLElement | string;
-  children?: any;
 }
 export const Portal = component$<PortalProps>((props) => {
   const el = useSignal<HTMLElement>();
@@ -16,7 +15,7 @@ export const Portal = component$<PortalProps>((props) => {
       track(() => props.target);
       if (el?.value) {
         let target =
-          typeof props.target === 'string'
+          typeof props.target === `string`
             ? document.querySelector(props.target)
             : props.target;
 
@@ -30,12 +29,12 @@ export const Portal = component$<PortalProps>((props) => {
       };
     },
     {
-      strategy: 'document-ready',
+      strategy: `document-ready`,
     }
   );
 
   return (
-    <div ref={el}>
+    <div class={`portal`} ref={el}>
       <Slot />
     </div>
   );
