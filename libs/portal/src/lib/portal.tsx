@@ -34,7 +34,7 @@ export const Portal = component$<PortalProps>((props) => {
   );
 
   return (
-    <div class={`portal`} ref={el}>
+    <div ref={el}>
       <Slot />
     </div>
   );
