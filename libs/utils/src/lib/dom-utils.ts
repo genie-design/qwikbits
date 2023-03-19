@@ -6,10 +6,13 @@ import focusableSelectors from 'focusable-selectors';
  * Set the focus to the first element with `autofocus` with the element or the
  * element itself.
  */
-export function moveFocusToDialog(el: HTMLElement) {
-  const focused = (el.querySelector('[autofocus]') || el) as HTMLElement;
+export function moveFocusToDialog(el: HTMLElement, focusElement = false) {
+  let focused = el.querySelector('[autofocus]') as HTMLElement;
 
-  focused.focus();
+  if (!focused && focusElement) {
+    focused = el;
+  }
+  focused?.focus();
 }
 
 /**

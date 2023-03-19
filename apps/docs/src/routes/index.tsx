@@ -1,47 +1,38 @@
-import { component$, useSignal, useStyles$ } from '@builder.io/qwik';
+import { component$, useSignal } from '@builder.io/qwik';
 import { DocumentHead } from '@builder.io/qwik-city';
 import { Dialog } from '@qwikbits/dialog';
-import { dialogStyles } from '@qwikbits/dialog';
-import { QwikBitsProvider } from '@qwikbits/provider';
 export default component$(() => {
-  useStyles$(dialogStyles);
   const dialogSignal = useSignal(false);
 
   return (
     <>
-      <QwikBitsProvider>
-        <div class="wrapped">
-          <Dialog
-            open={dialogSignal}
-            overlayProps={{ class: `dialog-overlay` }}
-            contentProps={{ class: `dialog-content` }}
-            triggerButton={true}
-            triggerProps={{ class: `dialog-trigger` }}
-            closeButton={true}
-            closeProps={{ class: `dialog-close` }}
-            titleProps={{ class: `dialog-title` }}
-            descriptionProps={{ class: `dialog-description` }}
-          >
-            <div q:slot="trigger">Open Dialog</div>
-            <div q:slot="close">X</div>
-            <span q:slot="title">Welcome to Qwik</span>
-            <span q:slot="description">Dialog</span>
-            Hello World
-            <br />
-            <button onClick$={() => (dialogSignal.value = false)}>
-              Cancel
-            </button>
-            <br />
-            <button onClick$={() => (dialogSignal.value = false)}>
-              Submit
-            </button>
-            <div q:slot="content"> More Content</div>
-          </Dialog>
-          <button onClick$={() => (dialogSignal.value = true)}>
-            Custom open. Is open: {String(dialogSignal.value)}
-          </button>
-        </div>
-        {/* <Dialog.Root context={DialogContext} open={dialogSignal}>
+      <div class="wrapped">
+        <Dialog
+          open={dialogSignal}
+          dialogProps={{ class: `dialog-content` }}
+          triggerButton={true}
+          triggerProps={{ class: `dialog-trigger` }}
+          closeButton={true}
+          closeProps={{ class: `dialog-close` }}
+          titleProps={{ class: `dialog-title` }}
+          descriptionProps={{ class: `dialog-description` }}
+        >
+          <div q:slot="trigger">Open Dialog</div>
+          <div q:slot="close">X</div>
+          <span q:slot="title">Welcome to Qwik</span>
+          <span q:slot="description">Dialog</span>
+          Hello World
+          <br />
+          <button onClick$={() => (dialogSignal.value = false)}>Cancel</button>
+          <br />
+          <button onClick$={() => (dialogSignal.value = false)}>Submit</button>
+          <div q:slot="content"> More Content</div>
+        </Dialog>
+        <button onClick$={() => (dialogSignal.value = true)}>
+          Custom open. Is open: {String(dialogSignal.value)}
+        </button>
+      </div>
+      {/* <Dialog.Root context={DialogContext} open={dialogSignal}>
         <Dialog.Trigger context={DialogContext}>Open Dialog</Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay context={DialogContext} class="dialog-overlay" />
@@ -83,7 +74,6 @@ export default component$(() => {
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root> */}
-      </QwikBitsProvider>
     </>
   );
 });

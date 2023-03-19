@@ -1,4 +1,3 @@
-import { usePortal, Portal } from '@qwikbits/provider';
 import {
   QwikIntrinsicElements,
   Signal,
@@ -7,12 +6,7 @@ import {
   VisibleTaskStrategy,
 } from '@builder.io/qwik';
 import { Slot, component$, useStore } from '@builder.io/qwik';
-import {
-  getActiveElement,
-  moveFocusToDialog,
-  trapTabKey,
-  useUniqueId,
-} from '@qwikbits/utils';
+import { moveFocusToDialog, useUniqueId } from '@qwikbits/utils';
 
 export type DialogState = {
   role: `dialog` | `alertdialog`;
@@ -20,14 +14,12 @@ export type DialogState = {
   id: string;
   titleId: string;
   descriptionId: string;
-  previouslyFocused: HTMLElement | undefined;
 };
 export type DialogProps = Partial<DialogState> & {
   rootProps?: QwikIntrinsicElements[`div`];
   triggerButton?: boolean;
   triggerProps?: QwikIntrinsicElements[`button`];
-  overlayProps?: QwikIntrinsicElements[`div`];
-  contentProps?: QwikIntrinsicElements[`div`];
+  dialogProps?: QwikIntrinsicElements[`dialog`];
   titleProps?: QwikIntrinsicElements[`h2`];
   descriptionProps?: QwikIntrinsicElements[`p`];
   closeButton?: boolean;
@@ -43,49 +35,25 @@ export const Dialog = component$((props: DialogProps) => {
     id: props.id ?? useUniqueId(),
     titleId: props.titleId ?? useUniqueId(),
     descriptionId: props.descriptionId ?? useUniqueId(),
-    previouslyFocused: undefined,
   });
-  const dialog = useSignal<HTMLDivElement>();
+  const dialogEl = useSignal<HTMLDialogElement>();
   useVisibleTask$(
     ({ track }) => {
       track(() => state.open.value);
-      if (dialog.value && state.open.value) {
-        state.previouslyFocused = getActiveElement() as HTMLElement;
-        moveFocusToDialog(dialog.value);
-      } else if (state.previouslyFocused) {
-        state.previouslyFocused.focus();
-        state.previouslyFocused = undefined;
+      if (dialogEl.value && state.open.value) {
+        dialogEl.value.showModal();
+        moveFocusToDialog(dialogEl.value);
+      } else if (dialogEl.value) {
+        dialogEl.value.close();
       }
     },
     {
       strategy: props?.strategy ?? `intersection-observer`,
     }
   );
-  useVisibleTask$(
-    () => {
-      const handler = (e: KeyboardEvent) => {
-        if (dialog.value) {
-          if (e.key === `Tab`) {
-            trapTabKey(dialog.value, e);
-          }
-        }
-      };
-      dialog.value?.addEventListener(`keydown`, handler);
-      return () => dialog.value?.addEventListener(`keydown`, handler);
-    },
-    {
-      strategy: props?.strategy ?? `intersection-observer`,
-    }
-  );
+
   return (
-    <div
-      {...props?.rootProps}
-      document:onKeyDown$={(event) => {
-        if (state.role !== `alertdialog` && event.key === `Escape`) {
-          state.open.value = false;
-        }
-      }}
-    >
+    <div {...props?.rootProps}>
       {props.triggerButton && (
         <button
           type="button"
@@ -97,18 +65,9 @@ export const Dialog = component$((props: DialogProps) => {
           <Slot name="trigger" />
         </button>
       )}
-      <div
-        role="presentation"
-        aria-modal="true"
-        aria-hidden={!state.open.value}
-        tabIndex={-1}
-        {...props?.overlayProps}
-        onClick$={() =>
-          state.role !== `alertdialog` ? (state.open.value = false) : ``
-        }
-      />
-      <div
-        ref={dialog}
+
+      <dialog
+        ref={dialogEl}
         role={state.role}
         tabIndex={-1}
         aria-modal="true"
@@ -116,8 +75,12 @@ export const Dialog = component$((props: DialogProps) => {
         hidden={!state.open.value}
         aria-labelledby={state.titleId}
         aria-describedby={state.descriptionId}
-        {...props?.contentProps}
-        onClick$={(event) => event.stopPropagation()}
+        {...props?.dialogProps}
+        onClick$={(e) => {
+          e.target === dialogEl.value && state.role !== 'alertdialog'
+            ? (state.open.value = false)
+            : '';
+        }}
       >
         {props?.closeButton && (
           <button
@@ -136,7 +99,7 @@ export const Dialog = component$((props: DialogProps) => {
         </p>
         <Slot />
         <Slot name="content" />
-      </div>
+      </dialog>
     </div>
   );
 });
