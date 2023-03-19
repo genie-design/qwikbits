@@ -18,6 +18,7 @@
       "@qwikbits/alert-dialog": ["libs/alert-dialog/src/index.ts"],
       "@qwikbits/dialog": ["libs/dialog/src/index.ts"],
       "@qwikbits/portal": ["libs/portal/src/index.ts"],
+      "@qwikbits/provider": ["libs/provider/src/index.ts"],
       "@qwikbits/utils": ["libs/utils/src/index.ts"]
     }
   },

@@ -1,0 +1,24 @@
+{
+  "name": "provider",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/provider/src",
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["../..//coverage/libs/provider"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/libs/provider"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/provider/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}

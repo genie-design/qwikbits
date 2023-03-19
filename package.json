@@ -7,7 +7,8 @@
     "new:lib": "nx generate qwik-nx:lib",
     "new:comp": "nx generate qwik-nx:component",
     "new:route": "nx generate qwik-nx:route",
-    "update": "pnpm update --latest --interactive"
+    "update": "pnpm update --latest --interactive",
+    "dev": "nx serve docs"
   },
   "private": true,
   "dependencies": {
@@ -17,6 +18,7 @@
     "@builder.io/qwik": "~0.21.0",
     "@builder.io/qwik-city": "~0.5.3",
     "@nrwl/eslint-plugin-nx": "15.8.6",
+    "@nrwl/js": "15.8.6",
     "@nrwl/linter": "15.8.6",
     "@nrwl/nx-cloud": "^15.2.1",
     "@nrwl/vite": "15.8.6",

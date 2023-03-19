@@ -2,14 +2,11 @@
   "root": true,
   "ignorePatterns": ["**/*"],
   "plugins": ["@nrwl/nx"],
-  "rules": {
-    "quotes": ["warn", "backtick"]
-  },
+  "rules": {},
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "quotes": ["warn", "backtick"],
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {
@@ -28,14 +25,11 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {
-        "quotes": ["warn", "backtick"]
-      }
+      "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
-      "rules": { "quotes": ["warn", "backtick"] }
+      "extends": ["plugin:@nrwl/nx/javascript"]
     }
   ]
 }

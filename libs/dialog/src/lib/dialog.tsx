@@ -1,8 +1,8 @@
-import { Portal } from '@qwikbits/portal';
+import { usePortal, Portal } from '@qwikbits/provider';
 import {
   QwikIntrinsicElements,
   Signal,
-  useBrowserVisibleTask$,
+  useVisibleTask$,
   useSignal,
   VisibleTaskStrategy,
 } from '@builder.io/qwik';
@@ -24,7 +24,6 @@ export type DialogState = {
 };
 export type DialogProps = Partial<DialogState> & {
   rootProps?: QwikIntrinsicElements[`div`];
-  portalProps?: typeof Portal;
   triggerButton?: boolean;
   triggerProps?: QwikIntrinsicElements[`button`];
   overlayProps?: QwikIntrinsicElements[`div`];
@@ -47,7 +46,7 @@ export const Dialog = component$((props: DialogProps) => {
     previouslyFocused: undefined,
   });
   const dialog = useSignal<HTMLDivElement>();
-  useBrowserVisibleTask$(
+  useVisibleTask$(
     ({ track }) => {
       track(() => state.open.value);
       if (dialog.value && state.open.value) {
@@ -62,7 +61,7 @@ export const Dialog = component$((props: DialogProps) => {
       strategy: props?.strategy ?? `intersection-observer`,
     }
   );
-  useBrowserVisibleTask$(
+  useVisibleTask$(
     () => {
       const handler = (e: KeyboardEvent) => {
         if (dialog.value) {
@@ -98,48 +97,46 @@ export const Dialog = component$((props: DialogProps) => {
           <Slot name="trigger" />
         </button>
       )}
-      <Portal {...props?.portalProps}>
-        <div
-          role="presentation"
-          aria-modal="true"
-          aria-hidden={!state.open.value}
-          tabIndex={-1}
-          {...props?.overlayProps}
-          onClick$={() =>
-            state.role !== `alertdialog` ? (state.open.value = false) : ``
-          }
-        />
-        <div
-          ref={dialog}
-          role={state.role}
-          tabIndex={-1}
-          aria-modal="true"
-          aria-hidden={!state.open.value}
-          hidden={!state.open.value}
-          aria-labelledby={state.titleId}
-          aria-describedby={state.descriptionId}
-          {...props?.contentProps}
-          onClick$={(event) => event.stopPropagation()}
-        >
-          {props?.closeButton && (
-            <button
-              type="button"
-              {...props?.closeProps}
-              onClick$={() => (state.open.value = false)}
-            >
-              <Slot name="close" />
-            </button>
-          )}
-          <h2 id={state.titleId} {...props?.titleProps}>
-            <Slot name="title" />
-          </h2>
-          <p id={state.descriptionId} {...props?.descriptionProps}>
-            <Slot name="description" />
-          </p>
-          <Slot />
-          <Slot name="content" />
-        </div>
-      </Portal>
+      <div
+        role="presentation"
+        aria-modal="true"
+        aria-hidden={!state.open.value}
+        tabIndex={-1}
+        {...props?.overlayProps}
+        onClick$={() =>
+          state.role !== `alertdialog` ? (state.open.value = false) : ``
+        }
+      />
+      <div
+        ref={dialog}
+        role={state.role}
+        tabIndex={-1}
+        aria-modal="true"
+        aria-hidden={!state.open.value}
+        hidden={!state.open.value}
+        aria-labelledby={state.titleId}
+        aria-describedby={state.descriptionId}
+        {...props?.contentProps}
+        onClick$={(event) => event.stopPropagation()}
+      >
+        {props?.closeButton && (
+          <button
+            type="button"
+            {...props?.closeProps}
+            onClick$={() => (state.open.value = false)}
+          >
+            <Slot name="close" />
+          </button>
+        )}
+        <h2 id={state.titleId} {...props?.titleProps}>
+          <Slot name="title" />
+        </h2>
+        <p id={state.descriptionId} {...props?.descriptionProps}>
+          <Slot name="description" />
+        </p>
+        <Slot />
+        <Slot name="content" />
+      </div>
     </div>
   );
 });
