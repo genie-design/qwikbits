@@ -1,7 +1,7 @@
 {
-  "name": "qwikbits",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "@geniejs/qwikbits",
+  "version": "0.0.1",
+  "license": "Mozilla Public License 2.0",
   "scripts": {
     "new:app": "nx generate qwik-nx:app",
     "new:lib": "nx generate qwik-nx:lib",
