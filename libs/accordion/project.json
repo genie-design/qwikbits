@@ -1,0 +1,24 @@
+{
+  "name": "accordion",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/accordion/src",
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["../..//coverage/libs/accordion"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/libs/accordion"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/accordion/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}

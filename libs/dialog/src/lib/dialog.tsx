@@ -4,9 +4,10 @@ import {
   useVisibleTask$,
   useSignal,
   VisibleTaskStrategy,
+  useId,
 } from '@builder.io/qwik';
 import { Slot, component$, useStore } from '@builder.io/qwik';
-import { moveFocusToDialog, useUniqueId } from '@qwikbits/utils';
+import { moveFocusToDialog } from '@qwikbits/utils';
 
 export type DialogState = {
   role: `dialog` | `alertdialog`;
@@ -32,9 +33,9 @@ export const Dialog = component$((props: DialogProps) => {
   const state = useStore<DialogState>({
     role: props.role ?? `dialog`,
     open: props.open ?? defaultSignal,
-    id: props.id ?? useUniqueId(),
-    titleId: props.titleId ?? useUniqueId(),
-    descriptionId: props.descriptionId ?? useUniqueId(),
+    id: props.id ?? useId(),
+    titleId: props.titleId ?? useId(),
+    descriptionId: props.descriptionId ?? useId(),
   });
   const dialogEl = useSignal<HTMLDialogElement>();
   useVisibleTask$(
@@ -58,7 +59,7 @@ export const Dialog = component$((props: DialogProps) => {
         <button
           type="button"
           aria-haspopup="dialog"
-          aria-expanded
+          aria-expanded={state.open.value}
           {...props?.triggerProps}
           onClick$={() => (state.open.value = true)}
         >

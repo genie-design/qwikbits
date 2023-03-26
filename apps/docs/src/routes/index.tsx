@@ -1,5 +1,6 @@
 import { component$, useSignal } from '@builder.io/qwik';
 import { DocumentHead } from '@builder.io/qwik-city';
+import { Accordion } from '@qwikbits/accordion';
 import { Dialog } from '@qwikbits/dialog';
 export default component$(() => {
   const dialogSignal = useSignal(false);
@@ -7,6 +8,9 @@ export default component$(() => {
   return (
     <>
       <div class="wrapped">
+        <Accordion>
+          <div q:slot="trigger">Open Accordion</div> <div>CONTENT</div>
+        </Accordion>
         <Dialog
           open={dialogSignal}
           dialogProps={{ class: `dialog-content` }}

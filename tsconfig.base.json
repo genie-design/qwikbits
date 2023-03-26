@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@qwikbits/accordion": ["libs/accordion/src/index.ts"],
       "@qwikbits/alert-dialog": ["libs/alert-dialog/src/index.ts"],
       "@qwikbits/dialog": ["libs/dialog/src/index.ts"],
       "@qwikbits/portal": ["libs/portal/src/index.ts"],
