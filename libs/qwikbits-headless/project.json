@@ -1,0 +1,82 @@
+{
+  "name": "qwikbits-headless",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/qwikbits-headless",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/qwikbits-headless",
+        "configFile": "libs/qwikbits-headless/vite.config.ts",
+        "mode": "lib"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/qwikbits-headless/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "version-dry": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "dryRun": true,
+        "releaseAs": "patch"
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
+      }
+    },
+    "version-publish": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "noVerify": true,
+        "push": true,
+        "releaseAs": "patch",
+        "postTargets": [
+          "qwikbits-headless:publish",
+          "qwikbits-headless:push-to-github"
+        ]
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "push-to-github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}"
+      }
+    },
+    "component-test": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "libs/qwikbits-headless/cypress.config.ts",
+        "testingType": "component"
+      }
+    }
+  },
+  "tags": []
+}
