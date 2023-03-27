@@ -1,0 +1,68 @@
+{
+  "name": "website",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/website/src",
+  "targets": {
+    "build": {
+      "executor": "qwik-nx:build",
+      "options": {
+        "runSequence": ["website:build.client", "website:build.ssr"],
+        "outputPath": "dist/apps/website"
+      },
+      "configurations": {
+        "preview": {}
+      }
+    },
+    "preview": {
+      "executor": "@nrwl/vite:preview-server",
+      "options": {
+        "buildTarget": "website:build"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["../../coverage/apps/website"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/apps/website"
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/vite:dev-server",
+      "options": {
+        "buildTarget": "website:build.client",
+        "mode": "ssr"
+      }
+    },
+    "build.client": {
+      "executor": "@nrwl/vite:build",
+      "options": {
+        "outputPath": "dist/apps/website",
+        "configFile": "apps/website/vite.config.ts"
+      }
+    },
+    "build.ssr": {
+      "executor": "@nrwl/vite:build",
+      "defaultConfiguration": "preview",
+      "options": {
+        "outputPath": "dist/apps/website"
+      },
+      "configurations": {
+        "preview": {
+          "ssr": "src/entry.preview.tsx",
+          "mode": "production"
+        }
+      },
+      "dependsOn": []
+    },
+    "serve.debug": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node --inspect-brk ../..//node_modules/vite/bin/vite.js --mode ssr --force",
+        "cwd": "apps/website"
+      }
+    }
+  },
+  "tags": []
+}

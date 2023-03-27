@@ -1,0 +1,212 @@
+{
+  "signedContributors": [
+    {
+      "name": "gilf",
+      "id": 1590253,
+      "comment_id": 1286907630,
+      "created_at": "2022-10-21T12:39:06Z",
+      "repoId": 545159943,
+      "pullRequestNo": 2
+    },
+    {
+      "name": "gioboa",
+      "id": 35845425,
+      "comment_id": 1297084906,
+      "created_at": "2022-10-31T13:24:42Z",
+      "repoId": 545159943,
+      "pullRequestNo": 29
+    },
+    {
+      "name": "shairez",
+      "id": 1430726,
+      "comment_id": 1304745662,
+      "created_at": "2022-11-06T09:24:57Z",
+      "repoId": 545159943,
+      "pullRequestNo": 41
+    },
+    {
+      "name": "reemardelarosa",
+      "id": 4918140,
+      "comment_id": 1312266189,
+      "created_at": "2022-11-11T23:35:13Z",
+      "repoId": 545159943,
+      "pullRequestNo": 57
+    },
+    {
+      "name": "voluntadpear",
+      "id": 10501948,
+      "comment_id": 1312311694,
+      "created_at": "2022-11-12T01:53:54Z",
+      "repoId": 545159943,
+      "pullRequestNo": 60
+    },
+    {
+      "name": "nnelgxorz",
+      "id": 9634080,
+      "comment_id": 1383294729,
+      "created_at": "2023-01-16T00:10:43Z",
+      "repoId": 545159943,
+      "pullRequestNo": 83
+    },
+    {
+      "name": "shiroinegai",
+      "id": 88586552,
+      "comment_id": 1401598964,
+      "created_at": "2023-01-24T09:12:11Z",
+      "repoId": 545159943,
+      "pullRequestNo": 88
+    },
+    {
+      "name": "michalmw",
+      "id": 10683327,
+      "comment_id": 1403863641,
+      "created_at": "2023-01-25T16:13:14Z",
+      "repoId": 545159943,
+      "pullRequestNo": 95
+    },
+    {
+      "name": "fabiobiondi",
+      "id": 1772083,
+      "comment_id": 1407201920,
+      "created_at": "2023-01-27T23:59:10Z",
+      "repoId": 545159943,
+      "pullRequestNo": 98
+    },
+    {
+      "name": "GregOnNet",
+      "id": 444278,
+      "comment_id": 1407780288,
+      "created_at": "2023-01-29T21:57:40Z",
+      "repoId": 545159943,
+      "pullRequestNo": 109
+    },
+    {
+      "name": "Obvio",
+      "id": 300232,
+      "comment_id": 1422704749,
+      "created_at": "2023-02-08T14:41:36Z",
+      "repoId": 545159943,
+      "pullRequestNo": 147
+    },
+    {
+      "name": "yishayhaz",
+      "id": 50710472,
+      "comment_id": 1429935788,
+      "created_at": "2023-02-14T15:29:53Z",
+      "repoId": 545159943,
+      "pullRequestNo": 151
+    },
+    {
+      "name": "rossellamascia",
+      "id": 42215075,
+      "comment_id": 1432010982,
+      "created_at": "2023-02-15T20:47:42Z",
+      "repoId": 545159943,
+      "pullRequestNo": 154
+    },
+    {
+      "name": "itaim18",
+      "id": 37772742,
+      "comment_id": 1433396261,
+      "created_at": "2023-02-16T16:52:20Z",
+      "repoId": 545159943,
+      "pullRequestNo": 157
+    },
+    {
+      "name": "Balastrong",
+      "id": 7253929,
+      "comment_id": 1435687885,
+      "created_at": "2023-02-18T14:22:37Z",
+      "repoId": 545159943,
+      "pullRequestNo": 162
+    },
+    {
+      "name": "KenAKAFrosty",
+      "id": 90424167,
+      "comment_id": 1435783942,
+      "created_at": "2023-02-18T22:37:36Z",
+      "repoId": 545159943,
+      "pullRequestNo": 165
+    },
+    {
+      "name": "luisbeqja",
+      "id": 75300376,
+      "comment_id": 1436119728,
+      "created_at": "2023-02-19T22:52:43Z",
+      "repoId": 545159943,
+      "pullRequestNo": 174
+    },
+    {
+      "name": "riccardo-vettore",
+      "id": 108279675,
+      "comment_id": 1437069799,
+      "created_at": "2023-02-20T14:01:51Z",
+      "repoId": 545159943,
+      "pullRequestNo": 176
+    },
+    {
+      "name": "adaliszk",
+      "id": 5189131,
+      "comment_id": 1438873201,
+      "created_at": "2023-02-21T17:44:59Z",
+      "repoId": 545159943,
+      "pullRequestNo": 179
+    },
+    {
+      "name": "sebbalex",
+      "id": 11008116,
+      "comment_id": 1439713380,
+      "created_at": "2023-02-22T09:44:06Z",
+      "repoId": 545159943,
+      "pullRequestNo": 183
+    },
+    {
+      "name": "wahyufeb",
+      "id": 38874570,
+      "comment_id": 1441273580,
+      "created_at": "2023-02-23T06:38:30Z",
+      "repoId": 545159943,
+      "pullRequestNo": 194
+    },
+    {
+      "name": "dmitry-stepanenko",
+      "id": 33101123,
+      "comment_id": 1441610687,
+      "created_at": "2023-02-23T11:37:05Z",
+      "repoId": 545159943,
+      "pullRequestNo": 196
+    },
+    {
+      "name": "Rossella-Mascia-Neosyn",
+      "id": 79088170,
+      "comment_id": 1456931690,
+      "created_at": "2023-03-06T20:31:01Z",
+      "repoId": 545159943,
+      "pullRequestNo": 154
+    },
+    {
+      "name": "the-r3aper7",
+      "id": 80447788,
+      "comment_id": 1458138480,
+      "created_at": "2023-03-07T13:06:07Z",
+      "repoId": 545159943,
+      "pullRequestNo": 230
+    },
+    {
+      "name": "GrandSchtroumpf",
+      "id": 8143464,
+      "comment_id": 1466308038,
+      "created_at": "2023-03-13T14:56:57Z",
+      "repoId": 545159943,
+      "pullRequestNo": 240
+    },
+    {
+      "name": "tleperou",
+      "id": 8383972,
+      "comment_id": 1475013253,
+      "created_at": "2023-03-18T22:18:00Z",
+      "repoId": 545159943,
+      "pullRequestNo": 243
+    }
+  ]
+}

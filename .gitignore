@@ -1,12 +1,48 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
-# compiled output
+# Build
 dist
-tmp
-/out-tsc
+lib
+lib-types
+/server
 
-# dependencies
+# Development
 node_modules
+migrations.json
+
+# Cache
+.cache
+.mf
+.rollup.cache
+tsconfig.tsbuildinfo
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/qwik.code-snippets
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Yarn
+.yarn/*
+!.yarn/releases
 
 # IDEs and editors
 /.idea
@@ -17,28 +53,14 @@ node_modules
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
 # misc
 /.sass-cache
 /connect.lock
 /coverage
 /libpeerconnection.log
-npm-debug.log
-yarn-error.log
 testem.log
 /typings
 
 # System Files
 .DS_Store
 Thumbs.db
-
-# Playwright
-**/test-results/
-**/playwright-report/
-**/playwright/.cache/
