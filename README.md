@@ -21,3 +21,12 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## Attributions
+
+This project uses snippets from on <a href="https://github.com/qwikifiers/qwik-ui">Qwik UI</a>. Thanks @qwikifiers.
+See LICENSE.qwikifiers_qwik-ui
+
+## License
+
+Mozilla Public License 2
