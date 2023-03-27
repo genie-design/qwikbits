@@ -1,0 +1,105 @@
+{
+  "name": "storybook-framework-qwik",
+  "version": "0.1.0",
+  "description": "Storybook for Qwik: View Qwik components in isolation.",
+  "keywords": [
+    "storybook",
+    "hydration",
+    "resumable",
+    "qwik",
+    "reactive",
+    "framework",
+    "components",
+    "builder.io"
+  ],
+  "type": "module",
+  "//": "not sure why dist/preview is needed, but it is",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./preset": {
+      "require": "./dist/preset.js",
+      "import": "./dist/preset.js",
+      "types": "./dist/preset.d.ts"
+    },
+    "./dist/preview.js": {
+      "require": "./dist/preview.js",
+      "import": "./dist/preview.js",
+      "types": "./dist/preview.d.ts"
+    },
+    "./preview.js": {
+      "require": "./dist/preview.js",
+      "import": "./dist/preview.js",
+      "types": "./dist/preview.d.ts"
+    },
+    "./qwik-city-decorator": {
+      "require": "./dist/qwik-city-decorator.js",
+      "import": "./dist/qwik-city-decorator.js",
+      "types": "./dist/qwik-city-decorator.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/index.d.ts"
+      ],
+      "qwik-city-decorator": [
+        "./dist/qwik-city-decorator.d.ts"
+      ]
+    }
+  },
+  "homepage": "https://github.com/literalpie/storybook-framework-qwik",
+  "bugs": {
+    "url": "https://github.com/literalpie/storybook-framework-qwik"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/literalpie/storybook-framework-qwik.git",
+    "directory": "app/qwik"
+  },
+  "license": "MIT",
+  "files": [
+    "README.md",
+    "./preset.js",
+    "./dist/*.js",
+    "./template/cli/**",
+    "*.js",
+    "*.d.ts",
+    "./dist/*.d.ts"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "watch": "tsc --watch --outDir ./dist --listEmittedFiles",
+    "build": "tsc --outDir ./dist --listEmittedFiles",
+    "//semantic-release": "this should be a GHA eventually. I only made this work once locally using tokens in env vars",
+    "semantic-release": "semantic-release"
+  },
+  "dependencies": {
+    "@storybook/builder-vite": ">=7.0.0-beta.7"
+  },
+  "peerDependencies": {
+    "@builder.io/qwik": ">=0.15.2"
+  },
+  "optionalDependencies": {
+    "@builder.io/qwik-city": ">=0.0.128"
+  },
+  "devDependencies": {
+    "@suin/semantic-release-yarn": "1.1.0",
+    "@types/node": "^18",
+    "semantic-release": "^21.0.0",
+    "typescript": "~5.0.2",
+    "vite": "^4.2.1"
+  },
+  "engines": {
+    "node": "^14.18 || >=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

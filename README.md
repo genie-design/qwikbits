@@ -134,6 +134,11 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 - [@QwikDev](https://twitter.com/QwikDev)
 - [Vite](https://vitejs.dev/)
 
+## Attributions
+
+This project uses snippets from on <a href="https://github.com/qwikifiers/qwik-ui">Qwik UI</a>. Thanks @qwikifiers.
+See LICENSE.qwikifiers_qwik-ui
+
 ## License
 
-MIT
+Mozilla Public License 2

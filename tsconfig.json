@@ -1,0 +1,31 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "incremental": false,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@builder.io/qwik",
+    "module": "commonjs",
+    "skipDefaultLibCheck": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "es5",
+    "types": [],
+    "lib": ["es2017", "dom"]
+  },
+  "exclude": [
+    "**/dist",
+    "./examples/qwik-kitchen-sink",
+    "./examples",
+    "node_modules",
+    "**/node_modules",
+    "**/*.spec.ts",
+    "**/__tests__",
+    "**/*.test.ts"
+  ]
+}
