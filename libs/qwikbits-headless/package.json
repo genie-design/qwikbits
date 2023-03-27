@@ -1,5 +1,5 @@
 {
-  "name": "@geniejs/qwikbits-headless",
+  "name": "@genie-design/qwikbits-headless",
   "version": "0.1.0",
   "description": "Headless components for Qwik with a focus on accessibility",
   "publishConfig": {
