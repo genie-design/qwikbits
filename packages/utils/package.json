@@ -1,0 +1,38 @@
+{
+  "name": "@qwikbits/utils",
+  "version": "0.1.1",
+  "description": "Helpful utils for Qwik",
+  "author": {
+    "name": "Corey Jepperson",
+    "email": "corey.jepperson@gmail.com"
+  },
+  "homepage": "https://github.com/genie-design/qwikbits",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/genie-design/qwikbits"
+  },
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0",
+    "vite-plugin-dts": "^2.1.0"
+  },
+  "dependencies": {
+    "focusable-selectors": "^0.8.0"
+  },
+  "main": "./dist/utils.umd.cjs",
+  "module": "./dist/utils.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/utils.js",
+      "require": "./dist/utils.umd.cjs"
+    }
+  }
+}
