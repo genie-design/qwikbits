@@ -7,7 +7,7 @@ export const App = component$(() => {
   return (
     <>
       <Collapse>
-        <div q:slot="trigger">Open Accordion</div> <div>CONTENT</div>
+        <span q:slot="trigger">Open Accordion</span> <div>CONTENT</div>
       </Collapse>
       <Dialog
         open={dialogSignal}

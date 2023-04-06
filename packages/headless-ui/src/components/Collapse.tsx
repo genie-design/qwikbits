@@ -8,10 +8,12 @@ import {
   useStore,
   Slot,
 } from "@builder.io/qwik";
+import { QwikHTMLElement, QwikHTMLElementProps } from "./QwikHTMLElement";
 export type CollapseProps = {
-  rootProps?: QwikIntrinsicElements[`div`];
+  rootProps?: QwikHTMLElementProps<keyof QwikIntrinsicElements>;
   id?: string;
   triggerProps?: QwikIntrinsicElements[`button`];
+  contentProps?: QwikHTMLElementProps<keyof QwikIntrinsicElements>;
   open?: Signal<boolean>;
 };
 export const Collapse = component$((props: CollapseProps) => {
@@ -27,25 +29,34 @@ export const Collapse = component$((props: CollapseProps) => {
   });
 
   return (
-    <div {...props.rootProps}>
-      <button
+    <QwikHTMLElement
+      tag={props.rootProps?.tag || "details"}
+      {...props.rootProps}
+    >
+      <summary
         type="button"
         id={state.id + "-trigger"}
         aria-expanded={state.open?.value}
         aria-controls={state.id}
-        {...props.triggerProps}
         onClick$={() => (state.open.value = !state.open.value)}
+        onKeyDown$={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            state.open.value = !state.open.value;
+          }
+        }}
+        {...props.triggerProps}
       >
         <Slot name="trigger" />
-      </button>
-      <div
+      </summary>
+      <QwikHTMLElement
         id={state.id}
         role="region"
         aria-labelledby={state.id + "-trigger"}
         hidden={!state.open?.value}
+        {...props.contentProps}
       >
         <Slot />
-      </div>
-    </div>
+      </QwikHTMLElement>
+    </QwikHTMLElement>
   );
 });
