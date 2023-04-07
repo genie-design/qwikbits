@@ -1,11 +1,39 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useVisibleTask$ } from "@builder.io/qwik";
 import { useSignal } from "@builder.io/qwik";
 import { Collapse, Dialog } from ".";
 
 export const App = component$(() => {
   const dialogSignal = useSignal(false);
+  const pico = useSignal<Element | null>(null);
+  useVisibleTask$(
+    () => {
+      pico.value = document.getElementById("pico-css");
+    },
+    { strategy: "document-ready" }
+  );
   return (
     <>
+      <label>
+        Pico{" "}
+        <input
+          type="checkbox"
+          onChange$={() => {
+            if (pico.value) {
+              pico.value.remove();
+              pico.value = null;
+            } else {
+              const link = document.createElement("link");
+              link.id = "pico-css";
+              link.rel = "stylesheet";
+              link.href =
+                "https://unpkg.com/@picocss/pico@1.*/css/pico.min.css";
+              document.head.appendChild(link);
+              pico.value = link;
+            }
+          }}
+          checked={!!pico}
+        ></input>
+      </label>
       <Collapse>
         <span q:slot="trigger">Open Accordion</span> <div>CONTENT</div>
       </Collapse>

@@ -12,7 +12,7 @@ import { QwikHTMLElement, QwikHTMLElementProps } from "./QwikHTMLElement";
 export type CollapseProps = {
   rootProps?: QwikHTMLElementProps<keyof QwikIntrinsicElements>;
   id?: string;
-  triggerProps?: QwikIntrinsicElements[`button`];
+  triggerProps?: QwikHTMLElementProps<keyof QwikIntrinsicElements>;
   contentProps?: QwikHTMLElementProps<keyof QwikIntrinsicElements>;
   open?: Signal<boolean>;
 };
@@ -33,8 +33,8 @@ export const Collapse = component$((props: CollapseProps) => {
       tag={props.rootProps?.tag || "details"}
       {...props.rootProps}
     >
-      <summary
-        type="button"
+      <QwikHTMLElement
+        tag={props.triggerProps?.tag || "summary"}
         id={state.id + "-trigger"}
         aria-expanded={state.open?.value}
         aria-controls={state.id}
@@ -47,7 +47,7 @@ export const Collapse = component$((props: CollapseProps) => {
         {...props.triggerProps}
       >
         <Slot name="trigger" />
-      </summary>
+      </QwikHTMLElement>
       <QwikHTMLElement
         id={state.id}
         role="region"
