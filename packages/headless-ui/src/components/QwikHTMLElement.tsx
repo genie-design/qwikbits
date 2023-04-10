@@ -5,13 +5,23 @@ export type QwikHTMLElementProps<T extends keyof QwikIntrinsicElements> =
     tag?: string;
   };
 
+export type QwikHTMLElementIntrinsic = QwikHTMLElementProps<
+  keyof QwikIntrinsicElements
+>;
+
 export const QwikHTMLElement = component$(
   ({ tag, ...props }: QwikHTMLElementProps<keyof QwikIntrinsicElements>) => {
-    const Component = tag || "div";
+    const Component = tag;
     return (
-      <Component {...props}>
-        <Slot />
-      </Component>
+      <>
+        {Component ? (
+          <Component {...props}>
+            <Slot />
+          </Component>
+        ) : (
+          <Slot />
+        )}
+      </>
     );
   }
 );
