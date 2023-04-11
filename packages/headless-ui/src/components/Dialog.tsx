@@ -6,7 +6,8 @@ import {
   VisibleTaskStrategy,
   useId,
   useStyles$,
-  useTask$,
+  useOnDocument,
+  $,
 } from "@builder.io/qwik";
 import { Slot, component$, useStore } from "@builder.io/qwik";
 import { moveFocusToDialog } from "@qwikbits/utils";
@@ -68,6 +69,15 @@ export const Dialog = component$((props: DialogProps) => {
     {
       strategy: props?.strategy ?? "document-ready",
     }
+  );
+
+  useOnDocument(
+    `keydown`,
+    $((e) => {
+      if ((e as KeyboardEvent).key === "Escape" && state.open.value) {
+        state.open.value = false;
+      }
+    })
   );
 
   return (
