@@ -6,6 +6,7 @@ import {
   VisibleTaskStrategy,
   useId,
   useStyles$,
+  useTask$,
 } from "@builder.io/qwik";
 import { Slot, component$, useStore } from "@builder.io/qwik";
 import { moveFocusToDialog } from "@qwikbits/utils";
@@ -57,8 +58,6 @@ export const Dialog = component$((props: DialogProps) => {
   useVisibleTask$(
     ({ track }) => {
       track(() => state.open.value);
-      console.log(dialogEl.value);
-      console.log(state.open.value);
       if (dialogEl.value && state.open.value) {
         dialogEl.value.showModal();
         moveFocusToDialog(dialogEl.value);
@@ -67,7 +66,7 @@ export const Dialog = component$((props: DialogProps) => {
       }
     },
     {
-      strategy: props?.strategy ?? `intersection-observer`,
+      strategy: props?.strategy ?? "document-ready",
     }
   );
 
