@@ -1,6 +1,6 @@
 import { component$, useVisibleTask$ } from "@builder.io/qwik";
 import { useSignal } from "@builder.io/qwik";
-import { Collapse, Dialog } from ".";
+import { Collapse, Dialog, Dropdown } from ".";
 
 export const App = component$(() => {
   const dialogSignal = useSignal(false);
@@ -12,7 +12,14 @@ export const App = component$(() => {
     { strategy: "document-ready" }
   );
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        margin: "2rem",
+      }}
+    >
       <label>
         Pico{" "}
         <input
@@ -34,9 +41,14 @@ export const App = component$(() => {
           checked={!!pico}
         ></input>
       </label>
-      <Collapse>
-        <span q:slot="trigger">Open Accordion</span> <div>CONTENT</div>
-      </Collapse>
+      <div>
+        <Collapse>
+          <span q:slot="trigger">Open Accordion</span> <div>CONTENT</div>
+        </Collapse>
+        <Collapse>
+          <span q:slot="trigger">Open Accordion 2</span> <div>CONTENT</div>
+        </Collapse>
+      </div>
       <Dialog
         open={dialogSignal}
         dialogProps={{ class: `dialog-content` }}
@@ -61,6 +73,68 @@ export const App = component$(() => {
       <button onClick$={() => (dialogSignal.value = true)}>
         Custom open. Is open: {String(dialogSignal.value)}
       </button>
-    </>
+      <div>
+        <Dropdown
+          label="Dropdown"
+          items={[{ label: "Item 1" }, { label: "Item 2" }]}
+        />
+        <Dropdown
+          label="Dropdown Radio"
+          items={[
+            {
+              label: "Item 1",
+              itemProps: { tag: "label", for: "item1" },
+              labelBeforeProps: {
+                tag: "input",
+                type: "radio",
+                name: "items",
+                id: "item1",
+              },
+            },
+            {
+              label: "Item 2",
+              itemProps: { tag: "label", for: "item2" },
+              labelBeforeProps: {
+                tag: "input",
+                type: "radio",
+                name: "items",
+                id: "item2",
+              },
+            },
+          ]}
+        />
+        <Dropdown
+          label="Dropdown Checkbox"
+          items={[
+            {
+              label: "Item 1",
+              itemProps: { tag: "label" },
+              labelBeforeProps: {
+                tag: "input",
+                type: "checkbox",
+                name: "items",
+              },
+            },
+            {
+              label: "Item 2",
+              itemProps: { tag: "label" },
+              labelBeforeProps: {
+                tag: "input",
+                type: "checkbox",
+              },
+            },
+          ]}
+        />
+        <nav>
+          <ul>
+            <Dropdown
+              label="Dropdown"
+              rootProps={{ tag: "li" }}
+              items={[{ label: "Item 1" }, { label: "Item 2" }]}
+            />
+          </ul>
+        </nav>
+      </div>
+    </div>
   );
 });
