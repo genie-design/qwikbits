@@ -5,6 +5,7 @@ import {
   useSignal,
   VisibleTaskStrategy,
   useId,
+  useStyles$,
 } from "@builder.io/qwik";
 import { Slot, component$, useStore } from "@builder.io/qwik";
 import { moveFocusToDialog } from "@qwikbits/utils";
@@ -25,12 +26,25 @@ export type DialogProps = Partial<DialogState> & {
   dialogProps?: QwikIntrinsicElements[`dialog`];
   titleProps?: QwikHTMLElementIntrinsic;
   descriptionProps?: QwikHTMLElementIntrinsic;
+  footerProps?: QwikHTMLElementIntrinsic;
   closeButton?: boolean;
   closeProps?: QwikHTMLElementIntrinsic;
   strategy?: VisibleTaskStrategy | undefined;
+  wrappers?: {
+    rootChildren?: QwikHTMLElementIntrinsic;
+    content?: QwikHTMLElementIntrinsic;
+  };
 };
 
 export const Dialog = component$((props: DialogProps) => {
+  useStyles$(`
+    header:empty {
+      display: none;
+    }
+    footer:empty {
+      display: none;
+    }
+`);
   const defaultSignal = useSignal(false);
   const state = useStore<DialogState>({
     role: props.role ?? `dialog`,
@@ -43,6 +57,8 @@ export const Dialog = component$((props: DialogProps) => {
   useVisibleTask$(
     ({ track }) => {
       track(() => state.open.value);
+      console.log(dialogEl.value);
+      console.log(state.open.value);
       if (dialogEl.value && state.open.value) {
         dialogEl.value.showModal();
         moveFocusToDialog(dialogEl.value);
@@ -57,68 +73,74 @@ export const Dialog = component$((props: DialogProps) => {
 
   return (
     <QwikHTMLElement tag={props.rootProps?.tag || "div"} {...props.rootProps}>
-      {props.triggerButton && (
-        <QwikHTMLElement
-          tag={props.triggerProps?.tag || "button"}
-          type="button"
-          aria-haspopup="dialog"
-          aria-expanded={state.open.value}
-          {...props?.triggerProps}
-          onClick$={() => (state.open.value = true)}
-        >
-          <Slot name="trigger" />
-        </QwikHTMLElement>
-      )}
+      <QwikHTMLElement {...props.wrappers?.rootChildren}>
+        {props.triggerButton && (
+          <QwikHTMLElement
+            tag={props.triggerProps?.tag || "button"}
+            type="button"
+            aria-haspopup="dialog"
+            aria-expanded={state.open.value}
+            {...props?.triggerProps}
+            onClick$={() => (state.open.value = true)}
+          >
+            <Slot name="trigger" />
+          </QwikHTMLElement>
+        )}
 
-      <dialog
-        ref={dialogEl}
-        role={state.role}
-        tabIndex={-1}
-        aria-modal="true"
-        aria-hidden={!state.open.value}
-        hidden={!state.open.value}
-        aria-labelledby={state.titleId}
-        aria-describedby={state.descriptionId}
-        {...props?.dialogProps}
-        open={state.open.value}
-        onClick$={(e) => {
-          e.target === dialogEl.value && state.role !== "alertdialog"
-            ? (state.open.value = false)
-            : "";
-        }}
-      >
-        <QwikHTMLElement
-          tag={props.contentProps?.tag || "article"}
-          {...props?.contentProps}
+        <dialog
+          ref={dialogEl}
+          role={state.role}
+          tabIndex={-1}
+          aria-modal="true"
+          aria-hidden={!state.open.value}
+          hidden={!state.open.value}
+          aria-labelledby={state.titleId}
+          aria-describedby={state.descriptionId}
+          {...props?.dialogProps}
+          onClick$={(e) => {
+            e.target === dialogEl.value && state.role !== "alertdialog"
+              ? (state.open.value = false)
+              : "";
+          }}
         >
           <QwikHTMLElement
-            tag={props.titleProps?.tag || "header"}
-            id={state.titleId}
-            {...props?.titleProps}
+            tag={props.contentProps?.tag || "article"}
+            {...props?.contentProps}
           >
-            <Slot name="title" />
-            {props?.closeButton && (
-              <QwikHTMLElement
-                tag={props.closeProps?.tag || "button"}
-                type="button"
-                {...props?.closeProps}
-                onClick$={() => (state.open.value = false)}
-              >
-                <Slot name="close" />
-              </QwikHTMLElement>
-            )}
+            <QwikHTMLElement
+              tag={props.titleProps?.tag || "header"}
+              id={state.titleId}
+              {...props?.titleProps}
+            >
+              <Slot name="title" />
+              {props?.closeButton && (
+                <QwikHTMLElement
+                  tag={props.closeProps?.tag || "button"}
+                  type="button"
+                  {...props?.closeProps}
+                  onClick$={() => (state.open.value = false)}
+                >
+                  <Slot name="close" />
+                </QwikHTMLElement>
+              )}
+            </QwikHTMLElement>
+            <QwikHTMLElement
+              tag={props.descriptionProps?.tag || "p"}
+              id={state.descriptionId}
+              {...props?.descriptionProps}
+            >
+              <Slot name="description" />
+            </QwikHTMLElement>
+            <QwikHTMLElement {...props.wrappers?.content}>
+              <Slot />
+              <Slot name="content" />
+            </QwikHTMLElement>
+            <QwikHTMLElement tag={props.footerProps?.tag || "footer"}>
+              <Slot name="footer" />
+            </QwikHTMLElement>
           </QwikHTMLElement>
-          <QwikHTMLElement
-            tag={props.descriptionProps?.tag || "p"}
-            id={state.descriptionId}
-            {...props?.descriptionProps}
-          >
-            <Slot name="description" />
-          </QwikHTMLElement>
-          <Slot />
-          <Slot name="content" />
-        </QwikHTMLElement>
-      </dialog>
+        </dialog>
+      </QwikHTMLElement>
     </QwikHTMLElement>
   );
 });
