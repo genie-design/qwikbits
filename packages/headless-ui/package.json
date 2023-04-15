@@ -30,7 +30,7 @@
     "fmt.check": "prettier --check .",
     "lint": "eslint \"src/**/*.ts*\"",
     "release": "changeset version",
-    "publish": "changeset publish",
+    "publish": "pnpm publish --access public",
     "start": "vite --open --mode ssr",
     "qwik": "qwik",
     "changeset": "changeset"
