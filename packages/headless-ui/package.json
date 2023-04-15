@@ -1,6 +1,6 @@
 {
   "name": "@qwikbits/headless-ui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Headless components for Qwik with a focus on accessibility",
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
