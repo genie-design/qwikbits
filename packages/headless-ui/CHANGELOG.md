@@ -1,5 +1,16 @@
 # @qwikbits/headless-ui
 
+## 0.3.0
+
+### Minor Changes
+
+- Add dropdown and major changes
+
+### Patch Changes
+
+- fix dependencies
+- Initial deployment under qwikbits org
+
 ## 0.2.0
 
 ### Minor Changes
