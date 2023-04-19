@@ -11,7 +11,7 @@ import {
 } from "@builder.io/qwik";
 import { Slot, component$, useStore } from "@builder.io/qwik";
 import { moveFocusToDialog } from "@qwikbits/utils";
-import { QwikHTMLElement, QwikHTMLElementIntrinsic } from "./QwikHTMLElement";
+import { QwikHTMLElement, QwikHTMLElementIntrinsic } from "@qwikbits/utils";
 
 export type DialogState = {
   role: `dialog` | `alertdialog`;
@@ -39,6 +39,12 @@ export type DialogProps = Partial<DialogState> & {
 };
 
 export const Dialog = component$((props: DialogProps) => {
+  const uid = useId();
+  const tuid = useId();
+  const duid = useId();
+  const id = props.id ?? uid;
+  const titleId = props.titleId ?? tuid;
+  const descriptionId = props.descriptionId ?? duid;
   useStyles$(`
     header:empty {
       display: none;
@@ -47,13 +53,14 @@ export const Dialog = component$((props: DialogProps) => {
       display: none;
     }
 `);
+
   const defaultSignal = useSignal(false);
   const state = useStore<DialogState>({
     role: props.role ?? `dialog`,
     open: props.open ?? defaultSignal,
-    id: props.id ?? useId(),
-    titleId: props.titleId ?? useId(),
-    descriptionId: props.descriptionId ?? useId(),
+    id,
+    titleId,
+    descriptionId,
   });
   const dialogEl = useSignal<HTMLDialogElement>();
   useVisibleTask$(

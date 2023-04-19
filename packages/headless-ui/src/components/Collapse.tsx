@@ -7,7 +7,7 @@ import {
   useStore,
   Slot,
 } from "@builder.io/qwik";
-import { QwikHTMLElement, QwikHTMLElementIntrinsic } from "./QwikHTMLElement";
+import { QwikHTMLElement, QwikHTMLElementIntrinsic } from "@qwikbits/utils";
 export type CollapseProps = {
   id?: string;
   open?: Signal<boolean>;
@@ -21,6 +21,7 @@ export type CollapseProps = {
   };
 };
 export const Collapse = component$((props: CollapseProps) => {
+  const id = useId();
   useStylesScoped$(`
   div[hidden] {
     display: none;
@@ -32,7 +33,7 @@ export const Collapse = component$((props: CollapseProps) => {
   const defaultSignal = useSignal(false);
   const state = useStore<Required<Pick<CollapseProps, "open" | "id">>>({
     open: props.open ?? defaultSignal,
-    id: props.id ?? useId(),
+    id: props.id ?? id,
   });
 
   return (

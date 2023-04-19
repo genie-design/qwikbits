@@ -1,2 +1,3 @@
-export { Collapse } from "./collapse";
-export { Dialog } from "./dialog";
+export { Collapse } from "./Collapse";
+export { Dialog } from "./Dialog";
+export { Dropdown } from "./Dropdown";

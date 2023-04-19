@@ -1,20 +1,20 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Node",
+    "allowJs": true,
+    "target": "ES2017",
+    "module": "ES2020",
+    "lib": ["es2020", "DOM"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "@builder.io/qwik",
     "strict": true,
+    "declaration": true,
+    "declarationDir": "lib-types",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "incremental": true,
+    "isolatedModules": true
   },
   "include": ["src"]
 }

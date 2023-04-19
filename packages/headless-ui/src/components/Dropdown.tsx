@@ -1,5 +1,5 @@
 import { component$, Slot } from "@builder.io/qwik";
-import { QwikHTMLElement, QwikHTMLElementIntrinsic } from "./QwikHTMLElement";
+import { QwikHTMLElement, QwikHTMLElementIntrinsic } from "@qwikbits/utils";
 export type DropdownProps = {
   rootProps?: QwikHTMLElementIntrinsic;
   label?: string;

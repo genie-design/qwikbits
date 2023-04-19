@@ -1,16 +1,16 @@
-// vite.config.ts
-import { resolve } from "path";
-import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
+import { defineConfig } from 'vite';
+import { qwikVite } from '@builder.io/qwik/optimizer';
 
-// https://vitejs.dev/guide/build.html#library-mode
-export default defineConfig({
-  build: {
-    lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      name: "@qwikbits/utils",
-      fileName: "utils",
+export default defineConfig(() => {
+  return {
+    build: {
+      target: 'es2020',
+      lib: {
+        entry: './src/index.ts',
+        formats: ['es', 'cjs'],
+        fileName: (format) => `index.qwik.${format === 'es' ? 'mjs' : 'cjs'}`,
+      },
     },
-  },
-  plugins: [dts()],
+    plugins: [qwikVite()],
+  };
 });
