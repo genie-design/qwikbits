@@ -1,19 +1,18 @@
 /* eslint-disable qwik/use-method-usage */
-import { useOnWindow, useSignal, component$, $ } from "@builder.io/qwik";
+import { useSignal, component$, Slot } from "@builder.io/qwik";
 import { useVisibleTask$ } from "@builder.io/qwik";
 import { QwikHTMLElement, QwikHTMLElementIntrinsic } from "./QwikHTMLElement";
 export function use100vh() {
   const height = useSignal<number | undefined>(undefined);
-  useOnWindow(
-    "resize",
-    $(() => {
+  if (typeof window !== "undefined") {
+    window.addEventListener("resize", () => {
       height.value = window.innerHeight;
-    })
-  );
+    });
+  }
   useVisibleTask$(async () => {
     height.value = innerHeight;
   });
-  return height.value ? `${height.value}px` : "100vh";
+  return height;
 }
 export type HeightScreenElementProps = {
   rootProps?: QwikHTMLElementIntrinsic;
@@ -24,10 +23,12 @@ export const HeightScreenElement = component$(
     const height = use100vh();
     return (
       <QwikHTMLElement
-        tag={props.rootProps?.tag || "details"}
+        tag={props.rootProps?.tag || "div"}
         {...props.rootProps}
-        style={{ height }}
-      ></QwikHTMLElement>
+        style={{ height: `${height.value}px` || "100vh" }}
+      >
+        <Slot />
+      </QwikHTMLElement>
     );
   }
 );

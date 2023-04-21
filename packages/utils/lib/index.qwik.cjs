@@ -132,37 +132,42 @@ const QwikHTMLElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.i
 }, "QwikHTMLElement_component_bEP4kKLrA50"));
 function use100vh() {
   const height = qwik.useSignal(void 0);
-  qwik.useOnWindow("resize", /* @__PURE__ */ qwik.inlinedQrl(() => {
-    const [height2] = qwik.useLexicalScope();
-    height2.value = window.innerHeight;
-  }, "use100vh_useOnWindow_A4Vrk135yDA", [
-    height
-  ]));
+  if (typeof window !== "undefined")
+    window.addEventListener("resize", () => {
+      height.value = window.innerHeight;
+    });
   qwik.useVisibleTaskQrl(/* @__PURE__ */ qwik.inlinedQrl(async () => {
     const [height2] = qwik.useLexicalScope();
     height2.value = innerHeight;
   }, "use100vh_useVisibleTask_ocOczmDxQWk", [
     height
   ]));
-  return height.value ? `${height.value}px` : "100vh";
+  return height;
 }
 const HeightScreenElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((props) => {
   const height = use100vh();
   return /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
     get tag() {
-      return props.rootProps?.tag || "details";
+      return props.rootProps?.tag || "div";
     },
     ...props.rootProps,
-    style: {
-      height
+    get style() {
+      return {
+        height: `${height.value}px` || "100vh"
+      };
     },
+    children: /* @__PURE__ */ qwik._jsxC(qwik.Slot, null, 3, "WR_0"),
     [qwik._IMMUTABLE]: {
-      tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "details", [
+      tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "div", [
         props
-      ], 'p0.rootProps?.tag||"details"'),
-      style: qwik._IMMUTABLE
+      ], 'p0.rootProps?.tag||"div"'),
+      style: qwik._fnSignal((p0) => ({
+        height: `${p0.value}px` || "100vh"
+      }), [
+        height
+      ], '{height:`${p0.value}px`||"100vh"}')
     }
-  }, 0, "WR_0");
+  }, 0, "WR_1");
 }, "HeightScreenElement_component_RSa7JFOHbX0"));
 exports.HeightScreenElement = HeightScreenElement;
 exports.QwikHTMLElement = QwikHTMLElement;

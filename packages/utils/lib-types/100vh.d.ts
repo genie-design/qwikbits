@@ -1,5 +1,5 @@
 import { QwikHTMLElementIntrinsic } from "./QwikHTMLElement";
-export declare function use100vh(): string;
+export declare function use100vh(): import("@builder.io/qwik").Signal<number | undefined>;
 export type HeightScreenElementProps = {
     rootProps?: QwikHTMLElementIntrinsic;
 };

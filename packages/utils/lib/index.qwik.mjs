@@ -1,4 +1,4 @@
-import { componentQrl, inlinedQrl, _jsxBranch, _restProps, _jsxC, Slot, useSignal, useOnWindow, useLexicalScope, useVisibleTaskQrl, _IMMUTABLE, _fnSignal } from "@builder.io/qwik";
+import { componentQrl, inlinedQrl, _jsxBranch, _restProps, _jsxC, Slot, useSignal, useVisibleTaskQrl, useLexicalScope, _IMMUTABLE, _fnSignal } from "@builder.io/qwik";
 import { Fragment } from "@builder.io/qwik/jsx-runtime";
 const not = {
   inert: ":not([inert]):not([inert] *)",
@@ -130,37 +130,42 @@ const QwikHTMLElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl(
 }, "QwikHTMLElement_component_bEP4kKLrA50"));
 function use100vh() {
   const height = useSignal(void 0);
-  useOnWindow("resize", /* @__PURE__ */ inlinedQrl(() => {
-    const [height2] = useLexicalScope();
-    height2.value = window.innerHeight;
-  }, "use100vh_useOnWindow_A4Vrk135yDA", [
-    height
-  ]));
+  if (typeof window !== "undefined")
+    window.addEventListener("resize", () => {
+      height.value = window.innerHeight;
+    });
   useVisibleTaskQrl(/* @__PURE__ */ inlinedQrl(async () => {
     const [height2] = useLexicalScope();
     height2.value = innerHeight;
   }, "use100vh_useVisibleTask_ocOczmDxQWk", [
     height
   ]));
-  return height.value ? `${height.value}px` : "100vh";
+  return height;
 }
 const HeightScreenElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => {
   const height = use100vh();
   return /* @__PURE__ */ _jsxC(QwikHTMLElement, {
     get tag() {
-      return props.rootProps?.tag || "details";
+      return props.rootProps?.tag || "div";
     },
     ...props.rootProps,
-    style: {
-      height
+    get style() {
+      return {
+        height: `${height.value}px` || "100vh"
+      };
     },
+    children: /* @__PURE__ */ _jsxC(Slot, null, 3, "WR_0"),
     [_IMMUTABLE]: {
-      tag: _fnSignal((p0) => p0.rootProps?.tag || "details", [
+      tag: _fnSignal((p0) => p0.rootProps?.tag || "div", [
         props
-      ], 'p0.rootProps?.tag||"details"'),
-      style: _IMMUTABLE
+      ], 'p0.rootProps?.tag||"div"'),
+      style: _fnSignal((p0) => ({
+        height: `${p0.value}px` || "100vh"
+      }), [
+        height
+      ], '{height:`${p0.value}px`||"100vh"}')
     }
-  }, 0, "WR_0");
+  }, 0, "WR_1");
 }, "HeightScreenElement_component_RSa7JFOHbX0"));
 export {
   HeightScreenElement,
