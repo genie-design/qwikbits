@@ -1,5 +1,17 @@
 # @qwikbits/headless-ui
 
+## 0.4.0
+
+### Minor Changes
+
+- Refractor and 100vh component
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @qwikbits/utils@0.2.0
+
 ## 0.3.0
 
 ### Minor Changes
