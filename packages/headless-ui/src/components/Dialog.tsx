@@ -46,10 +46,10 @@ export const Dialog = component$((props: DialogProps) => {
   const titleId = props.titleId ?? tuid;
   const descriptionId = props.descriptionId ?? duid;
   useStyles$(`
-    header:empty {
+    .qb-dialog-header:empty {
       display: none;
     }
-    footer:empty {
+    .qb-dialog-footer:empty {
       display: none;
     }
 `);
@@ -126,6 +126,7 @@ export const Dialog = component$((props: DialogProps) => {
             <QwikHTMLElement
               tag={props.titleProps?.tag || "header"}
               id={state.titleId}
+              class={`${props.titleProps?.class || ""} qb-dialog-header`}
               {...props?.titleProps}
             >
               <Slot name="title" />
@@ -151,7 +152,11 @@ export const Dialog = component$((props: DialogProps) => {
               <Slot />
               <Slot name="content" />
             </QwikHTMLElement>
-            <QwikHTMLElement tag={props.footerProps?.tag || "footer"}>
+            <QwikHTMLElement
+              tag={props.footerProps?.tag || "footer"}
+              class={`${props.footerProps?.class || ""} qb-dialog-footer`}
+              {...props.footerProps}
+            >
               <Slot name="footer" />
             </QwikHTMLElement>
           </QwikHTMLElement>

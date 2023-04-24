@@ -75,68 +75,77 @@ export const App = component$(() => {
         <button onClick$={() => (dialogSignal.value = true)}>
           Custom open. Is open: {String(dialogSignal.value)}
         </button>
-        <div>
-          <Dropdown
-            label="Dropdown"
-            items={[{ label: "Item 1" }, { label: "Item 2" }]}
-          />
-          <Dropdown
-            label="Dropdown Radio"
-            items={[
-              {
-                label: "Item 1",
-                itemProps: { tag: "label", for: "item1" },
-                labelBeforeProps: {
-                  tag: "input",
-                  type: "radio",
-                  name: "items",
-                  id: "item1",
-                },
+        Dropdown
+        <Dropdown label="Dropdown">Content Content</Dropdown>
+        Dropdown Pico
+        <Dropdown
+          label="Dropdown Pico"
+          rootProps={{ tag: "details" }}
+          triggerProps={{ tag: "summary" }}
+          items={[{ label: "Item 1" }, { label: "Item 2" }]}
+        />
+        <Dropdown
+          label="Dropdown Pico Radio"
+          rootProps={{ tag: "details" }}
+          triggerProps={{ tag: "summary" }}
+          items={[
+            {
+              label: "Item 1",
+              itemProps: { tag: "label", for: "item1" },
+              labelBeforeProps: {
+                tag: "input",
+                type: "radio",
+                name: "items",
+                id: "item1",
               },
-              {
-                label: "Item 2",
-                itemProps: { tag: "label", for: "item2" },
-                labelBeforeProps: {
-                  tag: "input",
-                  type: "radio",
-                  name: "items",
-                  id: "item2",
-                },
+            },
+            {
+              label: "Item 2",
+              itemProps: { tag: "label", for: "item2" },
+              labelBeforeProps: {
+                tag: "input",
+                type: "radio",
+                name: "items",
+                id: "item2",
               },
-            ]}
-          />
-          <Dropdown
-            label="Dropdown Checkbox"
-            items={[
-              {
-                label: "Item 1",
-                itemProps: { tag: "label" },
-                labelBeforeProps: {
-                  tag: "input",
-                  type: "checkbox",
-                  name: "items",
-                },
+            },
+          ]}
+        />
+        <Dropdown
+          label="Dropdown Pico Checkbox"
+          rootProps={{ tag: "details" }}
+          triggerProps={{ tag: "summary" }}
+          items={[
+            {
+              label: "Item 1",
+              itemProps: { tag: "label" },
+              labelBeforeProps: {
+                tag: "input",
+                type: "checkbox",
+                name: "items",
               },
-              {
-                label: "Item 2",
-                itemProps: { tag: "label" },
-                labelBeforeProps: {
-                  tag: "input",
-                  type: "checkbox",
-                },
+            },
+            {
+              label: "Item 2",
+              itemProps: { tag: "label" },
+              labelBeforeProps: {
+                tag: "input",
+                type: "checkbox",
               },
-            ]}
-          />
-          <nav>
-            <ul>
-              <Dropdown
-                label="Dropdown"
-                rootProps={{ tag: "li" }}
-                items={[{ label: "Item 1" }, { label: "Item 2" }]}
-              />
-            </ul>
-          </nav>
-        </div>
+            },
+          ]}
+        />
+        <nav>
+          <ul>
+            <Dropdown
+              label="Dropdown Pico Hover"
+              rootProps={{ tag: "li" }}
+              lockOpen={true}
+              triggerProps={{ tag: "summary" }}
+              items={[{ label: "Item 1" }, { label: "Item 2" }]}
+            />
+          </ul>
+        </nav>
       </div>
     </HeightScreenElement>
   );

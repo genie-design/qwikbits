@@ -1,10 +1,12 @@
-import { component$, Slot } from "@builder.io/qwik";
+import { component$, Signal, Slot, useSignal } from "@builder.io/qwik";
 import { QwikHTMLElement, QwikHTMLElementIntrinsic } from "@qwikbits/utils";
 export type DropdownProps = {
   rootProps?: QwikHTMLElementIntrinsic;
   label?: string;
-  labelProps?: QwikHTMLElementIntrinsic;
+  triggerProps?: QwikHTMLElementIntrinsic;
   contentProps?: QwikHTMLElementIntrinsic;
+  open?: Signal<boolean>;
+  lockOpen?: boolean;
   items?: {
     label?: string;
     key?: string;
@@ -19,23 +21,30 @@ export type DropdownProps = {
   };
 };
 export const Dropdown = component$((props: DropdownProps) => {
+  const defaultSignal = useSignal(props.lockOpen ?? false);
+  const open = props.open ?? defaultSignal;
+
   return (
     <QwikHTMLElement
-      tag={props.rootProps?.tag || "details"}
+      tag={props.rootProps?.tag || "div"}
+      aria-label={props.rootProps?.["aria-label"] || props.label}
+      onClick$={() => (open.value = !open.value)}
       role="list"
       {...props.rootProps}
     >
       <QwikHTMLElement {...props.wrappers?.rootChildren}>
         <QwikHTMLElement
-          tag={props.labelProps?.tag || "summary"}
+          tag={props.triggerProps?.tag || "button"}
           aria-haspopup="listbox"
-          {...props.labelProps}
+          aria-expanded={props.open?.value}
+          {...props.triggerProps}
         >
-          {props.label}
-          <Slot name="label" />
+          {props.label ? props.label : ""}
+          <Slot name="trigger" />
         </QwikHTMLElement>
         <QwikHTMLElement
           role="listbox"
+          hidden={!props.lockOpen && !open?.value}
           tag={props.contentProps?.tag || "ul"}
           {...props.contentProps}
         >
