@@ -152,10 +152,10 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
   const titleId = props.titleId ?? tuid;
   const descriptionId = props.descriptionId ?? duid;
   qwik.useStylesQrl(/* @__PURE__ */ qwik.inlinedQrl(`
-    header:empty {
+    .qb-dialog-header:empty {
       display: none;
     }
-    footer:empty {
+    .qb-dialog-footer:empty {
       display: none;
     }
 `, "Dialog_component_useStyles_fwdn9cAxUmY"));
@@ -247,6 +247,9 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
                 get id() {
                   return state.titleId;
                 },
+                get class() {
+                  return `${props.titleProps?.class || ""} qb-dialog-header`;
+                },
                 ...props?.titleProps,
                 children: [
                   /* @__PURE__ */ qwik._jsxC(qwik.Slot, {
@@ -288,7 +291,10 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
                   ], 'p0.titleProps?.tag||"header"'),
                   id: qwik._fnSignal((p0) => p0.titleId, [
                     state
-                  ], "p0.titleId")
+                  ], "p0.titleId"),
+                  class: qwik._fnSignal((p0) => `${p0.titleProps?.class || ""} qb-dialog-header`, [
+                    props
+                  ], '`${p0.titleProps?.class||""} qb-dialog-header`')
                 }
               }, 0, "w1_5"),
               /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
@@ -330,6 +336,10 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
                 get tag() {
                   return props.footerProps?.tag || "footer";
                 },
+                get class() {
+                  return `${props.footerProps?.class || ""} qb-dialog-footer`;
+                },
+                ...props.footerProps,
                 children: /* @__PURE__ */ qwik._jsxC(qwik.Slot, {
                   name: "footer",
                   [qwik._IMMUTABLE]: {
@@ -339,9 +349,12 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
                 [qwik._IMMUTABLE]: {
                   tag: qwik._fnSignal((p0) => p0.footerProps?.tag || "footer", [
                     props
-                  ], 'p0.footerProps?.tag||"footer"')
+                  ], 'p0.footerProps?.tag||"footer"'),
+                  class: qwik._fnSignal((p0) => `${p0.footerProps?.class || ""} qb-dialog-footer`, [
+                    props
+                  ], '`${p0.footerProps?.class||""} qb-dialog-footer`')
                 }
-              }, 1, "w1_12")
+              }, 0, "w1_12")
             ],
             [qwik._IMMUTABLE]: {
               tag: qwik._fnSignal((p0) => p0.contentProps?.tag || "article", [
@@ -385,10 +398,21 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
   }, 0, "w1_15");
 }, "Dialog_component_YMDBpsULtWk"));
 const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((props) => {
+  const defaultSignal = qwik.useSignal(props.lockOpen ?? false);
+  const open = props.open ?? defaultSignal;
   return /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
     get tag() {
-      return props.rootProps?.tag || "details";
+      return props.rootProps?.tag || "div";
     },
+    get "aria-label"() {
+      return props.rootProps?.["aria-label"] || props.label;
+    },
+    onClick$: /* @__PURE__ */ qwik.inlinedQrl(() => {
+      const [open2] = qwik.useLexicalScope();
+      return open2.value = !open2.value;
+    }, "Dropdown_component_QwikHTMLElement_onClick_BW7EOjZlpBQ", [
+      open
+    ]),
     role: "list",
     ...props.rootProps,
     children: /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
@@ -396,30 +420,37 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
       children: [
         /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
           get tag() {
-            return props.labelProps?.tag || "summary";
+            return props.triggerProps?.tag || "button";
           },
           "aria-haspopup": "listbox",
-          ...props.labelProps,
+          get "aria-expanded"() {
+            return props.open?.value;
+          },
+          ...props.triggerProps,
           children: [
-            qwik._fnSignal((p0) => p0.label, [
+            qwik._fnSignal((p0) => p0.label ? p0.label : "", [
               props
-            ], "p0.label"),
+            ], 'p0.label?p0.label:""'),
             /* @__PURE__ */ qwik._jsxC(qwik.Slot, {
-              name: "label",
+              name: "trigger",
               [qwik._IMMUTABLE]: {
                 name: qwik._IMMUTABLE
               }
             }, 3, "8Y_0")
           ],
           [qwik._IMMUTABLE]: {
-            tag: qwik._fnSignal((p0) => p0.labelProps?.tag || "summary", [
+            tag: qwik._fnSignal((p0) => p0.triggerProps?.tag || "button", [
               props
-            ], 'p0.labelProps?.tag||"summary"'),
-            "aria-haspopup": qwik._IMMUTABLE
+            ], 'p0.triggerProps?.tag||"button"'),
+            "aria-haspopup": qwik._IMMUTABLE,
+            "aria-expanded": qwik._fnSignal((p0) => p0.open?.value, [
+              props
+            ], "p0.open?.value")
           }
         }, 0, "8Y_1"),
         /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
           role: "listbox",
+          hidden: !props.lockOpen && !open?.value,
           get tag() {
             return props.contentProps?.tag || "ul";
           },
@@ -469,9 +500,12 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
       ]
     }, 0, "8Y_10"),
     [qwik._IMMUTABLE]: {
-      tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "details", [
+      tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "div", [
         props
-      ], 'p0.rootProps?.tag||"details"'),
+      ], 'p0.rootProps?.tag||"div"'),
+      "aria-label": qwik._fnSignal((p0) => p0.rootProps?.["aria-label"] || p0.label, [
+        props
+      ], 'p0.rootProps?.["aria-label"]||p0.label'),
       role: qwik._IMMUTABLE
     }
   }, 0, "8Y_11");

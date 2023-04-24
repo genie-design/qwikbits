@@ -150,10 +150,10 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
   const titleId = props.titleId ?? tuid;
   const descriptionId = props.descriptionId ?? duid;
   useStylesQrl(/* @__PURE__ */ inlinedQrl(`
-    header:empty {
+    .qb-dialog-header:empty {
       display: none;
     }
-    footer:empty {
+    .qb-dialog-footer:empty {
       display: none;
     }
 `, "Dialog_component_useStyles_fwdn9cAxUmY"));
@@ -245,6 +245,9 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
                 get id() {
                   return state.titleId;
                 },
+                get class() {
+                  return `${props.titleProps?.class || ""} qb-dialog-header`;
+                },
                 ...props?.titleProps,
                 children: [
                   /* @__PURE__ */ _jsxC(Slot, {
@@ -286,7 +289,10 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
                   ], 'p0.titleProps?.tag||"header"'),
                   id: _fnSignal((p0) => p0.titleId, [
                     state
-                  ], "p0.titleId")
+                  ], "p0.titleId"),
+                  class: _fnSignal((p0) => `${p0.titleProps?.class || ""} qb-dialog-header`, [
+                    props
+                  ], '`${p0.titleProps?.class||""} qb-dialog-header`')
                 }
               }, 0, "w1_5"),
               /* @__PURE__ */ _jsxC(QwikHTMLElement, {
@@ -328,6 +334,10 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
                 get tag() {
                   return props.footerProps?.tag || "footer";
                 },
+                get class() {
+                  return `${props.footerProps?.class || ""} qb-dialog-footer`;
+                },
+                ...props.footerProps,
                 children: /* @__PURE__ */ _jsxC(Slot, {
                   name: "footer",
                   [_IMMUTABLE]: {
@@ -337,9 +347,12 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
                 [_IMMUTABLE]: {
                   tag: _fnSignal((p0) => p0.footerProps?.tag || "footer", [
                     props
-                  ], 'p0.footerProps?.tag||"footer"')
+                  ], 'p0.footerProps?.tag||"footer"'),
+                  class: _fnSignal((p0) => `${p0.footerProps?.class || ""} qb-dialog-footer`, [
+                    props
+                  ], '`${p0.footerProps?.class||""} qb-dialog-footer`')
                 }
-              }, 1, "w1_12")
+              }, 0, "w1_12")
             ],
             [_IMMUTABLE]: {
               tag: _fnSignal((p0) => p0.contentProps?.tag || "article", [
@@ -383,10 +396,21 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
   }, 0, "w1_15");
 }, "Dialog_component_YMDBpsULtWk"));
 const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => {
+  const defaultSignal = useSignal(props.lockOpen ?? false);
+  const open = props.open ?? defaultSignal;
   return /* @__PURE__ */ _jsxC(QwikHTMLElement, {
     get tag() {
-      return props.rootProps?.tag || "details";
+      return props.rootProps?.tag || "div";
     },
+    get "aria-label"() {
+      return props.rootProps?.["aria-label"] || props.label;
+    },
+    onClick$: /* @__PURE__ */ inlinedQrl(() => {
+      const [open2] = useLexicalScope();
+      return open2.value = !open2.value;
+    }, "Dropdown_component_QwikHTMLElement_onClick_BW7EOjZlpBQ", [
+      open
+    ]),
     role: "list",
     ...props.rootProps,
     children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
@@ -394,30 +418,37 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
       children: [
         /* @__PURE__ */ _jsxC(QwikHTMLElement, {
           get tag() {
-            return props.labelProps?.tag || "summary";
+            return props.triggerProps?.tag || "button";
           },
           "aria-haspopup": "listbox",
-          ...props.labelProps,
+          get "aria-expanded"() {
+            return props.open?.value;
+          },
+          ...props.triggerProps,
           children: [
-            _fnSignal((p0) => p0.label, [
+            _fnSignal((p0) => p0.label ? p0.label : "", [
               props
-            ], "p0.label"),
+            ], 'p0.label?p0.label:""'),
             /* @__PURE__ */ _jsxC(Slot, {
-              name: "label",
+              name: "trigger",
               [_IMMUTABLE]: {
                 name: _IMMUTABLE
               }
             }, 3, "8Y_0")
           ],
           [_IMMUTABLE]: {
-            tag: _fnSignal((p0) => p0.labelProps?.tag || "summary", [
+            tag: _fnSignal((p0) => p0.triggerProps?.tag || "button", [
               props
-            ], 'p0.labelProps?.tag||"summary"'),
-            "aria-haspopup": _IMMUTABLE
+            ], 'p0.triggerProps?.tag||"button"'),
+            "aria-haspopup": _IMMUTABLE,
+            "aria-expanded": _fnSignal((p0) => p0.open?.value, [
+              props
+            ], "p0.open?.value")
           }
         }, 0, "8Y_1"),
         /* @__PURE__ */ _jsxC(QwikHTMLElement, {
           role: "listbox",
+          hidden: !props.lockOpen && !open?.value,
           get tag() {
             return props.contentProps?.tag || "ul";
           },
@@ -467,9 +498,12 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
       ]
     }, 0, "8Y_10"),
     [_IMMUTABLE]: {
-      tag: _fnSignal((p0) => p0.rootProps?.tag || "details", [
+      tag: _fnSignal((p0) => p0.rootProps?.tag || "div", [
         props
-      ], 'p0.rootProps?.tag||"details"'),
+      ], 'p0.rootProps?.tag||"div"'),
+      "aria-label": _fnSignal((p0) => p0.rootProps?.["aria-label"] || p0.label, [
+        props
+      ], 'p0.rootProps?.["aria-label"]||p0.label'),
       role: _IMMUTABLE
     }
   }, 0, "8Y_11");

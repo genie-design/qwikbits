@@ -1,9 +1,12 @@
+import { Signal } from "@builder.io/qwik";
 import { QwikHTMLElementIntrinsic } from "@qwikbits/utils";
 export type DropdownProps = {
     rootProps?: QwikHTMLElementIntrinsic;
     label?: string;
-    labelProps?: QwikHTMLElementIntrinsic;
+    triggerProps?: QwikHTMLElementIntrinsic;
     contentProps?: QwikHTMLElementIntrinsic;
+    open?: Signal<boolean>;
+    lockOpen?: boolean;
     items?: {
         label?: string;
         key?: string;
