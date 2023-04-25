@@ -50,7 +50,6 @@
     "vite": "4.3.1"
   },
   "dependencies": {
-    "@qwikbits/utils": "workspace:*",
-    "prismjs": "^1.29.0"
+      "prismjs": "^1.29.0"
   }
 }
