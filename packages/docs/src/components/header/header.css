@@ -1,34 +1,58 @@
-header {
-  position: sticky;
-  top: 0;
-  z-index: 11;
-  display: grid;
-  grid-template-columns: minmax(130px, auto) 1fr;
-  gap: 30px;
-  height: 80px;
-  width: 100%;
-  padding: 10px;
-  background-color: white;
-  overflow: hidden;
+nav.container-fluid {
+    text-size-adjust: 100%;
+    color: var(--color);
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    font-family: var(--font-family);
+    text-rendering: optimizeLegibility;
+    overflow-wrap: break-word;
+    cursor: default;
+    tab-size: 4;
+    color-scheme: light;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-between;
+    --nav-link-spacing-vertical: 1rem;
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: var(--nav-background-color);
+    box-shadow: 0px 1px 0 var(--nav-border-color);
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: var(--spacing);
+    padding-right: calc(var(--spacing) + var(--scrollbar-width, 0px));
 }
-
-header a.logo {
-  display: block;
-}
-
-header a {
-  text-decoration: none;
-}
-
-header nav {
-  text-align: right;
-}
-
-header nav a {
-  display: inline-block;
-  padding: 5px 15px;
-}
-
-header nav a:hover {
-  text-decoration: underline;
+nav.container-fluid ul {
+    text-size-adjust: 100%;
+    line-height: var(--line-height);
+    font-family: var(--font-family);
+    text-rendering: optimizeLegibility;
+    overflow-wrap: break-word;
+    cursor: default;
+    tab-size: 4;
+    color-scheme: light;
+    --nav-link-spacing-vertical: 1rem;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    padding-inline-start: var(--spacing);
+    padding-inline-end: 0;
+    margin-top: 0;
+    color: var(--color);
+    font-style: normal;
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+    list-style-type: none;
+    margin-left: calc(var(--spacing) * -1);
 }

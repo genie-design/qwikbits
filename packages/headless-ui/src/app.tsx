@@ -18,7 +18,6 @@ export const App = component$(() => {
 `);
   const dialogSignal = useSignal(false);
   const valueSet = useSignal(false);
-  const pico = useSignal<Element | null>(null);
 
   const page = useSignal<"getting-started" | "headlessui" | "utils">(
     "getting-started"
@@ -31,6 +30,7 @@ export const App = component$(() => {
     }
   });
 
+  const pico = useSignal<Element | null>(null);
   useVisibleTask$(
     () => {
       pico.value = document.getElementById("pico-css");
