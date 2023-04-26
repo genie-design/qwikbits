@@ -167,7 +167,7 @@ export default component$(() => {
               </li>
             </ul>
           </details>
-          <details open="true">
+          <details open={true}>
             <summary>Utilities</summary>
             <ul>
               <li>
@@ -218,11 +218,7 @@ export default component$(() => {
           <article aria-label="Tooltips examples">
             <p>
               Tooltip on a{" "}
-              <a
-                href="#"
-                onclick="event.preventDefault()"
-                data-tooltip="Tooltip"
-              >
+              <a href="#" preventdefault:click data-tooltip="Tooltip">
                 link
               </a>
             </p>

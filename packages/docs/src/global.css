@@ -552,13 +552,14 @@ body > nav ul:first-of-type li:first-of-type a {
   display: block;
   margin: 0;
   padding: 0;
-  background: var(--h1-color);
+  background: #f9fafb;
   color: var(--nav-logo-color);
 }
 body > nav ul:first-of-type li:first-of-type a svg {
   display: block;
   width: 3.5rem;
   height: 3.5rem;
+  padding: .25rem;
 }
 body > nav ul:first-of-type li:nth-of-type(2) {
   display: none;
