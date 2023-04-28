@@ -2,15 +2,10 @@
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const qwik = require("@builder.io/qwik");
 var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-var prismExports = {};
-var prism = {
-  get exports() {
-    return prismExports;
-  },
-  set exports(v) {
-    prismExports = v;
-  }
-};
+function getDefaultExportFromCjs(x) {
+  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+}
+var prism = { exports: {} };
 (function(module2) {
   var _self = typeof window !== "undefined" ? window : typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope ? self : {};
   /**
@@ -1464,7 +1459,8 @@ var prism = {
     };
   })();
 })(prism);
-const prismjs = prismExports;
+var prismExports = prism.exports;
+const prismjs = /* @__PURE__ */ getDefaultExportFromCjs(prismExports);
 (function(Prism2) {
   var javascript = Prism2.util.clone(Prism2.languages.javascript);
   var space = /(?:\s|\/\/.*(?!.)|\/\*(?:[^*]|\*(?!\/))\*\/)/.source;

@@ -128,22 +128,24 @@ const QwikHTMLElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl(
     }, 0, "dj_1") : /* @__PURE__ */ _jsxC(Slot, null, 3, "dj_2")
   }, 1, "dj_3");
 }, "QwikHTMLElement_component_bEP4kKLrA50"));
-function use100vh() {
+function use100vh(vh) {
   const height = useSignal(void 0);
+  const numerator = vh ?? 100;
   if (typeof window !== "undefined")
     window.addEventListener("resize", () => {
-      height.value = window.innerHeight;
+      height.value = window.innerHeight * (numerator / 100);
     });
   useVisibleTaskQrl(/* @__PURE__ */ inlinedQrl(async () => {
-    const [height2] = useLexicalScope();
-    height2.value = innerHeight;
+    const [height2, numerator2] = useLexicalScope();
+    height2.value = window.innerHeight * (numerator2 / 100);
   }, "use100vh_useVisibleTask_ocOczmDxQWk", [
-    height
+    height,
+    numerator
   ]));
   return height;
 }
-const HeightScreenElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => {
-  const height = use100vh();
+const VHElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => {
+  const height = use100vh(props.vh);
   return /* @__PURE__ */ _jsxC(QwikHTMLElement, {
     get tag() {
       return props.rootProps?.tag || "div";
@@ -151,7 +153,7 @@ const HeightScreenElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlined
     ...props.rootProps,
     get style() {
       return {
-        height: `${height.value}px` || "100vh"
+        height: `${height.value}px` || `${props.vh || 100}vh`
       };
     },
     children: /* @__PURE__ */ _jsxC(Slot, null, 3, "WR_0"),
@@ -159,17 +161,18 @@ const HeightScreenElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlined
       tag: _fnSignal((p0) => p0.rootProps?.tag || "div", [
         props
       ], 'p0.rootProps?.tag||"div"'),
-      style: _fnSignal((p0) => ({
-        height: `${p0.value}px` || "100vh"
+      style: _fnSignal((p0, p1) => ({
+        height: `${p0.value}px` || `${p1.vh || 100}vh`
       }), [
-        height
-      ], '{height:`${p0.value}px`||"100vh"}')
+        height,
+        props
+      ], "{height:`${p0.value}px`||`${p1.vh||100}vh`}")
     }
   }, 0, "WR_1");
-}, "HeightScreenElement_component_RSa7JFOHbX0"));
+}, "VHElement_component_Zns65jACPvc"));
 export {
-  HeightScreenElement,
   QwikHTMLElement,
+  VHElement,
   getActiveElement,
   getFocusableEdges,
   moveFocusToDialog,

@@ -1,3 +1,4 @@
-export { Collapse } from "./Collapse";
-export { Dialog } from "./Dialog";
-export { Dropdown } from "./Dropdown";
+export { Collapse, type CollapseProps } from "./Collapse";
+export { Dialog, type DialogProps } from "./Dialog";
+export { Dropdown, type DropdownProps } from "./Dropdown";
+export { Toggle, type ToggleProps } from "./Toggle";

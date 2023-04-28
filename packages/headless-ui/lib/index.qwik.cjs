@@ -510,6 +510,140 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
     }
   }, 0, "8Y_11");
 }, "Dropdown_component_hWeuySTMJ0E"));
+const Toggle = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((props) => {
+  const defaultSignal = qwik.useSignal(false);
+  const defaultId = qwik.useId();
+  const id = props.id ?? defaultId;
+  const checked = props.checked ?? defaultSignal;
+  return /* @__PURE__ */ qwik._jsxC(jsxRuntime.Fragment, {
+    children: [
+      "TEST",
+      /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
+        get tag() {
+          return props.rootProps?.tag || "div";
+        },
+        ...props.rootProps,
+        children: /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
+          ...props.wrappers?.rootChildren,
+          children: [
+            /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
+              for: id,
+              get tag() {
+                return props.labelProps?.tag || "label";
+              },
+              ...props.labelProps,
+              onClick$: /* @__PURE__ */ qwik.inlinedQrl(() => {
+                const [checked2] = qwik.useLexicalScope();
+                return checked2.value = !checked2.value;
+              }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_hNj9hv0igPc", [
+                checked
+              ]),
+              children: [
+                /* @__PURE__ */ qwik._jsxC(qwik.Slot, {
+                  name: "label",
+                  [qwik._IMMUTABLE]: {
+                    name: qwik._IMMUTABLE
+                  }
+                }, 3, "Cw_0"),
+                qwik._fnSignal((p0) => p0.label ? p0.label : "", [
+                  props
+                ], 'p0.label?p0.label:""')
+              ],
+              [qwik._IMMUTABLE]: {
+                tag: qwik._fnSignal((p0) => p0.labelProps?.tag || "label", [
+                  props
+                ], 'p0.labelProps?.tag||"label"')
+              }
+            }, 0, "Cw_1"),
+            /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
+              for: id,
+              get type() {
+                return props.buttonProps?.type || "button";
+              },
+              get role() {
+                return props.buttonProps?.role || "switch";
+              },
+              get "aria-checked"() {
+                return checked.value;
+              },
+              get "data-checked"() {
+                return checked.value;
+              },
+              id,
+              get tag() {
+                return props.buttonProps?.tag || "div";
+              },
+              onClick$: /* @__PURE__ */ qwik.inlinedQrl(() => {
+                const [checked2] = qwik.useLexicalScope();
+                return checked2.value = !checked2.value;
+              }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_1_4yy3wNhrKzg", [
+                checked
+              ]),
+              ...props.buttonProps,
+              children: [
+                /* @__PURE__ */ qwik._jsxC(qwik.Slot, {
+                  name: "button",
+                  [qwik._IMMUTABLE]: {
+                    name: qwik._IMMUTABLE
+                  }
+                }, 3, "Cw_2"),
+                /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
+                  get tag() {
+                    return props.buttonProps?.tag || "span";
+                  },
+                  get "data-checked"() {
+                    return checked.value;
+                  },
+                  ...props.thumbProps,
+                  [qwik._IMMUTABLE]: {
+                    tag: qwik._fnSignal((p0) => p0.buttonProps?.tag || "span", [
+                      props
+                    ], 'p0.buttonProps?.tag||"span"'),
+                    "data-checked": qwik._wrapProp(checked, "value")
+                  }
+                }, 0, "Cw_3")
+              ],
+              [qwik._IMMUTABLE]: {
+                type: qwik._fnSignal((p0) => p0.buttonProps?.type || "button", [
+                  props
+                ], 'p0.buttonProps?.type||"button"'),
+                role: qwik._fnSignal((p0) => p0.buttonProps?.role || "switch", [
+                  props
+                ], 'p0.buttonProps?.role||"switch"'),
+                "aria-checked": qwik._wrapProp(checked, "value"),
+                "data-checked": qwik._wrapProp(checked, "value"),
+                tag: qwik._fnSignal((p0) => p0.buttonProps?.tag || "div", [
+                  props
+                ], 'p0.buttonProps?.tag||"div"')
+              }
+            }, 0, "Cw_4"),
+            /* @__PURE__ */ qwik._jsxQ("input", {
+              checked: qwik._wrapSignal(checked, "value"),
+              onClick$: /* @__PURE__ */ qwik.inlinedQrl(() => {
+                const [checked2] = qwik.useLexicalScope();
+                return checked2.value = !checked2.value;
+              }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_input_onClick_UlUt7fUGL9k", [
+                checked
+              ])
+            }, {
+              type: "checkbox",
+              "aria-hidden": "true",
+              style: "transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px; width: 42px; height: 25px;",
+              tabIndex: -1,
+              value: "on"
+            }, null, 2, null)
+          ]
+        }, 0, "Cw_5"),
+        [qwik._IMMUTABLE]: {
+          tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "div", [
+            props
+          ], 'p0.rootProps?.tag||"div"')
+        }
+      }, 0, "Cw_6")
+    ]
+  }, 1, "Cw_7");
+}, "Toggle_component_8fJITTfl13Q"));
 exports.Collapse = Collapse;
 exports.Dialog = Dialog;
 exports.Dropdown = Dropdown;
+exports.Toggle = Toggle;

@@ -130,22 +130,24 @@ const QwikHTMLElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.i
     }, 0, "dj_1") : /* @__PURE__ */ qwik._jsxC(qwik.Slot, null, 3, "dj_2")
   }, 1, "dj_3");
 }, "QwikHTMLElement_component_bEP4kKLrA50"));
-function use100vh() {
+function use100vh(vh) {
   const height = qwik.useSignal(void 0);
+  const numerator = vh ?? 100;
   if (typeof window !== "undefined")
     window.addEventListener("resize", () => {
-      height.value = window.innerHeight;
+      height.value = window.innerHeight * (numerator / 100);
     });
   qwik.useVisibleTaskQrl(/* @__PURE__ */ qwik.inlinedQrl(async () => {
-    const [height2] = qwik.useLexicalScope();
-    height2.value = innerHeight;
+    const [height2, numerator2] = qwik.useLexicalScope();
+    height2.value = window.innerHeight * (numerator2 / 100);
   }, "use100vh_useVisibleTask_ocOczmDxQWk", [
-    height
+    height,
+    numerator
   ]));
   return height;
 }
-const HeightScreenElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((props) => {
-  const height = use100vh();
+const VHElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((props) => {
+  const height = use100vh(props.vh);
   return /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
     get tag() {
       return props.rootProps?.tag || "div";
@@ -153,7 +155,7 @@ const HeightScreenElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qw
     ...props.rootProps,
     get style() {
       return {
-        height: `${height.value}px` || "100vh"
+        height: `${height.value}px` || `${props.vh || 100}vh`
       };
     },
     children: /* @__PURE__ */ qwik._jsxC(qwik.Slot, null, 3, "WR_0"),
@@ -161,16 +163,17 @@ const HeightScreenElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qw
       tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "div", [
         props
       ], 'p0.rootProps?.tag||"div"'),
-      style: qwik._fnSignal((p0) => ({
-        height: `${p0.value}px` || "100vh"
+      style: qwik._fnSignal((p0, p1) => ({
+        height: `${p0.value}px` || `${p1.vh || 100}vh`
       }), [
-        height
-      ], '{height:`${p0.value}px`||"100vh"}')
+        height,
+        props
+      ], "{height:`${p0.value}px`||`${p1.vh||100}vh`}")
     }
   }, 0, "WR_1");
-}, "HeightScreenElement_component_RSa7JFOHbX0"));
-exports.HeightScreenElement = HeightScreenElement;
+}, "VHElement_component_Zns65jACPvc"));
 exports.QwikHTMLElement = QwikHTMLElement;
+exports.VHElement = VHElement;
 exports.getActiveElement = getActiveElement;
 exports.getFocusableEdges = getFocusableEdges;
 exports.moveFocusToDialog = moveFocusToDialog;

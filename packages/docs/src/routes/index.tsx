@@ -1,5 +1,7 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useSignal } from "@builder.io/qwik";
+import { Toggle } from "@qwikbits/headless-ui";
 export default component$(() => {
+  const toggleChecked = useSignal(false);
   return (
     <>
       <aside>
@@ -209,6 +211,10 @@ export default component$(() => {
       </aside>
       <div role="document">
         <section id="tooltips">
+          <Toggle label="Test Label Toggle" checked={toggleChecked}>
+            <span q:slot="button">Test slot</span>
+          </Toggle>
+          <p>{toggleChecked.value.toString()}</p>
           <hgroup>
             <h1>Tooltips</h1>
             <h2>
