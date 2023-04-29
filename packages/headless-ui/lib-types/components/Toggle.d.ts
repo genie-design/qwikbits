@@ -5,7 +5,7 @@ export type ToggleProps = {
     rootProps?: QwikHTMLElementIntrinsic;
     label?: string;
     labelProps?: QwikHTMLElementIntrinsic;
-    buttonProps?: QwikHTMLElementIntrinsic;
+    switchProps?: QwikHTMLElementIntrinsic;
     thumbProps?: QwikHTMLElementIntrinsic;
     checked?: Signal<boolean>;
     wrappers?: {

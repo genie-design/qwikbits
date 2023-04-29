@@ -514,131 +514,120 @@ const Toggle = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
   const id = props.id ?? defaultId;
   const checked = props.checked ?? defaultSignal;
   return /* @__PURE__ */ _jsxC(Fragment, {
-    children: [
-      "TEST",
-      /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-        get tag() {
-          return props.rootProps?.tag || "div";
-        },
-        ...props.rootProps,
-        children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-          ...props.wrappers?.rootChildren,
-          children: [
-            /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-              for: id,
-              get tag() {
-                return props.labelProps?.tag || "label";
-              },
-              ...props.labelProps,
-              onClick$: /* @__PURE__ */ inlinedQrl(() => {
-                const [checked2] = useLexicalScope();
-                return checked2.value = !checked2.value;
-              }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_hNj9hv0igPc", [
-                checked
-              ]),
-              children: [
-                /* @__PURE__ */ _jsxC(Slot, {
-                  name: "label",
-                  [_IMMUTABLE]: {
-                    name: _IMMUTABLE
-                  }
-                }, 3, "Cw_0"),
-                _fnSignal((p0) => p0.label ? p0.label : "", [
-                  props
-                ], 'p0.label?p0.label:""')
-              ],
-              [_IMMUTABLE]: {
-                tag: _fnSignal((p0) => p0.labelProps?.tag || "label", [
-                  props
-                ], 'p0.labelProps?.tag||"label"')
-              }
-            }, 0, "Cw_1"),
-            /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-              for: id,
-              get type() {
-                return props.buttonProps?.type || "button";
-              },
-              get role() {
-                return props.buttonProps?.role || "switch";
-              },
-              get "aria-checked"() {
-                return checked.value;
-              },
-              get "data-checked"() {
-                return checked.value;
-              },
-              id,
-              get tag() {
-                return props.buttonProps?.tag || "div";
-              },
-              onClick$: /* @__PURE__ */ inlinedQrl(() => {
-                const [checked2] = useLexicalScope();
-                return checked2.value = !checked2.value;
-              }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_1_4yy3wNhrKzg", [
-                checked
-              ]),
-              ...props.buttonProps,
-              children: [
-                /* @__PURE__ */ _jsxC(Slot, {
-                  name: "button",
-                  [_IMMUTABLE]: {
-                    name: _IMMUTABLE
-                  }
-                }, 3, "Cw_2"),
-                /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-                  get tag() {
-                    return props.buttonProps?.tag || "span";
-                  },
-                  get "data-checked"() {
-                    return checked.value;
-                  },
-                  ...props.thumbProps,
-                  [_IMMUTABLE]: {
-                    tag: _fnSignal((p0) => p0.buttonProps?.tag || "span", [
-                      props
-                    ], 'p0.buttonProps?.tag||"span"'),
-                    "data-checked": _wrapProp(checked, "value")
-                  }
-                }, 0, "Cw_3")
-              ],
-              [_IMMUTABLE]: {
-                type: _fnSignal((p0) => p0.buttonProps?.type || "button", [
-                  props
-                ], 'p0.buttonProps?.type||"button"'),
-                role: _fnSignal((p0) => p0.buttonProps?.role || "switch", [
-                  props
-                ], 'p0.buttonProps?.role||"switch"'),
-                "aria-checked": _wrapProp(checked, "value"),
-                "data-checked": _wrapProp(checked, "value"),
-                tag: _fnSignal((p0) => p0.buttonProps?.tag || "div", [
-                  props
-                ], 'p0.buttonProps?.tag||"div"')
-              }
-            }, 0, "Cw_4"),
-            /* @__PURE__ */ _jsxQ("input", {
-              checked: _wrapSignal(checked, "value"),
-              onClick$: /* @__PURE__ */ inlinedQrl(() => {
-                const [checked2] = useLexicalScope();
-                return checked2.value = !checked2.value;
-              }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_input_onClick_UlUt7fUGL9k", [
-                checked
-              ])
-            }, {
-              type: "checkbox",
-              "aria-hidden": "true",
-              style: "transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px; width: 42px; height: 25px;",
-              tabIndex: -1,
-              value: "on"
-            }, null, 2, null)
-          ]
-        }, 0, "Cw_5"),
-        [_IMMUTABLE]: {
-          tag: _fnSignal((p0) => p0.rootProps?.tag || "div", [
-            props
-          ], 'p0.rootProps?.tag||"div"')
-        }
-      }, 0, "Cw_6")
-    ]
+    children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+      get tag() {
+        return props.rootProps?.tag || "div";
+      },
+      ...props.rootProps,
+      children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+        ...props.wrappers?.rootChildren,
+        children: [
+          /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+            for: id,
+            get tag() {
+              return props.labelProps?.tag || "label";
+            },
+            ...props.labelProps,
+            onClick$: /* @__PURE__ */ inlinedQrl(() => {
+              const [checked2] = useLexicalScope();
+              return checked2.value = !checked2.value;
+            }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_hNj9hv0igPc", [
+              checked
+            ]),
+            children: [
+              /* @__PURE__ */ _jsxC(Slot, {
+                name: "label",
+                [_IMMUTABLE]: {
+                  name: _IMMUTABLE
+                }
+              }, 3, "Cw_0"),
+              _fnSignal((p0) => p0.label ? p0.label : "", [
+                props
+              ], 'p0.label?p0.label:""')
+            ],
+            [_IMMUTABLE]: {
+              tag: _fnSignal((p0) => p0.labelProps?.tag || "label", [
+                props
+              ], 'p0.labelProps?.tag||"label"')
+            }
+          }, 0, "Cw_1"),
+          /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+            for: id,
+            get type() {
+              return props.switchProps?.type || "button";
+            },
+            get role() {
+              return props.switchProps?.role || "switch";
+            },
+            get "aria-checked"() {
+              return checked.value;
+            },
+            id,
+            get tag() {
+              return props.switchProps?.tag || "div";
+            },
+            onClick$: /* @__PURE__ */ inlinedQrl(() => {
+              const [checked2] = useLexicalScope();
+              return checked2.value = !checked2.value;
+            }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_1_4yy3wNhrKzg", [
+              checked
+            ]),
+            ...props.switchProps,
+            children: [
+              /* @__PURE__ */ _jsxC(Slot, {
+                name: "button",
+                [_IMMUTABLE]: {
+                  name: _IMMUTABLE
+                }
+              }, 3, "Cw_2"),
+              /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+                get tag() {
+                  return props.switchProps?.tag || "span";
+                },
+                ...props.thumbProps,
+                [_IMMUTABLE]: {
+                  tag: _fnSignal((p0) => p0.switchProps?.tag || "span", [
+                    props
+                  ], 'p0.switchProps?.tag||"span"')
+                }
+              }, 0, "Cw_3")
+            ],
+            [_IMMUTABLE]: {
+              type: _fnSignal((p0) => p0.switchProps?.type || "button", [
+                props
+              ], 'p0.switchProps?.type||"button"'),
+              role: _fnSignal((p0) => p0.switchProps?.role || "switch", [
+                props
+              ], 'p0.switchProps?.role||"switch"'),
+              "aria-checked": _wrapProp(checked, "value"),
+              tag: _fnSignal((p0) => p0.switchProps?.tag || "div", [
+                props
+              ], 'p0.switchProps?.tag||"div"')
+            }
+          }, 0, "Cw_4"),
+          /* @__PURE__ */ _jsxQ("input", {
+            checked: _wrapSignal(checked, "value"),
+            onClick$: /* @__PURE__ */ inlinedQrl(() => {
+              const [checked2] = useLexicalScope();
+              return checked2.value = !checked2.value;
+            }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_input_onClick_UlUt7fUGL9k", [
+              checked
+            ])
+          }, {
+            type: "checkbox",
+            "aria-hidden": "true",
+            style: "transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px; width: 42px; height: 25px;",
+            tabIndex: -1,
+            value: "on"
+          }, null, 2, null)
+        ]
+      }, 0, "Cw_5"),
+      [_IMMUTABLE]: {
+        tag: _fnSignal((p0) => p0.rootProps?.tag || "div", [
+          props
+        ], 'p0.rootProps?.tag||"div"')
+      }
+    }, 0, "Cw_6")
   }, 1, "Cw_7");
 }, "Toggle_component_8fJITTfl13Q"));
 export {

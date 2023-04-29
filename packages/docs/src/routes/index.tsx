@@ -211,9 +211,12 @@ export default component$(() => {
       </aside>
       <div role="document">
         <section id="tooltips">
-          <Toggle label="Test Label Toggle" checked={toggleChecked}>
-            <span q:slot="button">Test slot</span>
-          </Toggle>
+          <Toggle
+            switchProps={{ class: "ToggleSwitch" }}
+            thumbProps={{ class: "ToggleThumb" }}
+            label="Test Label Toggle"
+            checked={toggleChecked}
+          ></Toggle>
           <p>{toggleChecked.value.toString()}</p>
           <hgroup>
             <h1>Tooltips</h1>

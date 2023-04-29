@@ -5,7 +5,7 @@ export type ToggleProps = {
   rootProps?: QwikHTMLElementIntrinsic;
   label?: string;
   labelProps?: QwikHTMLElementIntrinsic;
-  buttonProps?: QwikHTMLElementIntrinsic;
+  switchProps?: QwikHTMLElementIntrinsic;
   thumbProps?: QwikHTMLElementIntrinsic;
   checked?: Signal<boolean>;
   wrappers?: {
@@ -19,7 +19,6 @@ export const Toggle = component$((props: ToggleProps) => {
   const checked = props.checked ?? defaultSignal;
   return (
     <>
-      TEST
       <QwikHTMLElement tag={props.rootProps?.tag || "div"} {...props.rootProps}>
         <QwikHTMLElement {...props.wrappers?.rootChildren}>
           <QwikHTMLElement
@@ -33,19 +32,17 @@ export const Toggle = component$((props: ToggleProps) => {
           </QwikHTMLElement>
           <QwikHTMLElement
             for={id}
-            type={props.buttonProps?.type || "button"}
-            role={props.buttonProps?.role || "switch"}
+            type={props.switchProps?.type || "button"}
+            role={props.switchProps?.role || "switch"}
             aria-checked={checked.value}
-            data-checked={checked.value}
             id={id}
-            tag={props.buttonProps?.tag || "div"}
+            tag={props.switchProps?.tag || "div"}
             onClick$={() => (checked.value = !checked.value)}
-            {...props.buttonProps}
+            {...props.switchProps}
           >
             <Slot name="button" />
             <QwikHTMLElement
-              tag={props.buttonProps?.tag || "span"}
-              data-checked={checked.value}
+              tag={props.switchProps?.tag || "span"}
               {...props.thumbProps}
             ></QwikHTMLElement>
           </QwikHTMLElement>
