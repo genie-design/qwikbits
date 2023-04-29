@@ -1,8 +1,13 @@
-import { component$ } from '@builder.io/qwik';
-import { QwikCityProvider, RouterOutlet, ServiceWorkerRegister } from '@builder.io/qwik-city';
-import { RouterHead } from './components/router-head/router-head';
-
-import './global.css';
+import { component$ } from "@builder.io/qwik";
+import {
+  QwikCityProvider,
+  RouterOutlet,
+  ServiceWorkerRegister,
+} from "@builder.io/qwik-city";
+import { RouterHead } from "./components/router-head/router-head";
+import { isBrowser } from "@builder.io/qwik/build";
+import * as Sentry from "@sentry/browser";
+import "./global.css";
 
 export default component$(() => {
   /*
@@ -11,6 +16,17 @@ export default component$(() => {
    *
    * Dont remove the `<head>` and `<body>` elements.
    */
+  if (isBrowser) {
+    Sentry.init({
+      dsn: "https://f21c7eb8cec741eb87f2b7b3fa95f47f@o4504414345166848.ingest.sentry.io/4505098271260672",
+      integrations: [new Sentry.BrowserTracing()],
+
+      // Set tracesSampleRate to 1.0 to capture 100%
+      // of transactions for performance monitoring.
+      // We recommend adjusting this value in production
+      tracesSampleRate: 1.0,
+    });
+  }
   return (
     <QwikCityProvider>
       <head>
