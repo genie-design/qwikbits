@@ -8,7 +8,8 @@ import { RouterHead } from "./components/router-head/router-head";
 import { isBrowser } from "@builder.io/qwik/build";
 import * as Sentry from "@sentry/browser";
 import "./global.css";
-
+import "@unocss/reset/tailwind.css";
+import "virtual:uno.css";
 export default component$(() => {
   /*
    * The root of a QwikCity site always start with the <QwikCityProvider> component,

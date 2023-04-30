@@ -2,6 +2,7 @@ export const QwikBitsLogo = () => (
   <svg
     version="1.1"
     id="svg9"
+    class="h-16 w-16"
     width="507.49432"
     height="536.69727"
     viewBox="0 0 507.49435 536.69726"

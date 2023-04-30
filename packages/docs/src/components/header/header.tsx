@@ -1,25 +1,28 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import { QwikBitsLogo } from "../icons/qwikbits";
-import styles from "./header.css?inline";
 
 export default component$(() => {
-  useStyles$(styles);
-
   const { url } = useLocation();
 
   return (
-    <header>
-      <a class="logo" href="/">
+    <header class="sticky bg-white top-0 z-10 flex justify-between gap-8 h-20 w-full p-2 overflow-hidden">
+      <a class="block" href="/">
         <QwikBitsLogo />
       </a>
-      <nav>
-        <a href="/docs" class={{ active: url.pathname.startsWith("/docs") }}>
+      <nav class="text-right">
+        <a
+          href="/docs"
+          class={{
+            "no-underline inline-block px-2 py-4 hover:underline": true,
+            "font-bold": url.pathname.startsWith("/docs"),
+          }}
+        >
           Docs
         </a>
         <a
           href="/about-us"
-          class={{ active: url.pathname.startsWith("/about-us") }}
+          class={{ "font-bold": url.pathname.startsWith("/about-us") }}
         >
           About Us
         </a>

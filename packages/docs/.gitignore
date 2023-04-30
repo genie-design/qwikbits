@@ -3,6 +3,7 @@
 /lib
 /lib-types
 /server
+/src/uno.css
 
 # Development
 node_modules
