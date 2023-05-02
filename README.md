@@ -13,7 +13,7 @@ Utilities and other helpers for Qwik
 ## @qwikbits/code-block
 Code hightlighting compontent for Qwik docs
 
-`npm install @qwikbits/utils`
+`npm install @qwikbits/code-block`
 ## Attributions
 
 
