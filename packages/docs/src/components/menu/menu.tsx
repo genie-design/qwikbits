@@ -1,6 +1,6 @@
-import { component$, useStyles$ } from '@builder.io/qwik';
-import { useContent, Link, useLocation } from '@builder.io/qwik-city';
-import styles from './menu.css?inline';
+import { component$, useStyles$ } from "@builder.io/qwik";
+import { useContent, Link, useLocation } from "@builder.io/qwik-city";
+import styles from "./menu.css?inline";
 
 export default component$(() => {
   useStyles$(styles);
@@ -20,7 +20,7 @@ export default component$(() => {
                     <Link
                       href={item.href}
                       class={{
-                        'is-active': loc.url.pathname === item.href,
+                        "is-active": loc.url.pathname === item.href,
                       }}
                     >
                       {item.text}

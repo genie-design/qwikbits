@@ -3,29 +3,72 @@ import { presetForms } from "@julr/unocss-preset-forms";
 import { presetIcons } from "unocss";
 import transformerDirectives from "@unocss/transformer-directives";
 import presetWebFonts from "@unocss/preset-web-fonts";
+import type { Theme } from "@unocss/preset-wind";
 import presetWind from "@unocss/preset-wind";
 import presetTheme from "unocss-preset-theme";
 
-const richblue: Record<number, string> = {
-  100: "#7da6ff",
-  200: "#598dff",
-  300: "#446bc1",
-  400: "#37569b",
-  500: "#2a4175",
-  600: "#243967",
-  700: "#1c2c4f",
-  800: "#0f1729",
-  900: "#090e1a",
-};
+const wind = presetWind({
+  dark: "class",
+});
+let darkColors: Theme["colors"] = {};
+if (wind.theme?.colors) {
+  wind.theme.colors.richblue = {
+    100: "#7da6ff",
+    200: "#598dff",
+    300: "#446bc1",
+    400: "#37569b",
+    500: "#2a4175",
+    600: "#243967",
+    700: "#1c2c4f",
+    800: "#0f1729",
+    900: "#090e1a",
+  };
+  darkColors = Object.keys(wind.theme?.colors).reduce<Theme["colors"]>(
+    (acc, colorkey) => {
+      if (acc && wind.theme?.colors) {
+        const colors = wind.theme.colors[colorkey];
+        if (colorkey === "white") {
+          acc[colorkey] = "#000";
+        } else if (colorkey === "black") {
+          acc[colorkey] = "#fff";
+        } else if (typeof colors === "object" && Object.keys(colors).length) {
+          const newColors: typeof colors = {};
+          Object.keys(colors).forEach((key) => {
+            let newKey = key;
+            if (key === "50") {
+              newKey = "950";
+            } else if (key === "950") {
+              newKey = "50";
+            } else {
+              newKey = newKey.replace("9", "1");
+              newKey = newKey.replace("8", "2");
+              newKey = newKey.replace("7", "3");
+              newKey = newKey.replace("6", "4");
+              if (newKey === key) {
+                newKey = newKey.replace("4", "6");
+                newKey = newKey.replace("3", "7");
+                newKey = newKey.replace("2", "8");
+                newKey = newKey.replace("1", "9");
+              }
+            }
+            newColors[newKey] = colors[key];
+            if (key === "DEFAULT") {
+              newColors[key] = colors["600"] ?? colors["6"] ?? colors.DEFAULT;
+            }
+          });
+          acc[colorkey] = newColors;
+        } else {
+          acc[colorkey] = colors;
+        }
+      }
 
-const darkRichBlue = Object.keys(richblue)
-  .reverse()
-  .reduce<typeof richblue>((acc, key, i) => {
-    acc[100 * (i + 1)] = richblue[parseInt(key)];
-    return acc;
-  }, {});
+      return acc;
+    },
+    {} as Theme["colors"]
+  );
+}
 
-export default defineConfig({
+const config = defineConfig({
   rules: [
     [
       /^content-\[(.*)\]$/,
@@ -37,9 +80,7 @@ export default defineConfig({
   },
   transformers: [transformerDirectives()],
   presets: [
-    presetWind({
-      dark: "media",
-    }),
+    wind,
     presetForms(),
     presetIcons({
       scale: 1.0,
@@ -48,9 +89,7 @@ export default defineConfig({
     presetTheme({
       theme: {
         dark: {
-          colors: {
-            richblue: darkRichBlue,
-          },
+          colors: { ...darkColors },
         },
       },
     }),
@@ -71,7 +110,11 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      richblue,
+      dark: {
+        colors: darkColors,
+      },
     },
   },
 });
+
+export default config;

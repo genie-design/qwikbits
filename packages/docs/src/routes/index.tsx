@@ -1,9 +1,9 @@
-import { component$ } from '@builder.io/qwik';
-import type { DocumentHead } from '@builder.io/qwik-city';
+import { component$ } from "@builder.io/qwik";
+import type { DocumentHead } from "@builder.io/qwik-city";
 
 export default component$(() => {
   return (
-    <>
+    <div class="flex flex-col gap-8">
       <h1>Welcome to Qwik Docs Starter</h1>
 
       <ul>
@@ -11,7 +11,11 @@ export default component$(() => {
         <li>
           <span>The </span>
           <a href="/docs">Documentation</a>
-          <span> pages use multiple nested layouts, one of them providing a left menu.</span>
+          <span>
+            {" "}
+            pages use multiple nested layouts, one of them providing a left
+            menu.
+          </span>
         </li>
         <li>
           Check out the <code>src/routes</code> directory to get started.
@@ -68,7 +72,10 @@ export default component$(() => {
               <code>npm run qwik add azure-swa</code>
             </td>
             <td>
-              <a href="https://learn.microsoft.com/azure/static-web-apps/overview" target="_blank">
+              <a
+                href="https://learn.microsoft.com/azure/static-web-apps/overview"
+                target="_blank"
+              >
                 Azure Static Web Apps
               </a>
             </td>
@@ -108,7 +115,10 @@ export default component$(() => {
               <code>npm run qwik add vercel-edge</code>
             </td>
             <td>
-              <a href="https://vercel.com/docs/concepts/get-started" target="_blank">
+              <a
+                href="https://vercel.com/docs/concepts/get-started"
+                target="_blank"
+              >
                 Vercel Edge Functions
               </a>
             </td>
@@ -158,10 +168,10 @@ export default component$(() => {
           </a>
         </li>
       </ul>
-    </>
+    </div>
   );
 });
 
 export const head: DocumentHead = {
-  title: 'Welcome to Qwik Docs Starter',
+  title: "Welcome to Qwik Docs Starter",
 };

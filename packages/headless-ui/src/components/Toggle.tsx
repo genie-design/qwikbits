@@ -35,16 +35,20 @@ export const Toggle = component$((props: ToggleProps) => {
             type={props.switchProps?.type || "button"}
             role={props.switchProps?.role || "switch"}
             aria-checked={checked.value}
+            data-state={checked.value ? "checked" : "unchecked"}
             id={id}
-            tag={props.switchProps?.tag || "div"}
+            tag={props.switchProps?.tag || "button"}
             onClick$={() => (checked.value = !checked.value)}
             {...props.switchProps}
           >
             <Slot name="button" />
             <QwikHTMLElement
+              data-state={checked.value ? "checked" : "off"}
               tag={props.switchProps?.tag || "span"}
               {...props.thumbProps}
-            ></QwikHTMLElement>
+            >
+              <Slot name="thumb" />
+            </QwikHTMLElement>
           </QwikHTMLElement>
           <input
             type="checkbox"
