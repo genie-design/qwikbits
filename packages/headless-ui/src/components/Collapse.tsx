@@ -1,7 +1,6 @@
 import {
   Signal,
   component$,
-  useStylesScoped$,
   useId,
   useSignal,
   useStore,
@@ -22,14 +21,6 @@ export type CollapseProps = {
 };
 export const Collapse = component$((props: CollapseProps) => {
   const id = useId();
-  useStylesScoped$(`
-  div[hidden] {
-    display: none;
-  }
-  [role="button"] {
-    cursor: pointer;
-  }
-`);
   const defaultSignal = useSignal(false);
   const state = useStore<Required<Pick<CollapseProps, "open" | "id">>>({
     open: props.open ?? defaultSignal,

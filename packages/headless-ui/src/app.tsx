@@ -1,6 +1,6 @@
 import { component$, useStyles$, useVisibleTask$ } from "@builder.io/qwik";
 import { useSignal } from "@builder.io/qwik";
-import { Collapse, Dialog, Dropdown } from ".";
+import { Collapse, Dialog, Dropdown, Tabs } from ".";
 
 export const App = component$(() => {
   useStyles$(`
@@ -88,7 +88,7 @@ export const App = component$(() => {
                     pico.value = link;
                   }
                 }}
-                checked={!!pico}
+                checked={false}
               ></input>
             </label>
           </li>
@@ -123,6 +123,16 @@ export const App = component$(() => {
           </li>
         </ul>
       </nav>
+      <Tabs
+        tabs={[
+          { content: "HI" },
+          { tabSlotName: "qwikbits-tab-2" },
+          { tabLabel: "Tab 3", content: "bam" },
+        ]}
+      >
+        <q:template q:slot="tab-1">Tab 1</q:template>
+        <q:template q:slot="qwikbits-tab-2">Tab 2</q:template>
+      </Tabs>
       <section
         hidden={page.value !== "getting-started"}
         id="getting-started"
