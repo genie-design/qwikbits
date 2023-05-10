@@ -59,7 +59,6 @@ export const Tabs = component$((props: TabsProps) => {
   useVisibleTask$((ctx) => {
     ctx.track(() => selected.value);
     const handleKeyDown = (event: KeyboardEvent) => {
-      console.log(event.key, selected.value);
       let handled = false;
       switch (event.key) {
         case "ArrowLeft":
@@ -99,21 +98,17 @@ export const Tabs = component$((props: TabsProps) => {
         default:
           break;
       }
-      console.log(selected.value);
       if (handled) {
         event.preventDefault();
       }
     };
     const rootElem = document.getElementById(id);
-    console.log(rootElem);
     if (rootElem) {
-      console.log(rootElem.querySelectorAll("[role=tab]"));
       rootElem.querySelectorAll("[role=tab]").forEach((elem) => {
         (elem as HTMLButtonElement).addEventListener("keydown", handleKeyDown);
       });
     }
     return () => {
-      console.log("cleanup");
       if (rootElem) {
         rootElem.querySelectorAll("[role=tab]").forEach((elem) => {
           (elem as HTMLButtonElement).removeEventListener(
