@@ -22,14 +22,6 @@ const QwikHTMLElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.i
 }, "QwikHTMLElement_component_bEP4kKLrA50"));
 const Collapse = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((props) => {
   const id = qwik.useId();
-  qwik.useStylesScopedQrl(/* @__PURE__ */ qwik.inlinedQrl(`
-  div[hidden] {
-    display: none;
-  }
-  [role="button"] {
-    cursor: pointer;
-  }
-`, "Collapse_component_useStylesScoped_n6oJGUNCH40"));
   const defaultSignal = qwik.useSignal(false);
   const state = qwik.useStore({
     open: props.open ?? defaultSignal,
@@ -46,8 +38,10 @@ const Collapse = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
         /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
           ...props.wrappers?.trigger,
           children: /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
-            style: {
-              cursor: "pointer"
+            get style() {
+              return {
+                cursor: "pointer"
+              };
             },
             get tag() {
               return props.triggerProps?.tag || "summary";
@@ -82,6 +76,7 @@ const Collapse = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
               }
             }, 3, "vw_0"),
             [qwik._IMMUTABLE]: {
+              style: qwik._IMMUTABLE,
               tag: qwik._fnSignal((p0) => p0.triggerProps?.tag || "summary", [
                 props
               ], 'p0.triggerProps?.tag||"summary"'),
@@ -640,7 +635,179 @@ const Toggle = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
     }, 0, "Cw_7")
   }, 1, "Cw_8");
 }, "Toggle_component_8fJITTfl13Q"));
+const Tabs = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((props) => {
+  const defaultSignal = qwik.useSignal(0);
+  const defaultId = qwik.useId();
+  const id = props.id ?? defaultId;
+  const selected = props.selected ?? defaultSignal;
+  qwik.useTaskQrl(/* @__PURE__ */ qwik.inlinedQrl((ctx) => {
+    const [id2, props2] = qwik.useLexicalScope();
+    ctx.track(() => props2.tabs);
+    if (props2.tabs)
+      props2.tabs.forEach((tab, i) => {
+        tab.key = tab.key ?? id2 + (tab.tabSlotName ?? "") + (tab.contentSlotName ?? "") + (tab.tabLabel ?? "") + i;
+      });
+  }, "Tabs_component_useTask_0N0C0QE0xrw", [
+    id,
+    props
+  ]));
+  qwik.useVisibleTaskQrl(/* @__PURE__ */ qwik.inlinedQrl((ctx) => {
+    const [id2, props2, selected2] = qwik.useLexicalScope();
+    ctx.track(() => selected2.value);
+    const tab = props2.tabs[selected2.value];
+    if (tab) {
+      const tabId = tab.tabProps?.id ?? `tab-${id2}-${selected2.value}`;
+      document.getElementById(tabId)?.focus();
+    }
+  }, "Tabs_component_useVisibleTask_xvgaFSc3jr8", [
+    id,
+    props,
+    selected
+  ]));
+  qwik.useVisibleTaskQrl(/* @__PURE__ */ qwik.inlinedQrl((ctx) => {
+    const [id2, props2, selected2] = qwik.useLexicalScope();
+    ctx.track(() => selected2.value);
+    const handleKeyDown = (event) => {
+      let handled = false;
+      switch (event.key) {
+        case "ArrowLeft":
+          if (selected2.value === 0)
+            selected2.value = props2.tabs.length - 1;
+          else
+            selected2.value = selected2.value - 1;
+          handled = true;
+          break;
+        case "ArrowRight":
+          if (selected2.value === props2.tabs.length - 1)
+            selected2.value = 0;
+          else
+            selected2.value = selected2.value + 1;
+          handled = true;
+          break;
+        case "Home":
+          selected2.value = 0;
+          handled = true;
+          break;
+        case "End":
+          selected2.value = props2.tabs.length - 1;
+          handled = true;
+          break;
+        case "Tab":
+          if (event.shiftKey && selected2.value > 0) {
+            selected2.value = 0;
+            handled = true;
+          }
+          break;
+      }
+      if (handled)
+        event.preventDefault();
+    };
+    const rootElem = document.getElementById(id2);
+    if (rootElem)
+      rootElem.querySelectorAll("[role=tab]").forEach((elem) => {
+        elem.addEventListener("keydown", handleKeyDown);
+      });
+    return () => {
+      if (rootElem)
+        rootElem.querySelectorAll("[role=tab]").forEach((elem) => {
+          elem.removeEventListener("keydown", handleKeyDown);
+        });
+    };
+  }, "Tabs_component_useVisibleTask_1_UuFDBoOXONE", [
+    id,
+    props,
+    selected
+  ]));
+  return /* @__PURE__ */ qwik._jsxC(jsxRuntime.Fragment, {
+    children: /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
+      get tag() {
+        return props.rootProps?.tag || "div";
+      },
+      ...props.rootProps,
+      id,
+      children: [
+        /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
+          id: `tablist-${id}`,
+          tag: "h3",
+          ...props.labelProps,
+          children: [
+            /* @__PURE__ */ qwik._jsxC(qwik.Slot, {
+              name: "label",
+              [qwik._IMMUTABLE]: {
+                name: qwik._IMMUTABLE
+              }
+            }, 3, "oI_0"),
+            qwik._fnSignal((p0) => p0.label ? p0.label : "", [
+              props
+            ], 'p0.label?p0.label:""')
+          ],
+          [qwik._IMMUTABLE]: {
+            tag: qwik._IMMUTABLE
+          }
+        }, 0, "oI_1"),
+        /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
+          role: "tablist",
+          ...props.wrappers?.tabList,
+          "aria-labelledby": `tablist-${id}`,
+          children: props.tabs?.map((tab, i) => /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
+            role: "tab",
+            id: tab.tabProps?.id ?? `tab-${id}-${i}`,
+            tag: "button",
+            onClick$: /* @__PURE__ */ qwik.inlinedQrl(() => {
+              const [i2, selected2] = qwik.useLexicalScope();
+              return selected2.value = i2;
+            }, "Tabs_component__Fragment_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_IkXBwVoy0vQ", [
+              i,
+              selected
+            ]),
+            "aria-selected": selected.value === i ? "true" : "false",
+            "aria-controls": tab?.contentProps?.id ?? `tabpanel-${id}-${i}`,
+            tabIndex: i === 0 ? 0 : -1,
+            ...tab.tabProps,
+            children: [
+              /* @__PURE__ */ qwik._jsxC(qwik.Slot, {
+                name: tab.tabSlotName ?? `tab-${i + 1}`
+              }, 3, "oI_2"),
+              tab.tabLabel ? tab.tabLabel : ""
+            ],
+            [qwik._IMMUTABLE]: {
+              role: qwik._IMMUTABLE,
+              tag: qwik._IMMUTABLE
+            }
+          }, 0, (tab.key ?? i) + "-tab")),
+          [qwik._IMMUTABLE]: {
+            role: qwik._IMMUTABLE
+          }
+        }, 0, "oI_3"),
+        props.tabs?.map((tab, i) => /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
+          tag: "div",
+          role: "tabpanel",
+          hidden: selected.value !== i,
+          id: tab.contentProps?.id ?? `tabpanel-${id}-${i}`,
+          "aria-labelledby": tab.tabProps?.id ?? `tab-${id}-${i}`,
+          ...tab.contentProps,
+          children: [
+            /* @__PURE__ */ qwik._jsxC(qwik.Slot, {
+              name: tab.contentSlotName ?? `tabcontent-${i + 1}`
+            }, 3, "oI_4"),
+            tab.content ? tab.content : ""
+          ],
+          [qwik._IMMUTABLE]: {
+            tag: qwik._IMMUTABLE,
+            role: qwik._IMMUTABLE
+          }
+        }, 0, (tab.key ?? i) + "content"))
+      ],
+      [qwik._IMMUTABLE]: {
+        tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "div", [
+          props
+        ], 'p0.rootProps?.tag||"div"')
+      }
+    }, 0, "oI_5")
+  }, 1, "oI_6");
+}, "Tabs_component_NQO8Bi30zrU"));
 exports.Collapse = Collapse;
 exports.Dialog = Dialog;
 exports.Dropdown = Dropdown;
+exports.Tabs = Tabs;
 exports.Toggle = Toggle;

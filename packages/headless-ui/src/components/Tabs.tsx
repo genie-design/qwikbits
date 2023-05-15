@@ -49,7 +49,6 @@ export const Tabs = component$((props: TabsProps) => {
   });
   useVisibleTask$((ctx) => {
     ctx.track(() => selected.value);
-    console.log(selected.value);
     const tab = props.tabs[selected.value];
     if (tab) {
       const tabId = tab.tabProps?.id ?? `tab-${id}-${selected.value}`;
@@ -120,6 +119,7 @@ export const Tabs = component$((props: TabsProps) => {
       }
     };
   });
+
   return (
     <>
       <QwikHTMLElement

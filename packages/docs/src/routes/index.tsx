@@ -4,7 +4,9 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 export default component$(() => {
   return (
     <div class="flex flex-col gap-8">
-      <h1>Welcome to Qwik Docs Starter</h1>
+      <h1 class="color-red-900 dark:color-green-900">
+        Welcome to Qwik Docs Starter
+      </h1>
 
       <ul>
         <li>This homepage uses a layout without a menu.</li>

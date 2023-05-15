@@ -15,8 +15,7 @@ export function use100vh(vh?: number) {
   });
   return height;
 }
-export type HeightScreenElementProps = {
-  rootProps?: QwikHTMLElementIntrinsic;
+export type HeightScreenElementProps = QwikHTMLElementIntrinsic & {
   vh?: number;
 };
 
@@ -24,8 +23,8 @@ export const VHElement = component$((props: HeightScreenElementProps) => {
   const height = use100vh(props.vh);
   return (
     <QwikHTMLElement
-      tag={props.rootProps?.tag || "div"}
-      {...props.rootProps}
+      tag={"div"}
+      {...props}
       style={{ height: `${height.value}px` || `${props.vh || 100}vh` }}
     >
       <Slot />

@@ -1,32 +1,34 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
-import { useContent, Link, useLocation } from "@builder.io/qwik-city";
-import styles from "./menu.css?inline";
+import { component$ } from "@builder.io/qwik";
+import CTA from "../cta";
+import { useLocation } from "@builder.io/qwik-city";
 
-export default component$(() => {
-  useStyles$(styles);
+export type MenuProps = {
+  items?: {
+    text: string;
+    href: string;
+  }[];
+};
 
-  const { menu } = useContent();
+export default component$((props: MenuProps) => {
   const loc = useLocation();
 
+  console.log({ loc });
   return (
-    <aside class="menu">
-      {menu
-        ? menu.items?.map((item) => (
+    <aside class="flex lg:flex-col gap-4 border-r border-slate-300 pr-8">
+      {props.items
+        ? props.items?.map((item) => (
             <>
-              <h5>{item.text}</h5>
               <ul>
-                {item.items?.map((item) => (
-                  <li>
-                    <Link
-                      href={item.href}
-                      class={{
-                        "is-active": loc.url.pathname === item.href,
-                      }}
-                    >
-                      {item.text}
-                    </Link>
-                  </li>
-                ))}
+                <li key={item.href}>
+                  <CTA
+                    href={item.href}
+                    class={{
+                      underline: loc.url.pathname === item.href,
+                    }}
+                  >
+                    {item.text}
+                  </CTA>
+                </li>
               </ul>
             </>
           ))

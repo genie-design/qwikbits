@@ -8,7 +8,7 @@ export default component$(() => {
   const { url } = useLocation();
   const darkMode = useContext(ThemeContext);
   return (
-    <header class="sticky bg-slate-200 top-0 z-10 flex justify-between gap-8 h-20 w-full p-2 overflow-hidden">
+    <header class="sticky bg-slate-200 top-0 z-10 flex justify-between gap-8 h-20 w-full py-2 px-8 overflow-hidden">
       <a class="block" href="/">
         <QwikBitsLogo />
       </a>

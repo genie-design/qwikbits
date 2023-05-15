@@ -49,6 +49,12 @@ export const App = component$(() => {
     },
     { strategy: "document-ready" }
   );
+
+  const labelRef = useSignal<HTMLElement | undefined>(undefined);
+  useVisibleTask$((ctx) => {
+    ctx.track(() => labelRef.value);
+    console.log("wham", { labelRef }, labelRef.value);
+  });
   return (
     <div
       style={{
@@ -124,6 +130,10 @@ export const App = component$(() => {
         </ul>
       </nav>
       <Tabs
+        label="Tabs"
+        labelProps={{
+          ref: labelRef,
+        }}
         tabs={[
           { content: "HI" },
           { tabSlotName: "qwikbits-tab-2" },

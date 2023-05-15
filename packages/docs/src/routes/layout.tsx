@@ -7,6 +7,7 @@ import {
   useSignal,
   useVisibleTask$,
 } from "@builder.io/qwik";
+import { VHElement } from "@qwikbits/utils";
 import Footer from "~/components/footer/footer";
 import Header from "~/components/header/header";
 export const ThemeContext =
@@ -27,17 +28,18 @@ export default component$(() => {
     localStorage.setItem("theme", darkMode.value ? "dark" : "light");
   });
   return (
-    <div
+    <VHElement
       class={{
         light: !darkMode.value,
         dark: darkMode.value,
+        "font-sans flex flex-col text-lg": true,
       }}
     >
       <Header />
-      <main class="bg-slate-100 color-sky-950">
+      <main class="grow bg-slate-100 color-sky-950">
         <Slot />
       </main>
       <Footer />
-    </div>
+    </VHElement>
   );
 });

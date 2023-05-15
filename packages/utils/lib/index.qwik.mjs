@@ -147,10 +147,8 @@ function use100vh(vh) {
 const VHElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => {
   const height = use100vh(props.vh);
   return /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-    get tag() {
-      return props.rootProps?.tag || "div";
-    },
-    ...props.rootProps,
+    tag: "div",
+    ...props,
     get style() {
       return {
         height: `${height.value}px` || `${props.vh || 100}vh`
@@ -158,9 +156,7 @@ const VHElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props
     },
     children: /* @__PURE__ */ _jsxC(Slot, null, 3, "WR_0"),
     [_IMMUTABLE]: {
-      tag: _fnSignal((p0) => p0.rootProps?.tag || "div", [
-        props
-      ], 'p0.rootProps?.tag||"div"'),
+      tag: _IMMUTABLE,
       style: _fnSignal((p0, p1) => ({
         height: `${p0.value}px` || `${p1.vh || 100}vh`
       }), [
@@ -170,12 +166,25 @@ const VHElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props
     }
   }, 0, "WR_1");
 }, "VHElement_component_Zns65jACPvc"));
+const serializeClass = (obj) => {
+  if (!obj)
+    return "";
+  if (typeof obj === "string")
+    return obj.trim();
+  if (Array.isArray(obj))
+    return obj.reduce((result, o) => {
+      const classList = serializeClass(o);
+      return classList ? result ? `${result} ${classList}` : classList : result;
+    }, "");
+  return Object.entries(obj).reduce((result, [key, value]) => value ? result ? `${result} ${key.trim()}` : key.trim() : result, "");
+};
 export {
   QwikHTMLElement,
   VHElement,
   getActiveElement,
   getFocusableEdges,
   moveFocusToDialog,
+  serializeClass,
   trapTabKey,
   use100vh
 };

@@ -149,10 +149,8 @@ function use100vh(vh) {
 const VHElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((props) => {
   const height = use100vh(props.vh);
   return /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
-    get tag() {
-      return props.rootProps?.tag || "div";
-    },
-    ...props.rootProps,
+    tag: "div",
+    ...props,
     get style() {
       return {
         height: `${height.value}px` || `${props.vh || 100}vh`
@@ -160,9 +158,7 @@ const VHElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlined
     },
     children: /* @__PURE__ */ qwik._jsxC(qwik.Slot, null, 3, "WR_0"),
     [qwik._IMMUTABLE]: {
-      tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "div", [
-        props
-      ], 'p0.rootProps?.tag||"div"'),
+      tag: qwik._IMMUTABLE,
       style: qwik._fnSignal((p0, p1) => ({
         height: `${p0.value}px` || `${p1.vh || 100}vh`
       }), [
@@ -172,10 +168,23 @@ const VHElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlined
     }
   }, 0, "WR_1");
 }, "VHElement_component_Zns65jACPvc"));
+const serializeClass = (obj) => {
+  if (!obj)
+    return "";
+  if (typeof obj === "string")
+    return obj.trim();
+  if (Array.isArray(obj))
+    return obj.reduce((result, o) => {
+      const classList = serializeClass(o);
+      return classList ? result ? `${result} ${classList}` : classList : result;
+    }, "");
+  return Object.entries(obj).reduce((result, [key, value]) => value ? result ? `${result} ${key.trim()}` : key.trim() : result, "");
+};
 exports.QwikHTMLElement = QwikHTMLElement;
 exports.VHElement = VHElement;
 exports.getActiveElement = getActiveElement;
 exports.getFocusableEdges = getFocusableEdges;
 exports.moveFocusToDialog = moveFocusToDialog;
+exports.serializeClass = serializeClass;
 exports.trapTabKey = trapTabKey;
 exports.use100vh = use100vh;
