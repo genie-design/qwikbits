@@ -1,4 +1,4 @@
-import { Signal, component$, useContext } from "@builder.io/qwik";
+import { component$, useContext } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import { QwikBitsLogo } from "../icons/qwikbits";
 import { Toggle } from "@qwikbits/headless-ui";
