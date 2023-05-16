@@ -1596,9 +1596,15 @@ const CodeBlock = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlined
     const highlighted = prismjs.highlight(props.code, prismjs.languages[language], language);
     const className = `language-${language}`;
     return /* @__PURE__ */ qwik._jsxQ("pre", {
-      class: className
+      class: [
+        className,
+        props.class
+      ]
     }, null, /* @__PURE__ */ qwik._jsxQ("code", {
-      class: className,
+      class: [
+        className,
+        props.codeClass
+      ],
       dangerouslySetInnerHTML: highlighted
     }, null, null, 3, null), 1, "wy_0");
   }

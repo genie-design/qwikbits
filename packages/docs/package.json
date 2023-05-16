@@ -31,7 +31,7 @@
     "@iconify-json/lucide": "^1.1.90",
     "@julr/unocss-preset-forms": "^0.0.5",
     "@types/eslint": "8.37.0",
-    "@types/node": "^20.1.4",
+    "@types/node": "^20.1.5",
     "@typescript-eslint/eslint-plugin": "5.59.6",
     "@typescript-eslint/parser": "5.59.6",
     "@unocss/cli": "^0.51.13",
@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "@cloudflare/pages-plugin-sentry": "^1.1.1",
+    "@qwikbits/code-block": "workspace:^",
     "@qwikbits/headless-ui": "workspace:^",
     "@qwikbits/utils": "workspace:^",
     "@sentry/browser": "^7.52.1",

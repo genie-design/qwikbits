@@ -53,7 +53,10 @@ if (wind.theme?.colors) {
             }
             newColors[newKey] = colors[key];
             if (key === "DEFAULT") {
-              newColors[key] = colors["600"] ?? colors["6"] ?? colors.DEFAULT;
+              newColors[key] =
+                (colors["600"] as string) ??
+                (colors["6"] as string) ??
+                colors.DEFAULT;
             }
           });
           acc[colorkey] = newColors;
@@ -94,7 +97,7 @@ const config = defineConfig({
       },
     }),
     presetWebFonts({
-      provider: "google", // default provider
+      provider: "none", // default provider
       fonts: {
         //   // these will extend the default theme
         //   sans: [

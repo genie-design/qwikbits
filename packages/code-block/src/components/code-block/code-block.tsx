@@ -1,4 +1,4 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { ClassList, component$, useStyles$ } from "@builder.io/qwik";
 import prismjs from "prismjs";
 // Set to global so that prism language plugins can find it.
 const _global =
@@ -16,6 +16,8 @@ interface CodeBlockProps {
   path?: string;
   language?: "markup" | "css" | "javascript" | "json" | "jsx" | "tsx";
   code: string;
+  class?: ClassList;
+  codeClass?: ClassList;
 }
 
 export const CodeBlock = component$((props: CodeBlockProps) => {
@@ -41,8 +43,11 @@ export const CodeBlock = component$((props: CodeBlockProps) => {
     );
     const className = `language-${language}`;
     return (
-      <pre class={className}>
-        <code class={className} dangerouslySetInnerHTML={highlighted} />
+      <pre class={[className, props.class]}>
+        <code
+          class={[className, props.codeClass]}
+          dangerouslySetInnerHTML={highlighted}
+        />
       </pre>
     );
   }

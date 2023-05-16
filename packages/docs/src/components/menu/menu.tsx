@@ -12,7 +12,6 @@ export type MenuProps = {
 export default component$((props: MenuProps) => {
   const loc = useLocation();
 
-  console.log({ loc });
   return (
     <aside class="flex lg:flex-col gap-4 border-r border-slate-300 pr-8">
       {props.items
