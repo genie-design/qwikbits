@@ -28,6 +28,9 @@ export default defineConfig(() => {
     plugins: [qwikVite()],
     build: {
       target: 'es2020',
+      rollupOptions: {
+        external: ['@builder.io/qwik'],
+      },
       lib: {
         entry: './src/index.ts',
         formats: ['es', 'cjs'],

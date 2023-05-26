@@ -1,6 +1,6 @@
 {
   "name": "@qwikbits/headless-ui",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
   "types": "./lib-types/libs/headless-ui/src/index.d.ts",
@@ -23,5 +23,9 @@
   "engines": {
     "node": ">=15.0.0"
   },
-  "type": "module"
+  "type": "module",
+  "peerDependencies": {
+    "@builder.io/qwik": "*",
+    "@qwikbits/utils": "0.6.1"
+  }
 }
