@@ -17,7 +17,6 @@
     "paths": {
       "@qwikbits/code-block": ["libs/code-block/src/index.ts"],
       "@qwikbits/headless-ui": ["libs/headless-ui/src/index.ts"],
-      "@qwikbits/reacttest": ["libs/react-publishable/src/index.ts"],
       "@qwikbits/utils": ["libs/utils/src/index.ts"]
     }
   },
