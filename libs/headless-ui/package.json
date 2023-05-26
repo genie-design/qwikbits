@@ -1,0 +1,27 @@
+{
+  "name": "@qwikbits/headless-ui",
+  "version": "0.6.0",
+  "main": "./lib/index.qwik.mjs",
+  "qwik": "./lib/index.qwik.mjs",
+  "types": "./lib-types/libs/headless-ui/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.qwik.mjs",
+      "require": "./lib/index.qwik.cjs",
+      "types": "./lib-types/libs/headless-ui/src/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build.lib": "npx vite build --mode lib",
+    "build.types": "npx tsc --emitDeclarationOnly --outDir lib-types -p tsconfig.types.json",
+    "publish": "pnpm publish --access public"
+  },
+  "files": [
+    "lib",
+    "lib-types"
+  ],
+  "engines": {
+    "node": ">=15.0.0"
+  },
+  "type": "module"
+}

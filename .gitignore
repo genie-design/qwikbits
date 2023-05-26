@@ -1,38 +1,39 @@
-# Build
-/dist
-/lib
-/lib-types
-/server
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Development
+# compiled output
+dist
+tmp
+/out-tsc
+
+# dependencies
 node_modules
 
-# Cache
-.cache
-.mf
-.vscode
-.rollup.cache
-tsconfig.tsbuildinfo
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# Editor
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 !.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
-# Yarn
-.yarn/*
-!.yarn/releases
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
