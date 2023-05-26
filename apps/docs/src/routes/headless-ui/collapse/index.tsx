@@ -1,7 +1,7 @@
-import { component$, useSignal, useStore, useTask$ } from '@builder.io/qwik';
+import { component$, useSignal, useStore } from '@builder.io/qwik';
 import { CodeBlock } from '@qwikbits/code-block';
 import Cta from '../../../components/genie-system/cta';
-import { Collapse, Tabs } from '@qwikbits/headless-ui';
+import { Collapse } from '@qwikbits/headless-ui';
 
 export default component$(() => {
   const state = useStore({ collapses: [true, false, false] });
@@ -12,7 +12,7 @@ export default component$(() => {
   return (
     <div class="flex flex-col gap-8">
       <div class="flex flex-col gap-8">
-        <Cta href="/utils/dom-utils">
+        <Cta href="/headless-ui/collapse">
           <h2>Collapse</h2>
         </Cta>
         <h5>An interactive component which expands/collapses content</h5>
@@ -80,7 +80,7 @@ export default component$(() => {
           codeClass="!text-sky-800"
           language="javascript"
           code={`
-import { component$, useStore, useSignal } from '@qwiket/qwik';
+import { component$, useStore, useSignal } from '@builder.io/qwik';
 
 const qwikString =
   'Qwik is a web framework that can ...';

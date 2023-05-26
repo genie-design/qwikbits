@@ -4,6 +4,7 @@ import {
   Signal,
   Slot,
   useSignal,
+  useVisibleTask$,
 } from '@builder.io/qwik';
 import {
   QwikHTMLElement,
@@ -40,7 +41,6 @@ export const Dropdown = component$((props: DropdownProps) => {
     <QwikHTMLElement
       tag={props.rootProps?.tag || 'div'}
       aria-label={props.rootProps?.['aria-label'] || props.label}
-      onClick$={() => (open.value = !open.value)}
       role="list"
       {...props.rootProps}
       class={
@@ -53,7 +53,8 @@ export const Dropdown = component$((props: DropdownProps) => {
         <QwikHTMLElement
           tag={props.triggerProps?.tag || 'button'}
           aria-haspopup="listbox"
-          aria-expanded={props.open?.value}
+          aria-expanded={open?.value}
+          onClick$={() => (open.value = !open.value)}
           {...props.triggerProps}
         >
           {props.label ? props.label : ''}

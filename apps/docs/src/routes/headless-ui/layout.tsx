@@ -9,8 +9,8 @@ export default component$(() => {
         items={[
           { text: 'Getting Started', href: '/headless-ui/' },
           { text: 'Collapse', href: '/headless-ui/collapse' },
-          { text: '100vh', href: '/utils/vh-element/' },
-          { text: 'Serialize Class', href: '/utils/serialize-class/' },
+          { text: 'Dialog', href: '/headless-ui/dialog/' },
+          { text: 'Dropdown', href: '/headless-ui/dropdown/' },
           { text: 'Dom Utils', href: '/utils/dom-utils' },
           { text: 'Helpers', href: '/utils/helpers' },
         ]}
