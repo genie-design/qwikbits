@@ -1,9 +1,6 @@
 [popover] {
+  position: absolute;
   z-index: 2147483647;
-  inset: 0;
-  width: fit-content;
-  height: fit-content;
-  overflow: auto;
 }
 @supports not selector([popover]:open) {
   [popover]:not(.\:popover-open, dialog[open]) {

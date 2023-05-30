@@ -6,11 +6,13 @@ import { QwikHTMLElement, serializeClass } from '@qwikbits/utils';
 import { Link } from '@builder.io/qwik-city';
 import type { VariantProps } from 'class-variance-authority';
 import { cva } from 'class-variance-authority';
+import { t8y } from './typography';
 type CTAProps = {
   text?: string;
   href?: string;
   class?: ClassList | Signal<ClassList>;
   variantProps?: VariantProps<typeof cta>;
+  typography?: VariantProps<typeof t8y>;
   props?: QwikHTMLElementIntrinsic;
 };
 const cta = cva(['font-semibold'], {
@@ -32,17 +34,8 @@ const cta = cva(['font-semibold'], {
         'hover:bg-gray-100',
       ],
     },
-    size: {
-      small: ['text-sm'],
-      medium: ['text-base'],
-    },
   },
   compoundVariants: [
-    {
-      intent: 'primary',
-      size: 'medium',
-      class: 'uppercase',
-    },
     {
       intent: ['secondary', 'primary'],
       class: ['border', 'rounded'],
@@ -50,12 +43,11 @@ const cta = cva(['font-semibold'], {
   ],
   defaultVariants: {
     intent: 'link',
-    size: 'medium',
   },
 });
 export default component$((props: CTAProps) => {
-  const { text, href, variantProps } = props;
-  const classes = `${cta(variantProps)} ${serializeClass(
+  const { text, href, variantProps, typography } = props;
+  const classes = `${cta(variantProps)} ${t8y(typography)}} ${serializeClass(
     props.class || ''
   )} ${serializeClass(
     typeof props?.props === 'object' && 'value' in props.props

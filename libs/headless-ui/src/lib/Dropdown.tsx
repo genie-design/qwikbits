@@ -5,7 +5,7 @@ import {
   Slot,
   useId,
   useSignal,
-  useStylesScoped$,
+  useStyles$,
   useVisibleTask$,
   type QwikIntrinsicElements,
 } from '@builder.io/qwik';
@@ -20,6 +20,8 @@ import popoverStyles from './popover.css?inline';
 
 export type DropdownProps = {
   id?: string;
+  popoverId?: string;
+  popover?: 'auto' | 'manual' | null;
   rootProps?: QwikHTMLElementIntrinsic;
   label?: string;
   triggerProps?: QwikHTMLElementIntrinsic;
@@ -42,14 +44,14 @@ export type DropdownProps = {
   };
 };
 export const Dropdown = component$((props: DropdownProps) => {
-  useStylesScoped$(popoverStyles);
+  useStyles$(popoverStyles);
   const id = useId();
+  const popoverId = useId();
   const defaultSignal = useSignal(props.lockOpen ?? false);
   const open = props.open ?? defaultSignal;
 
   useVisibleTask$(
     () => {
-      console.log('is supported', isSupported());
       if (!isSupported()) {
         apply();
       }
@@ -59,9 +61,11 @@ export const Dropdown = component$((props: DropdownProps) => {
 
   return (
     <QwikHTMLElement
+      id={props.id ?? id}
       tag={props.rootProps?.tag || 'div'}
       aria-label={props.rootProps?.['aria-label'] || props.label}
       role="list"
+      style={{ position: 'relative' }}
       {...props.rootProps}
       class={
         serializeClass(props.class) +
@@ -70,26 +74,22 @@ export const Dropdown = component$((props: DropdownProps) => {
       }
     >
       <QwikHTMLElement {...props.wrappers?.rootChildren}>
-        <div id={props.id ?? id} popover="auto" class="">
-          Popover 1
-        </div>
-        <button popovertarget={props.id ?? id}>
-          <span>Click to toggle Popover 1</span>
-        </button>
+        {/* @ts-ignore can't figure out how to add popover to types */}
         <QwikHTMLElement
           tag={props.triggerProps?.tag || 'button'}
-          aria-haspopup="listbox"
-          aria-expanded={open?.value}
-          onClick$={() => (open.value = !open.value)}
+          popovertarget={props.popoverId ?? popoverId}
           {...props.triggerProps}
         >
           {props.label ? props.label : ''}
           <Slot name="trigger" />
         </QwikHTMLElement>
         <QwikHTMLElement
-          role="listbox"
-          hidden={!props.lockOpen && !open?.value}
+          id={props.popoverId ?? popoverId}
           tag={props.contentProps?.tag || 'ul'}
+          popover={props.popover ?? 'auto'}
+          onToggle$={(e: ToggleEvent) => {
+            open.value = e.newState === 'open';
+          }}
           {...props.contentProps}
         >
           <Slot />
@@ -124,27 +124,14 @@ export const Dropdown = component$((props: DropdownProps) => {
   );
 });
 
-type PopoverToggleTargetElementInvoker = QwikIntrinsicElements & {
-  popoverTargetElement: HTMLElement | null;
-  popoverTargetAction: 'toggle' | 'show' | 'hide';
-};
-
-declare global {
-  interface ToggleEvent extends Event {
-    oldState: string;
-    newState: string;
+declare module '@builder.io/qwik' {
+  interface Popover {
+    popover?: 'auto' | 'manual' | null;
+    popoverTargetElement?: HTMLElement | null;
+    popoverTargetAction?: 'toggle' | 'show' | 'hide';
   }
-  interface HTMLAttributes<HTMLDivElement> {
-    popover: 'auto' | 'manual' | null;
-    showPopover(): void;
-    hidePopover(): void;
-    togglePopover(): void;
-  }
-  /* eslint-disable @typescript-eslint/no-empty-interface */
-  interface HTMLButtonElement extends PopoverToggleTargetElementInvoker {}
-  interface HTMLInputElement extends PopoverToggleTargetElementInvoker {}
-  /* eslint-enable @typescript-eslint/no-empty-interface */
-  interface Window {
-    ToggleEvent: ToggleEvent;
-  }
+  interface HTMLAttributes<T> extends Popover {}
+}
+function useStyles(popoverStyles: string) {
+  throw new Error('Function not implemented.');
 }

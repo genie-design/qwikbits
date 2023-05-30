@@ -1,6 +1,7 @@
 import {
   ClassList,
   component$,
+  PropFunction,
   Signal,
   Slot,
   useId,
@@ -31,8 +32,12 @@ export type TabsProps = {
   label?: string;
   labelProps?: QwikHTMLElementIntrinsic;
   selected?: Signal<number>;
+  tabListProps?: QwikHTMLElementIntrinsic;
+  allTabProps?: QwikHTMLElementIntrinsic;
+  allContentProps?: QwikHTMLElementIntrinsic;
+  onChange$?: PropFunction<(selected: number) => void>;
   wrappers?: {
-    tabList?: QwikHTMLElementIntrinsic;
+    content?: QwikHTMLElementIntrinsic;
   };
 };
 export const Tabs = component$((props: TabsProps) => {
@@ -126,7 +131,12 @@ export const Tabs = component$((props: TabsProps) => {
       }
     };
   });
-
+  useTask$((ctx) => {
+    ctx.track(() => selected.value);
+    if (props.onChange$) {
+      props.onChange$(selected.value);
+    }
+  });
   return (
     <>
       <QwikHTMLElement
@@ -140,12 +150,14 @@ export const Tabs = component$((props: TabsProps) => {
         }
       >
         <QwikHTMLElement id={`tablist-${id}`} tag="h3" {...props.labelProps}>
+          <Slot />
           <Slot name="label" />
           {props.label ? props.label : ''}
         </QwikHTMLElement>
         <QwikHTMLElement
+          tag="div"
           role="tablist"
-          {...props.wrappers?.tabList}
+          {...props?.tabListProps}
           aria-labelledby={`tablist-${id}`}
         >
           {props.tabs?.map((tab, i) => (
@@ -158,11 +170,14 @@ export const Tabs = component$((props: TabsProps) => {
               aria-selected={selected.value === i ? 'true' : 'false'}
               aria-controls={tab?.contentProps?.id ?? `tabpanel-${id}-${i}`}
               tabIndex={i === 0 ? 0 : -1}
+              {...props?.allTabProps}
               {...tab.tabProps}
               class={
                 serializeClass(tab.class) +
                 ' ' +
-                serializeClass(tab.tabProps?.class)
+                serializeClass(tab.tabProps?.class) +
+                ' ' +
+                serializeClass(props.allTabProps?.class)
               }
             >
               <Slot name={tab.tabSlotName ?? `tab-${i + 1}`} />
@@ -171,20 +186,28 @@ export const Tabs = component$((props: TabsProps) => {
           ))}
         </QwikHTMLElement>
 
-        {props.tabs?.map((tab, i) => (
-          <QwikHTMLElement
-            key={(tab.key ?? i) + 'content'}
-            tag="div"
-            role="tabpanel"
-            hidden={selected.value !== i}
-            id={tab.contentProps?.id ?? `tabpanel-${id}-${i}`}
-            aria-labelledby={tab.tabProps?.id ?? `tab-${id}-${i}`}
-            {...tab.contentProps}
-          >
-            <Slot name={tab.contentSlotName ?? `tabcontent-${i + 1}`} />
-            {tab.content ? tab.content : ''}
-          </QwikHTMLElement>
-        ))}
+        <QwikHTMLElement {...props.wrappers?.content}>
+          {props.tabs?.map((tab, i) => (
+            <QwikHTMLElement
+              key={(tab.key ?? i) + 'content'}
+              tag="div"
+              role="tabpanel"
+              hidden={selected.value !== i}
+              id={tab.contentProps?.id ?? `tabpanel-${id}-${i}`}
+              aria-labelledby={tab.tabProps?.id ?? `tab-${id}-${i}`}
+              {...props.allContentProps}
+              {...tab.contentProps}
+              class={
+                serializeClass(tab.contentProps?.class) +
+                ' ' +
+                serializeClass(props.allContentProps?.class)
+              }
+            >
+              <Slot name={tab.contentSlotName ?? `tab-content-${i + 1}`} />
+              {tab.content ? tab.content : ''}
+            </QwikHTMLElement>
+          ))}
+        </QwikHTMLElement>
       </QwikHTMLElement>
     </>
   );

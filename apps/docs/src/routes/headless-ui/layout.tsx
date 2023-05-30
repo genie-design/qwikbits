@@ -11,8 +11,8 @@ export default component$(() => {
           { text: 'Collapse', href: '/headless-ui/collapse' },
           { text: 'Dialog', href: '/headless-ui/dialog/' },
           { text: 'Dropdown', href: '/headless-ui/dropdown/' },
-          { text: 'Dom Utils', href: '/utils/dom-utils' },
-          { text: 'Helpers', href: '/utils/helpers' },
+          { text: 'Tabs', href: '/headless-ui/tabs' },
+          { text: 'Toggle', href: '/headless-ui/toggle' },
         ]}
       />
       <article>

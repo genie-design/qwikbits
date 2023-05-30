@@ -12,65 +12,68 @@ export default component$(() => {
         </Cta>
         <h5>
           When a button is clicked, a menu appears that presents a set of
-          actions or functions to the user.
+          actions or functions to the user. Polyfills the upcoming browser
+          popover API for maximum accessibility.
         </h5>
         <h5>Demo:</h5>
-        <div class="max-w-prose w-full grid grid-cols-1 gap-8">
-          <Dropdown label="Dropdown">Content Content</Dropdown>
+        <div class="max-w-prose w-full grid grid-cols-1 gap-8 justify-items-start">
           <Dropdown
             label="Dropdown"
-            items={[
-              { label: 'Item 1', itemProps: { tag: 'button' } },
-              { label: 'Item 2' },
-            ]}
-          />
+            triggerProps={{
+              class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
+            }}
+            contentProps={{
+              class:
+                'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900',
+            }}
+          >
+            Dropdown Content
+          </Dropdown>
           <Dropdown
-            label="Dropdown Radio"
+            label="Dropdown With Items"
+            triggerProps={{
+              class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
+            }}
+            contentProps={{
+              class:
+                'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max flex flex-col gap-4',
+            }}
             items={[
               {
-                label: 'Item 1',
-                itemProps: { tag: 'label', for: 'item1' },
-                labelBeforeProps: {
-                  tag: 'input',
-                  type: 'radio',
-                  name: 'items',
-                  id: 'item1',
+                label: 'Item Button',
+                itemProps: {
+                  tag: 'button',
+                  class: 'bg-sky-900 text-white rounded px-2 py-1',
                 },
               },
               {
-                label: 'Item 2',
-                itemProps: { tag: 'label', for: 'item2' },
-                labelBeforeProps: {
-                  tag: 'input',
-                  type: 'radio',
-                  name: 'items',
-                  id: 'item2',
-                },
+                label: 'Item Link',
+                itemProps: { href: '#', class: 'underline' },
               },
             ]}
           />
+
           <Dropdown
-            label="Dropdown Checkbox"
-            items={[
-              {
-                label: 'Item 1',
-                itemProps: { tag: 'label' },
-                labelBeforeProps: {
-                  tag: 'input',
-                  type: 'checkbox',
-                  name: 'items',
-                },
-              },
-              {
-                label: 'Item 2',
-                itemProps: { tag: 'label' },
-                labelBeforeProps: {
-                  tag: 'input',
-                  type: 'checkbox',
-                },
-              },
-            ]}
-          />
+            label="Dropdown Nested"
+            triggerProps={{
+              class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
+            }}
+            contentProps={{
+              class:
+                'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max',
+            }}
+          >
+            <Dropdown
+              label="Dropdown Inside"
+              triggerProps={{ class: 'underline' }}
+              contentProps={{
+                class:
+                  'left-full top-0 bottom-auto p-8 rounded bg-slate-50 mt-2 ml-2 text-sky-900',
+              }}
+            >
+              Inner Content
+            </Dropdown>
+          </Dropdown>
         </div>
 
         <h5>Use:</h5>
@@ -84,44 +87,64 @@ import { component$, useSignal } from '@builder.io/qwik';
 export default component$(() => {
   const open = useSignal(false);
   return (
-    <div class="max-w-prose w-full grid grid-cols-1 gap-8">
-      <Dialog
-        open={open}
-        dialogProps={{ class: "dialog-dialog rounded p-0" }}
-        contentProps={{
-          class: "dialog-content py-8 px-16 flex flex-col gap-4",
+    <div class="max-w-prose w-full grid grid-cols-1 gap-8 justify-items-start">
+      <Dropdown
+        label="Dropdown"
+        triggerProps={{
+          class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
         }}
-        triggerButton={true}
-        triggerProps={{ class: "dialog-trigger" }}
-        closeButton={true}
-        closeProps={{ class: "dialog-close" }}
-        titleProps={{ class: "dialog-title" }}
-        descriptionProps={{ class: "dialog-description" }}
+        contentProps={{
+          class:
+            'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900',
+        }}
       >
-        <div
-          q:slot="trigger"
-          class="bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2"
+        Dropdown Content
+      </Dropdown>
+      <Dropdown
+        label="Dropdown With Items"
+        triggerProps={{
+          class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
+        }}
+        contentProps={{
+          class:
+            'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max flex flex-col gap-4',
+        }}
+        items={[
+          {
+            label: 'Item Button',
+            itemProps: {
+              tag: 'button',
+              class: 'bg-sky-900 text-white rounded px-2 py-1',
+            },
+          },
+          {
+            label: 'Item Link',
+            itemProps: { href: '#', class: 'underline' },
+          },
+        ]}
+      />
+
+      <Dropdown
+        label="Dropdown Nested"
+        triggerProps={{
+          class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
+        }}
+        contentProps={{
+          class:
+            'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max',
+        }}
+      >
+        <Dropdown
+          label="Dropdown Inside"
+          triggerProps={{ class: 'underline' }}
+          contentProps={{
+            class:
+              'left-full top-0 bottom-auto p-8 rounded bg-slate-50 mt-2 ml-2 text-sky-900',
+          }}
         >
-          Open Dialog
-        </div>
-        <div q:slot="close" class="absolute right-4 top-4">
-          X
-        </div>
-        <span q:slot="title">Title Slot Content</span>
-        <span q:slot="description">Description Slot Content</span>
-        <span>Default Slot Content</span>
-        <span q:slot="content">Content Slot Content</span>
-        <div class="flex w-full justify-between" q:slot="footer">
-          <button onClick$={() => (open.value = false)}>Cancel</button>
-          <button onClick$={() => (open.value = false)}>Submit</button>
-        </div>
-      </Dialog>
-      <button
-        class="bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2"
-        onClick$={() => (open.value = true)}
-      >
-        External Dialog Open. Is open: {String(open.value)}
-      </button>
+          Inner Content
+        </Dropdown>
+      </Dropdown>
     </div>
   );
   
@@ -134,18 +157,29 @@ export default component$(() => {
             class="!bg-slate-200 !text-sky-800"
             codeClass="!text-sky-800"
             language="javascript"
-            code={`export type CollapseProps = {
+            code={`export type DropdownProps = {
   id?: string;
-  open?: Signal<boolean>;
-  onChange$?: PropFunction<(open: boolean) => void>;
+  popoverId?: string;
+  popover?: 'auto' | 'manual' | null;
   rootProps?: QwikHTMLElementIntrinsic;
+  label?: string;
   triggerProps?: QwikHTMLElementIntrinsic;
   contentProps?: QwikHTMLElementIntrinsic;
+  open?: Signal<boolean>;
+  lockOpen?: boolean;
   class?: ClassList | Signal<ClassList>;
+  items?: {
+    label?: string;
+    key?: string;
+    class?: ClassList | Signal<ClassList>;
+    itemWrapperProps?: QwikHTMLElementIntrinsic;
+    itemProps?: QwikHTMLElementIntrinsic;
+    labelWrapperProps?: QwikHTMLElementIntrinsic;
+    labelBeforeProps?: QwikHTMLElementIntrinsic;
+    labelAfterProps?: QwikHTMLElementIntrinsic;
+  }[];
   wrappers?: {
     rootChildren?: QwikHTMLElementIntrinsic;
-    trigger?: QwikHTMLElementIntrinsic;
-    content?: QwikHTMLElementIntrinsic;
   };
 };
 `}
@@ -153,22 +187,17 @@ export default component$(() => {
         </div>
         <h5>Slots:</h5>
         <p>
-          default: Content in the dialog (within content wrapper, before
+          default: Content in the dropdown (within content wrapper, before
           "content" slot)
         </p>
-        <p>trigger: Button to open the dialog</p>
-        <p>title: first slot of the dialog, within titleProps element</p>
+        <p>trigger: Button to open the dropdown</p>
         <p>
-          close: within closeProps element (which is within titleProps element)
+          content: third slot of the dropdown, within content element but before
+          any items
         </p>
         <p>
-          description: second slot of the dialog, within descriptionProps
-          element
+          content_after: fourth slot of dropdown, within content but after items
         </p>
-        <p>
-          content: third slot of the dialog, within wrappers.content element
-        </p>
-        <p>footer: fourth slot of the dialog, within footerProps element</p>
       </div>
     </div>
   );

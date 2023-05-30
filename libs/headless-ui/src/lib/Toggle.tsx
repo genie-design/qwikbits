@@ -6,7 +6,6 @@ import {
   useComputed$,
   useId,
   useSignal,
-  useVisibleTask$,
 } from '@builder.io/qwik';
 import {
   QwikHTMLElement,
@@ -67,7 +66,7 @@ export const Toggle = component$((props: ToggleProps) => {
             onClick$={() => (checked.value = !checked.value)}
             {...props.switchProps}
           >
-            <Slot name="button" />
+            <Slot name="switch" />
             <QwikHTMLElement
               data-state={isChecked.value ? 'checked' : 'off'}
               tag={props.switchProps?.tag || 'span'}

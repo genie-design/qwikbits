@@ -7,9 +7,9 @@ import {
 import { RouterHead } from './components/router-head/router-head';
 import { isBrowser } from '@builder.io/qwik/build';
 import * as Sentry from '@sentry/browser';
+import '@unocss/reset/tailwind-compat.css';
 import './global.css';
 import 'cal-sans';
-import '@unocss/reset/tailwind.css';
 import 'virtual:uno.css';
 export default component$(() => {
   /*
