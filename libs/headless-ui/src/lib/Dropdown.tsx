@@ -3,15 +3,23 @@ import {
   component$,
   Signal,
   Slot,
+  useId,
   useSignal,
+  useStylesScoped$,
   useVisibleTask$,
+  type QwikIntrinsicElements,
 } from '@builder.io/qwik';
 import {
   QwikHTMLElement,
   QwikHTMLElementIntrinsic,
   serializeClass,
 } from '@qwikbits/utils';
+
+import { isSupported, apply } from '@oddbird/popover-polyfill/fn';
+import popoverStyles from './popover.css?inline';
+
 export type DropdownProps = {
+  id?: string;
   rootProps?: QwikHTMLElementIntrinsic;
   label?: string;
   triggerProps?: QwikHTMLElementIntrinsic;
@@ -34,8 +42,20 @@ export type DropdownProps = {
   };
 };
 export const Dropdown = component$((props: DropdownProps) => {
+  useStylesScoped$(popoverStyles);
+  const id = useId();
   const defaultSignal = useSignal(props.lockOpen ?? false);
   const open = props.open ?? defaultSignal;
+
+  useVisibleTask$(
+    () => {
+      console.log('is supported', isSupported());
+      if (!isSupported()) {
+        apply();
+      }
+    },
+    { strategy: 'document-ready' }
+  );
 
   return (
     <QwikHTMLElement
@@ -50,6 +70,12 @@ export const Dropdown = component$((props: DropdownProps) => {
       }
     >
       <QwikHTMLElement {...props.wrappers?.rootChildren}>
+        <div id={props.id ?? id} popover="auto" class="">
+          Popover 1
+        </div>
+        <button popovertarget={props.id ?? id}>
+          <span>Click to toggle Popover 1</span>
+        </button>
         <QwikHTMLElement
           tag={props.triggerProps?.tag || 'button'}
           aria-haspopup="listbox"
@@ -97,3 +123,28 @@ export const Dropdown = component$((props: DropdownProps) => {
     </QwikHTMLElement>
   );
 });
+
+type PopoverToggleTargetElementInvoker = QwikIntrinsicElements & {
+  popoverTargetElement: HTMLElement | null;
+  popoverTargetAction: 'toggle' | 'show' | 'hide';
+};
+
+declare global {
+  interface ToggleEvent extends Event {
+    oldState: string;
+    newState: string;
+  }
+  interface HTMLAttributes<HTMLDivElement> {
+    popover: 'auto' | 'manual' | null;
+    showPopover(): void;
+    hidePopover(): void;
+    togglePopover(): void;
+  }
+  /* eslint-disable @typescript-eslint/no-empty-interface */
+  interface HTMLButtonElement extends PopoverToggleTargetElementInvoker {}
+  interface HTMLInputElement extends PopoverToggleTargetElementInvoker {}
+  /* eslint-enable @typescript-eslint/no-empty-interface */
+  interface Window {
+    ToggleEvent: ToggleEvent;
+  }
+}

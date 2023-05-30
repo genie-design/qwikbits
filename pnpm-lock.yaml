@@ -7,6 +7,9 @@ dependencies:
   '@julr/unocss-preset-forms':
     specifier: 0.0.5
     version: 0.0.5(unocss@0.52.3)
+  '@oddbird/popover-polyfill':
+    specifier: ^0.2.1
+    version: 0.2.1
   '@sentry/browser':
     specifier: ^7.53.0
     version: 7.53.0
@@ -2300,6 +2303,10 @@ packages:
       - '@swc-node/register'
       - '@swc/core'
       - debug
+
+  /@oddbird/popover-polyfill@0.2.1:
+    resolution: {integrity: sha512-Sj91gbw50aXe4nOivKzCZsBZZaNQJeVB8hRdQu7sYG5wKyTWD251GdnrM8GKO7VL9ECPyeXhqworbZ/bOx9MsA==}
+    dev: false
 
   /@parcel/watcher@2.0.4:
     resolution: {integrity: sha512-cTDi+FUDBIUOBKEtj+nhiJ71AZVlkAsQFuGQTun5tV9mwQBQgZvhCzG+URPQc8myeN32yRVZEfVAPCs1RW+Jvg==}

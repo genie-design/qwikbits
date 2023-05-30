@@ -14,7 +14,7 @@ export default component$(() => {
         </Cta>
         <h5>
           A component overlaid on the window, rendering the content underneath
-          inert.
+          inert. Uses the built in browser dialog API..
         </h5>
         <h5>Demo:</h5>
         <div class="max-w-prose w-full grid grid-cols-1 gap-8">

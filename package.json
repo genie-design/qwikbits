@@ -1,6 +1,6 @@
 {
   "name": "qwikbits",
-  "version": "0.0.0",
+  "version": "0.6.1",
   "license": "MIT",
   "scripts": {
     "dev": "nx serve docs",
@@ -10,6 +10,7 @@
   "dependencies": {
     "@cloudflare/pages-plugin-sentry": "^1.1.1",
     "@julr/unocss-preset-forms": "0.0.5",
+    "@oddbird/popover-polyfill": "^0.2.1",
     "@sentry/browser": "^7.53.0",
     "cal-sans": "^1.0.1",
     "class-variance-authority": "^0.6.0",
