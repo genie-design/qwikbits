@@ -18,7 +18,7 @@ export const QwikComp = component$((props: Props) => {
 
 export default component$(() => {
   return (
-    <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-8 m-8">
       <div class="flex flex-col gap-8">
         <h2 class={t8y({ size: 'text-5xl' })}>Qwikbits Utils</h2>
         <h5>Utilities and other helpers for Qwik</h5>
