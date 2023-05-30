@@ -1,4 +1,15 @@
+<p align="center">
+  <br>
+  <img width="400" src="./apps/docs/public/qwikbits.svg" alt="Qwik BIts">
+  <br>
+  <br>
+</p>
+
 # Qwik Bits
+
+## Docs
+
+
 
 ## @qwikbits/headless-ui
 Low level, unstyled (or styled the examples), accessible, and fast ui components. Highly customizable, to the point of being able to change individual element tags that the component creates.
@@ -10,10 +21,6 @@ Utilities and other helpers for Qwik
 
 `npm install @qwikbits/utils`
 
-## @qwikbits/code-block
-Code hightlighting compontent for Qwik docs
-
-`npm install @qwikbits/code-block`
 ## Attributions
 
 

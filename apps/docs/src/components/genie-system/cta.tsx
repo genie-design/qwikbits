@@ -20,10 +20,10 @@ const cta = cva(['font-semibold'], {
     intent: {
       link: ['hover:underline underline-offset-2'],
       primary: [
-        'bg-blue-500',
+        'bg-sky-700',
         'text-white',
         'border-transparent',
-        'hover:bg-blue-600',
+        'hover:bg-sky-500',
       ],
       // **or**
       // primary: "bg-blue-500 text-white border-transparent hover:bg-blue-600",
@@ -38,7 +38,7 @@ const cta = cva(['font-semibold'], {
   compoundVariants: [
     {
       intent: ['secondary', 'primary'],
-      class: ['border', 'rounded'],
+      class: ['border', 'rounded', 'px-4', 'py-2'],
     },
   ],
   defaultVariants: {

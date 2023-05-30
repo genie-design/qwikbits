@@ -20,7 +20,7 @@ export default component$(() => {
   return (
     <div class="flex flex-col gap-8">
       <div class="flex flex-col gap-8">
-        <h2 class={t8y({ size: 'text-5xl' })}>Qwikbits Headless-ui</h2>
+        <h2 class={t8y({ size: 'text-5xl' })}>Qwik Bits Headless-ui</h2>
         <h5>Low level, unstyled, accessible, and fast ui components.</h5>
         <h5>
           Highly customizable, to the point of being able to change individual

@@ -58,10 +58,15 @@ export default component$(() => {
         >
           Utils
         </Cta>
+        <a
+          href="https://github.com/genie-design/qwikbits"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <div class="i-lucide-github text-3xl text-sky-900" />
+        </a>
         <div class="fixed right-8 bottom-8 flex gap-4 items-center">
-          <h6 class={t8y({ size: 'text-lg' })}>
-            {lightMode.value ? 'Dark' : 'Light'} Mode:
-          </h6>
+          <h6 class={t8y({ size: 'text-lg' })}>Dark Mode:</h6>
           <Toggle
             invertChecked
             checked={lightMode}

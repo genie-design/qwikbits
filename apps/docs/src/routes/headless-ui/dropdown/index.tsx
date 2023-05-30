@@ -65,7 +65,7 @@ export default component$(() => {
           >
             <Dropdown
               label="Dropdown Inside"
-              triggerProps={{ class: 'underline' }}
+              triggerProps={{ class: 'underline bg-transparent' }}
               contentProps={{
                 class:
                   'left-full top-0 bottom-auto p-8 rounded bg-slate-50 mt-2 ml-2 text-sky-900',

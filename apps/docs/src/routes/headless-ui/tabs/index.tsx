@@ -14,7 +14,7 @@ export default component$(() => {
         <h5>Demo:</h5>
         <div class="max-w-prose w-full grid grid-cols-1 gap-8 justify-items-start">
           <Tabs
-            label="Qwikbits Tabs"
+            label="Qwik Bits Tabs"
             class="w-full"
             tabListProps={{
               class: 'w-full flex',
@@ -69,7 +69,7 @@ export default component$(() => {
   return (
     <div class="max-w-prose w-full grid grid-cols-1 gap-8 justify-items-start">
       <Tabs
-        label="Qwikbits Tabs"
+        label="Qwik Bits Tabs"
         class="w-full"
         tabListProps={{
           class: 'w-full flex',
