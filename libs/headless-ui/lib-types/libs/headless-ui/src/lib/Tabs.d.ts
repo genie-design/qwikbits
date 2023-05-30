@@ -1,4 +1,4 @@
-import { ClassList, Signal } from '@builder.io/qwik';
+import { ClassList, PropFunction, Signal } from '@builder.io/qwik';
 import { QwikHTMLElementIntrinsic } from '@qwikbits/utils';
 export type Tab = {
     tabProps?: QwikHTMLElementIntrinsic;
@@ -18,8 +18,12 @@ export type TabsProps = {
     label?: string;
     labelProps?: QwikHTMLElementIntrinsic;
     selected?: Signal<number>;
+    tabListProps?: QwikHTMLElementIntrinsic;
+    allTabProps?: QwikHTMLElementIntrinsic;
+    allContentProps?: QwikHTMLElementIntrinsic;
+    onChange$?: PropFunction<(selected: number) => void>;
     wrappers?: {
-        tabList?: QwikHTMLElementIntrinsic;
+        content?: QwikHTMLElementIntrinsic;
     };
 };
 export declare const Tabs: import("@builder.io/qwik").Component<TabsProps>;

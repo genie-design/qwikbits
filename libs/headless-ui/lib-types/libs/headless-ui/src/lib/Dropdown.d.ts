@@ -1,6 +1,9 @@
 import { ClassList, Signal } from '@builder.io/qwik';
 import { QwikHTMLElementIntrinsic } from '@qwikbits/utils';
 export type DropdownProps = {
+    id?: string;
+    popoverId?: string;
+    popover?: 'auto' | 'manual' | null;
     rootProps?: QwikHTMLElementIntrinsic;
     label?: string;
     triggerProps?: QwikHTMLElementIntrinsic;
@@ -23,3 +26,12 @@ export type DropdownProps = {
     };
 };
 export declare const Dropdown: import("@builder.io/qwik").Component<DropdownProps>;
+declare module '@builder.io/qwik' {
+    interface Popover {
+        popover?: 'auto' | 'manual' | null;
+        popoverTargetElement?: HTMLElement | null;
+        popoverTargetAction?: 'toggle' | 'show' | 'hide';
+    }
+    interface HTMLAttributes<T> extends Popover {
+    }
+}
