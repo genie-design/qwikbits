@@ -7,7 +7,7 @@ import {
   useSignal,
   useStyles$,
   useVisibleTask$,
-  type QwikIntrinsicElements,
+  $,
 } from '@builder.io/qwik';
 import {
   QwikHTMLElement,
@@ -27,7 +27,8 @@ export type DropdownProps = {
   triggerProps?: QwikHTMLElementIntrinsic;
   contentProps?: QwikHTMLElementIntrinsic;
   open?: Signal<boolean>;
-  lockOpen?: boolean;
+  hoverMode?: boolean;
+  hoverCloseDelay?: number;
   class?: ClassList | Signal<ClassList>;
   items?: {
     label?: string;
@@ -47,20 +48,63 @@ export const Dropdown = component$((props: DropdownProps) => {
   useStyles$(popoverStyles);
   const id = useId();
   const popoverId = useId();
-  const defaultSignal = useSignal(props.lockOpen ?? false);
+  const defaultSignal = useSignal(false);
   const open = props.open ?? defaultSignal;
-
-  useVisibleTask$(
-    () => {
-      if (!isSupported()) {
-        apply();
+  const root = useSignal<HTMLElement>();
+  useVisibleTask$(() => {
+    if (!isSupported()) {
+      apply();
+    }
+  });
+  useVisibleTask$((ctx) => {
+    ctx.track(() => root.value);
+    ctx.track(() => open.value);
+    if (root.value) {
+      const popover = root.value.querySelector('[popover]');
+      if (popover) {
+        if (
+          open.value &&
+          'showPopover' in popover &&
+          typeof popover.showPopover === 'function'
+        ) {
+          console.log('SHOW');
+          popover.showPopover();
+        } else if (
+          !open.value &&
+          'hidePopover' in popover &&
+          typeof popover.hidePopover === 'function'
+        ) {
+          console.log('HIDE');
+          popover.hidePopover();
+        }
       }
-    },
-    { strategy: 'document-ready' }
-  );
+    }
+  });
+
+  const timer = useSignal<ReturnType<typeof setTimeout>>();
+
+  const handleMouseEnter = $(() => {
+    if (props.hoverMode) {
+      clearTimeout(timer.value);
+      if (!open.value) {
+        open.value = true;
+      }
+    }
+  });
+
+  const handleMouseLeave = $(() => {
+    if (props.hoverMode) {
+      timer.value = setTimeout(() => {
+        if (open.value) {
+          open.value = false;
+        }
+      }, props.hoverCloseDelay ?? 100);
+    }
+  });
 
   return (
     <QwikHTMLElement
+      ref={root}
       id={props.id ?? id}
       tag={props.rootProps?.tag || 'div'}
       aria-label={props.rootProps?.['aria-label'] || props.label}
@@ -79,6 +123,14 @@ export const Dropdown = component$((props: DropdownProps) => {
           tag={props.triggerProps?.tag || 'button'}
           popovertarget={props.popoverId ?? popoverId}
           {...props.triggerProps}
+          onMouseEnter$={(e) => {
+            handleMouseEnter();
+            props.triggerProps?.onMouseEnter?.(e);
+          }}
+          onMouseLeave$={(e) => {
+            handleMouseLeave();
+            props.triggerProps?.onMouseLeave?.(e);
+          }}
         >
           {props.label ? props.label : ''}
           <Slot name="trigger" />
@@ -91,6 +143,14 @@ export const Dropdown = component$((props: DropdownProps) => {
             open.value = e.newState === 'open';
           }}
           {...props.contentProps}
+          onMouseEnter$={(e) => {
+            handleMouseEnter();
+            props.triggerProps?.onMouseEnter?.(e);
+          }}
+          onMouseLeave$={(e) => {
+            handleMouseLeave();
+            props.triggerProps?.onMouseLeave?.(e);
+          }}
         >
           <Slot />
           <Slot name="content" />

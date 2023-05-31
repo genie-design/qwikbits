@@ -1,6 +1,6 @@
 [popover] {
   position: absolute;
-  z-index: 2147483647;
+  z-index: 90;
 }
 @supports not selector([popover]:open) {
   [popover]:not(.\:popover-open, dialog[open]) {

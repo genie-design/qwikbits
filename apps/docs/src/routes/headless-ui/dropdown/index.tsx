@@ -4,6 +4,7 @@ import Cta from '../../../components/genie-system/cta';
 import { Dropdown } from '@qwikbits/headless-ui';
 
 export default component$(() => {
+  const open = useSignal(true);
   return (
     <div class="flex flex-col gap-8">
       <div class="flex flex-col gap-8">
@@ -30,13 +31,14 @@ export default component$(() => {
             Dropdown Content
           </Dropdown>
           <Dropdown
-            label="Dropdown With Items"
+            label="Dropdown On Hover With Items"
+            hoverMode
             triggerProps={{
               class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
             }}
             contentProps={{
               class:
-                'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max flex flex-col gap-4',
+                'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max flex flex-col gap-4 !z-[99]',
             }}
             items={[
               {
@@ -55,6 +57,9 @@ export default component$(() => {
 
           <Dropdown
             label="Dropdown Nested"
+            open={open}
+            popover="manual"
+            class="mb-24"
             triggerProps={{
               class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
             }}
@@ -166,7 +171,6 @@ export default component$(() => {
   triggerProps?: QwikHTMLElementIntrinsic;
   contentProps?: QwikHTMLElementIntrinsic;
   open?: Signal<boolean>;
-  lockOpen?: boolean;
   class?: ClassList | Signal<ClassList>;
   items?: {
     label?: string;
