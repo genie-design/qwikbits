@@ -90,7 +90,7 @@ export default component$(() => {
 import { component$, useSignal } from '@builder.io/qwik';
 
 export default component$(() => {
-  const open = useSignal(false);
+  const open = useSignal(true);
   return (
     <div class="max-w-prose w-full grid grid-cols-1 gap-8 justify-items-start">
       <Dropdown
@@ -106,13 +106,14 @@ export default component$(() => {
         Dropdown Content
       </Dropdown>
       <Dropdown
-        label="Dropdown With Items"
+        label="Dropdown On Hover With Items"
+        hoverMode
         triggerProps={{
           class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
         }}
         contentProps={{
           class:
-            'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max flex flex-col gap-4',
+            'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max flex flex-col gap-4 !z-[99]',
         }}
         items={[
           {
@@ -131,6 +132,9 @@ export default component$(() => {
 
       <Dropdown
         label="Dropdown Nested"
+        open={open}
+        popover="manual"
+        class="mb-24"
         triggerProps={{
           class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
         }}
@@ -141,7 +145,7 @@ export default component$(() => {
       >
         <Dropdown
           label="Dropdown Inside"
-          triggerProps={{ class: 'underline' }}
+          triggerProps={{ class: 'underline bg-transparent' }}
           contentProps={{
             class:
               'left-full top-0 bottom-auto p-8 rounded bg-slate-50 mt-2 ml-2 text-sky-900',
@@ -170,6 +174,8 @@ export default component$(() => {
   label?: string;
   triggerProps?: QwikHTMLElementIntrinsic;
   contentProps?: QwikHTMLElementIntrinsic;
+  hoverMode?: boolean;
+  hoverCloseDelay?: number;
   open?: Signal<boolean>;
   class?: ClassList | Signal<ClassList>;
   items?: {
