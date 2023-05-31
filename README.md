@@ -11,7 +11,7 @@
 ## Docs
 
 
-https://qwikbits.dev
+<a href="https://qwikbits.dev" target="_blank">qwikbits.dev</a>
 
 ## @qwikbits/headless-ui
 Low level, unstyled (or styled the examples), accessible, and fast ui components. Highly customizable, to the point of being able to change individual element tags that the component creates.
