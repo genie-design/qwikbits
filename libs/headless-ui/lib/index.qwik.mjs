@@ -912,20 +912,65 @@ function apply() {
   };
   addEventListeners(document);
 }
-const popoverStyles = "[popover] {\n  position: absolute;\n  z-index: 2147483647;\n}\n@supports not selector([popover]:open) {\n  [popover]:not(.\\:popover-open, dialog[open]) {\n    display: none;\n  }\n  [anchor].\\:popover-open {\n    inset: auto;\n  }\n}\n@supports not selector([popover]:popover-open) {\n  [popover]:not(.\\:popover-open, dialog[open]) {\n    display: none;\n  }\n  [anchor].\\:popover-open {\n    inset: auto;\n  }\n}\n";
+const popoverStyles = "[popover] {\n  position: absolute;\n  z-index: 90;\n}\n@supports not selector([popover]:open) {\n  [popover]:not(.\\:popover-open, dialog[open]) {\n    display: none;\n  }\n  [anchor].\\:popover-open {\n    inset: auto;\n  }\n}\n@supports not selector([popover]:popover-open) {\n  [popover]:not(.\\:popover-open, dialog[open]) {\n    display: none;\n  }\n  [anchor].\\:popover-open {\n    inset: auto;\n  }\n}\n";
 const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => {
   useStylesQrl(/* @__PURE__ */ inlinedQrl(popoverStyles, "Dropdown_component_useStyles_3Odsr6GZh5E"));
   const id = useId();
   const popoverId = useId();
-  const defaultSignal = useSignal(props.lockOpen ?? false);
+  const defaultSignal = useSignal(false);
   const open = props.open ?? defaultSignal;
+  const root = useSignal();
   useVisibleTaskQrl(/* @__PURE__ */ inlinedQrl(() => {
     if (!isSupported())
       apply();
-  }, "Dropdown_component_useVisibleTask_Qq2GPBh5jLs"), {
-    strategy: "document-ready"
-  });
+  }, "Dropdown_component_useVisibleTask_Qq2GPBh5jLs"));
+  useVisibleTaskQrl(/* @__PURE__ */ inlinedQrl((ctx) => {
+    const [open2, root2] = useLexicalScope();
+    ctx.track(() => root2.value);
+    ctx.track(() => open2.value);
+    if (root2.value) {
+      const popover = root2.value.querySelector("[popover]");
+      if (popover) {
+        if (open2.value && "showPopover" in popover && typeof popover.showPopover === "function") {
+          console.log("SHOW");
+          popover.showPopover();
+        } else if (!open2.value && "hidePopover" in popover && typeof popover.hidePopover === "function") {
+          console.log("HIDE");
+          popover.hidePopover();
+        }
+      }
+    }
+  }, "Dropdown_component_useVisibleTask_1_hD9KLeuNPYg", [
+    open,
+    root
+  ]));
+  const timer = useSignal();
+  const handleMouseEnter = /* @__PURE__ */ inlinedQrl(() => {
+    const [open2, props2, timer2] = useLexicalScope();
+    if (props2.hoverMode) {
+      clearTimeout(timer2.value);
+      if (!open2.value)
+        open2.value = true;
+    }
+  }, "Dropdown_component_handleMouseEnter_r0j13ISVZp0", [
+    open,
+    props,
+    timer
+  ]);
+  const handleMouseLeave = /* @__PURE__ */ inlinedQrl(() => {
+    const [open2, props2, timer2] = useLexicalScope();
+    if (props2.hoverMode)
+      timer2.value = setTimeout(() => {
+        if (open2.value)
+          open2.value = false;
+      }, props2.hoverCloseDelay ?? 100);
+  }, "Dropdown_component_handleMouseLeave_fV89ujPviKM", [
+    open,
+    props,
+    timer
+  ]);
   return /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+    ref: root,
     get id() {
       return props.id ?? id;
     },
@@ -954,6 +999,22 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
             return props.popoverId ?? popoverId;
           },
           ...props.triggerProps,
+          onMouseEnter$: /* @__PURE__ */ inlinedQrl((e) => {
+            const [handleMouseEnter2, props2] = useLexicalScope();
+            handleMouseEnter2();
+            props2.triggerProps?.onMouseEnter?.(e);
+          }, "Dropdown_component_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onMouseEnter_E0reuP06kHk", [
+            handleMouseEnter,
+            props
+          ]),
+          onMouseLeave$: /* @__PURE__ */ inlinedQrl((e) => {
+            const [handleMouseLeave2, props2] = useLexicalScope();
+            handleMouseLeave2();
+            props2.triggerProps?.onMouseLeave?.(e);
+          }, "Dropdown_component_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onMouseLeave_Bo5eCuMQN64", [
+            handleMouseLeave,
+            props
+          ]),
           children: [
             _fnSignal((p0) => p0.label ? p0.label : "", [
               props
@@ -972,7 +1033,9 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
             popovertarget: _fnSignal((p0, p1) => p1.popoverId ?? p0, [
               popoverId,
               props
-            ], "p1.popoverId??p0")
+            ], "p1.popoverId??p0"),
+            onMouseEnter$: _IMMUTABLE,
+            onMouseLeave$: _IMMUTABLE
           }
         }, 0, "H9_1"),
         /* @__PURE__ */ _jsxC(QwikHTMLElement, {
@@ -992,6 +1055,22 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
             open
           ]),
           ...props.contentProps,
+          onMouseEnter$: /* @__PURE__ */ inlinedQrl((e) => {
+            const [handleMouseEnter2, props2] = useLexicalScope();
+            handleMouseEnter2();
+            props2.triggerProps?.onMouseEnter?.(e);
+          }, "Dropdown_component_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onMouseEnter_1_WUZ6SY7VURs", [
+            handleMouseEnter,
+            props
+          ]),
+          onMouseLeave$: /* @__PURE__ */ inlinedQrl((e) => {
+            const [handleMouseLeave2, props2] = useLexicalScope();
+            handleMouseLeave2();
+            props2.triggerProps?.onMouseLeave?.(e);
+          }, "Dropdown_component_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onMouseLeave_1_zNCV0axuIWA", [
+            handleMouseLeave,
+            props
+          ]),
           children: [
             /* @__PURE__ */ _jsxC(Slot, null, 3, "H9_2"),
             /* @__PURE__ */ _jsxC(Slot, {
@@ -1038,12 +1117,15 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
             ], 'p0.contentProps?.tag||"ul"'),
             popover: _fnSignal((p0) => p0.popover ?? "auto", [
               props
-            ], 'p0.popover??"auto"')
+            ], 'p0.popover??"auto"'),
+            onMouseEnter$: _IMMUTABLE,
+            onMouseLeave$: _IMMUTABLE
           }
         }, 0, "H9_9")
       ]
     }, 0, "H9_10"),
     [_IMMUTABLE]: {
+      ref: _IMMUTABLE,
       id: _fnSignal((p0, p1) => p1.id ?? p0, [
         id,
         props

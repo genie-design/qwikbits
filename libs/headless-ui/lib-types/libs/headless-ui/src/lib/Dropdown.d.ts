@@ -9,7 +9,8 @@ export type DropdownProps = {
     triggerProps?: QwikHTMLElementIntrinsic;
     contentProps?: QwikHTMLElementIntrinsic;
     open?: Signal<boolean>;
-    lockOpen?: boolean;
+    hoverMode?: boolean;
+    hoverCloseDelay?: number;
     class?: ClassList | Signal<ClassList>;
     items?: {
         label?: string;
