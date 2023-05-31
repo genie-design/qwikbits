@@ -59,6 +59,7 @@ export const Toggle = component$((props: ToggleProps) => {
             for={id}
             type={props.switchProps?.type || 'button'}
             role={props.switchProps?.role || 'switch'}
+            aria-label={props.switchProps?.['aria-label'] || 'Toggle Switch'}
             aria-checked={isChecked.value}
             data-state={isChecked.value ? 'checked' : 'unchecked'}
             id={id}

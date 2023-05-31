@@ -1,6 +1,6 @@
 {
   "name": "qwikbits",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "license": "MIT",
   "scripts": {
     "dev": "nx serve docs",

@@ -982,7 +982,6 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
     get "aria-label"() {
       return props.rootProps?.["aria-label"] || props.label;
     },
-    role: "list",
     get style() {
       return {
         position: "relative"
@@ -1047,6 +1046,7 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
           get tag() {
             return props.contentProps?.tag || "ul";
           },
+          role: "list",
           get popover() {
             return props.popover ?? "auto";
           },
@@ -1083,6 +1083,7 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
             }, 3, "H9_3"),
             props.items?.map((item, i) => /* @__PURE__ */ qwik._jsxC(utils.QwikHTMLElement, {
               tag: item.itemWrapperProps?.tag || "li",
+              role: "listitem",
               ...item.itemWrapperProps,
               children: /* @__PURE__ */ qwik._jsxC(utils.QwikHTMLElement, {
                 tag: item.itemProps?.tag || "a",
@@ -1100,7 +1101,10 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
                     ...item.labelAfterProps
                   }, 0, "H9_6")
                 ]
-              }, 0, "H9_7")
+              }, 0, "H9_7"),
+              [qwik._IMMUTABLE]: {
+                role: qwik._IMMUTABLE
+              }
             }, 0, item.key ?? i)),
             /* @__PURE__ */ qwik._jsxC(qwik.Slot, {
               name: "content_after",
@@ -1117,6 +1121,7 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
             tag: qwik._fnSignal((p0) => p0.contentProps?.tag || "ul", [
               props
             ], 'p0.contentProps?.tag||"ul"'),
+            role: qwik._IMMUTABLE,
             popover: qwik._fnSignal((p0) => p0.popover ?? "auto", [
               props
             ], 'p0.popover??"auto"'),
@@ -1138,7 +1143,6 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
       "aria-label": qwik._fnSignal((p0) => p0.rootProps?.["aria-label"] || p0.label, [
         props
       ], 'p0.rootProps?.["aria-label"]||p0.label'),
-      role: qwik._IMMUTABLE,
       style: qwik._IMMUTABLE
     }
   }, 0, "H9_11");
@@ -1392,6 +1396,9 @@ const Toggle = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
             get role() {
               return props.switchProps?.role || "switch";
             },
+            get "aria-label"() {
+              return props.switchProps?.["aria-label"] || "Toggle Switch";
+            },
             get "aria-checked"() {
               return isChecked.value;
             },
@@ -1447,6 +1454,9 @@ const Toggle = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
               role: qwik._fnSignal((p0) => p0.switchProps?.role || "switch", [
                 props
               ], 'p0.switchProps?.role||"switch"'),
+              "aria-label": qwik._fnSignal((p0) => p0.switchProps?.["aria-label"] || "Toggle Switch", [
+                props
+              ], 'p0.switchProps?.["aria-label"]||"Toggle Switch"'),
               "aria-checked": qwik._fnSignal((p0) => p0.value, [
                 isChecked
               ], "p0.value"),

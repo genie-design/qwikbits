@@ -980,7 +980,6 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
     get "aria-label"() {
       return props.rootProps?.["aria-label"] || props.label;
     },
-    role: "list",
     get style() {
       return {
         position: "relative"
@@ -1045,6 +1044,7 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
           get tag() {
             return props.contentProps?.tag || "ul";
           },
+          role: "list",
           get popover() {
             return props.popover ?? "auto";
           },
@@ -1081,6 +1081,7 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
             }, 3, "H9_3"),
             props.items?.map((item, i) => /* @__PURE__ */ _jsxC(QwikHTMLElement, {
               tag: item.itemWrapperProps?.tag || "li",
+              role: "listitem",
               ...item.itemWrapperProps,
               children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
                 tag: item.itemProps?.tag || "a",
@@ -1098,7 +1099,10 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
                     ...item.labelAfterProps
                   }, 0, "H9_6")
                 ]
-              }, 0, "H9_7")
+              }, 0, "H9_7"),
+              [_IMMUTABLE]: {
+                role: _IMMUTABLE
+              }
             }, 0, item.key ?? i)),
             /* @__PURE__ */ _jsxC(Slot, {
               name: "content_after",
@@ -1115,6 +1119,7 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
             tag: _fnSignal((p0) => p0.contentProps?.tag || "ul", [
               props
             ], 'p0.contentProps?.tag||"ul"'),
+            role: _IMMUTABLE,
             popover: _fnSignal((p0) => p0.popover ?? "auto", [
               props
             ], 'p0.popover??"auto"'),
@@ -1136,7 +1141,6 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
       "aria-label": _fnSignal((p0) => p0.rootProps?.["aria-label"] || p0.label, [
         props
       ], 'p0.rootProps?.["aria-label"]||p0.label'),
-      role: _IMMUTABLE,
       style: _IMMUTABLE
     }
   }, 0, "H9_11");
@@ -1390,6 +1394,9 @@ const Toggle = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
             get role() {
               return props.switchProps?.role || "switch";
             },
+            get "aria-label"() {
+              return props.switchProps?.["aria-label"] || "Toggle Switch";
+            },
             get "aria-checked"() {
               return isChecked.value;
             },
@@ -1445,6 +1452,9 @@ const Toggle = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
               role: _fnSignal((p0) => p0.switchProps?.role || "switch", [
                 props
               ], 'p0.switchProps?.role||"switch"'),
+              "aria-label": _fnSignal((p0) => p0.switchProps?.["aria-label"] || "Toggle Switch", [
+                props
+              ], 'p0.switchProps?.["aria-label"]||"Toggle Switch"'),
               "aria-checked": _fnSignal((p0) => p0.value, [
                 isChecked
               ], "p0.value"),

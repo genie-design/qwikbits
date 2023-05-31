@@ -108,7 +108,6 @@ export const Dropdown = component$((props: DropdownProps) => {
       id={props.id ?? id}
       tag={props.rootProps?.tag || 'div'}
       aria-label={props.rootProps?.['aria-label'] || props.label}
-      role="list"
       style={{ position: 'relative' }}
       {...props.rootProps}
       class={
@@ -138,6 +137,7 @@ export const Dropdown = component$((props: DropdownProps) => {
         <QwikHTMLElement
           id={props.popoverId ?? popoverId}
           tag={props.contentProps?.tag || 'ul'}
+          role="list"
           popover={props.popover ?? 'auto'}
           onToggle$={(e: ToggleEvent) => {
             open.value = e.newState === 'open';
@@ -158,6 +158,7 @@ export const Dropdown = component$((props: DropdownProps) => {
             <QwikHTMLElement
               key={item.key ?? i}
               tag={item.itemWrapperProps?.tag || 'li'}
+              role="listitem"
               {...item.itemWrapperProps}
             >
               <QwikHTMLElement

@@ -70,6 +70,11 @@ export default component$(() => {
           >
             <Dropdown
               label="Dropdown Inside"
+              rootProps={{
+                tag: 'li',
+                role: 'listitem',
+                class: 'list-none',
+              }}
               triggerProps={{ class: 'underline bg-transparent' }}
               contentProps={{
                 class:
@@ -145,6 +150,11 @@ export default component$(() => {
       >
         <Dropdown
           label="Dropdown Inside"
+          rootProps={{
+            tag: 'li',
+            role: 'listitem',
+            class: 'list-none',
+          }}
           triggerProps={{ class: 'underline bg-transparent' }}
           contentProps={{
             class:

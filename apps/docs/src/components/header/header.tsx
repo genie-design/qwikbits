@@ -12,7 +12,7 @@ export default component$(() => {
   const lightMode = useContext(ThemeContext);
   return (
     <header class="sticky bg-slate-200 top-0 z-10 flex justify-between gap-8 h-20 min-h-20 w-full py-2 px-8 overflow-hidden">
-      <a class="block" href="/">
+      <a class="block" href="/" aria-label="Home">
         <QwikBitsLogo />
       </a>
       <nav class="flex gap-4 items-center text-sky-900">
@@ -60,6 +60,7 @@ export default component$(() => {
         </Cta>
         <a
           href="https://github.com/genie-design/qwikbits"
+          aria-label="Qwik Bits Github Repository"
           target="_blank"
           rel="noreferrer"
         >
