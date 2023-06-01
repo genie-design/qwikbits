@@ -140,6 +140,7 @@ export const Dropdown = component$((props: DropdownProps) => {
           role="list"
           popover={props.popover ?? 'auto'}
           onToggle$={(e: ToggleEvent) => {
+            console.log(e);
             open.value = e.newState === 'open';
           }}
           {...props.contentProps}

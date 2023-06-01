@@ -1,7 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { CodeBlock } from '@qwikbits/code-block';
 import { t8y } from '../../components/genie-system/typography';
-import Cta from '../../components/genie-system/cta';
 import { QwikHTMLElement, QwikHTMLElementIntrinsic } from '@qwikbits/utils';
 
 export type Props = {
@@ -35,6 +34,30 @@ export default component$(() => {
             code={'npm install @qwikbits/headless-ui @qwikbits/utils'}
           />
         </div>
+        <p>
+          Check the examples, Props and Slots for each component. If a prop type
+          is QwikHTMLElementIntrinsic that means it is part of what renders on
+          the dom and often has a default tag (button, div, etc) but you can use
+          the tag property to change it. e.g for a dropdown:
+        </p>
+        <CodeBlock
+          class="!bg-slate-200 !text-slate-900 font-mono"
+          codeClass="!text-sky-800"
+          language="javascript"
+          code={`items={[
+  {
+    label: 'Item Button',
+    itemProps: {
+      tag: 'button',
+      class: 'bg-sky-900 text-white rounded px-2 py-1',
+    },
+  },
+  {
+    label: 'Item Link',
+    itemProps: { href: '#', class: 'underline' },
+  },
+]}`}
+        />
       </div>
     </div>
   );

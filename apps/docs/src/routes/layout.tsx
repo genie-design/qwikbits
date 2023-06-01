@@ -1,4 +1,4 @@
-import type { Signal } from '@builder.io/qwik';
+import type { Signal } from "@builder.io/qwik";
 import {
   component$,
   createContextId,
@@ -6,46 +6,47 @@ import {
   useContextProvider,
   useSignal,
   useVisibleTask$,
-} from '@builder.io/qwik';
-import { VHElement } from '@qwikbits/utils';
-import Footer from '../components/footer/footer';
-import Header from '../components/header/header';
+} from "@builder.io/qwik";
+import { VHElement } from "@qwikbits/utils";
+import Header from "../components/header/header";
 export const ThemeContext =
-  createContextId<Signal<boolean>>('docs.theme-context');
+  createContextId<Signal<boolean>>("docs.theme-context");
 export default component$(() => {
   const lightMode = useSignal<boolean | null>(null);
   useContextProvider(ThemeContext, lightMode);
   useVisibleTask$(() => {
-    const theme = localStorage.getItem('theme');
-    if (theme === 'light') {
+    const theme = localStorage.getItem("theme");
+    if (theme === "light") {
       lightMode.value = true;
-    } else if (theme === 'dark') {
+    } else if (theme === "dark") {
       lightMode.value = false;
     } else {
       lightMode.value =
         !window.matchMedia ||
-        !window.matchMedia('(prefers-color-scheme: dark)').matches;
+        !window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
   });
   useVisibleTask$((ctx) => {
     ctx.track(() => lightMode.value);
-    localStorage.setItem('theme', lightMode.value ? 'light' : 'dark');
+    localStorage.setItem("theme", lightMode.value ? "light" : "dark");
   });
   return (
     <VHElement
       class={{
         light: lightMode.value,
         dark: !lightMode.value,
-        'font-sans flex flex-col text-lg': true,
+        "font-sans flex flex-col text-lg": true,
       }}
     >
       <Header />
       <main
         class={{
-          'grow bg-slate-100 color-sky-950': true,
+          "grow bg-slate-100 color-sky-950": true,
         }}
       >
-        <Slot />
+        <div class="mb-24">
+          <Slot />
+        </div>
       </main>
       {/* <Footer /> */}
     </VHElement>

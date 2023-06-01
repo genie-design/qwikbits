@@ -1,7 +1,7 @@
 import { component$, useContext } from '@builder.io/qwik';
 import { CodeBlock } from '@qwikbits/code-block';
 import Cta from '../../../components/genie-system/cta';
-import { Tabs, Toggle } from '@qwikbits/headless-ui';
+import { Toggle } from '@qwikbits/headless-ui';
 import { ThemeContext } from '../../layout';
 
 export default component$(() => {
@@ -57,7 +57,8 @@ export default component$(() => {
       switchProps={{
         style: { '-webkit-tap-highlight-color': 'rgba(0, 0, 0, 0)' },
         class:
-          'inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-black data-[state=unchecked]:bg-slate-600',
+          'inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 
+            focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-black data-[state=unchecked]:bg-slate-600',
       }}
       thumbProps={{
         class:
@@ -71,7 +72,8 @@ export default component$(() => {
       switchProps={{
         style: { '-webkit-tap-highlight-color': 'rgba(0, 0, 0, 0)' },
         class:
-          'inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-black data-[state=unchecked]:bg-slate',
+          'inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 
+            focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-black data-[state=unchecked]:bg-slate',
       }}
       thumbProps={{
         class:

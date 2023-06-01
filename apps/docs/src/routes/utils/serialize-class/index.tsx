@@ -1,6 +1,5 @@
 import { component$ } from '@builder.io/qwik';
 import { CodeBlock } from '@qwikbits/code-block';
-import { t8y } from '../../../components/genie-system/typography';
 import Cta from '../../../components/genie-system/cta';
 
 export default component$(() => {
