@@ -146,23 +146,21 @@ function use100vh(vh) {
 }
 const VHElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((props) => {
   const height = use100vh(props.vh);
+  const styles = props.styles ?? [
+    "min-height"
+  ];
+  const styleValue = height.value ? `${height.value}px` : `${props.vh || 100}vh`;
+  const style = styles.reduce((acc, s) => {
+    acc[s] = styleValue;
+    return acc;
+  }, {});
   return /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
     tag: "div",
     ...props,
-    get style() {
-      return {
-        height: height.value ? `${height.value}px` : `${props.vh || 100}vh`
-      };
-    },
+    style,
     children: /* @__PURE__ */ qwik._jsxC(qwik.Slot, null, 3, "0M_0"),
     [qwik._IMMUTABLE]: {
-      tag: qwik._IMMUTABLE,
-      style: qwik._fnSignal((p0, p1) => ({
-        height: p0.value ? `${p0.value}px` : `${p1.vh || 100}vh`
-      }), [
-        height,
-        props
-      ], "{height:p0.value?`${p0.value}px`:`${p1.vh||100}vh`}")
+      tag: qwik._IMMUTABLE
     }
   }, 0, "0M_1");
 }, "VHElement_component_RxPbi9LjSx0"));

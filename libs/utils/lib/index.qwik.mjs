@@ -1,4 +1,4 @@
-import { componentQrl, inlinedQrl, _jsxBranch, _jsxC, Slot, useSignal, useVisibleTaskQrl, useLexicalScope, _IMMUTABLE, _fnSignal } from "@builder.io/qwik";
+import { componentQrl, inlinedQrl, _jsxBranch, _jsxC, Slot, useSignal, useVisibleTaskQrl, useLexicalScope, _IMMUTABLE } from "@builder.io/qwik";
 import { Fragment } from "@builder.io/qwik/jsx-runtime";
 import { isBrowser } from "@builder.io/qwik/build";
 const not = {
@@ -144,23 +144,21 @@ function use100vh(vh) {
 }
 const VHElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => {
   const height = use100vh(props.vh);
+  const styles = props.styles ?? [
+    "min-height"
+  ];
+  const styleValue = height.value ? `${height.value}px` : `${props.vh || 100}vh`;
+  const style = styles.reduce((acc, s) => {
+    acc[s] = styleValue;
+    return acc;
+  }, {});
   return /* @__PURE__ */ _jsxC(QwikHTMLElement, {
     tag: "div",
     ...props,
-    get style() {
-      return {
-        height: height.value ? `${height.value}px` : `${props.vh || 100}vh`
-      };
-    },
+    style,
     children: /* @__PURE__ */ _jsxC(Slot, null, 3, "0M_0"),
     [_IMMUTABLE]: {
-      tag: _IMMUTABLE,
-      style: _fnSignal((p0, p1) => ({
-        height: p0.value ? `${p0.value}px` : `${p1.vh || 100}vh`
-      }), [
-        height,
-        props
-      ], "{height:p0.value?`${p0.value}px`:`${p1.vh||100}vh`}")
+      tag: _IMMUTABLE
     }
   }, 0, "0M_1");
 }, "VHElement_component_RxPbi9LjSx0"));
