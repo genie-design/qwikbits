@@ -2,6 +2,7 @@
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const qwik = require("@builder.io/qwik");
 const jsxRuntime = require("@builder.io/qwik/jsx-runtime");
+const build = require("@builder.io/qwik/build");
 const not = {
   inert: ":not([inert]):not([inert] *)",
   negTabIndex: ':not([tabindex^="-"])',
@@ -130,7 +131,7 @@ const QwikHTMLElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.i
 function use100vh(vh) {
   const height = qwik.useSignal(void 0);
   const numerator = vh ?? 100;
-  if (typeof window !== "undefined")
+  if (build.isBrowser)
     window.addEventListener("resize", () => {
       height.value = window.innerHeight * (numerator / 100);
     });
@@ -150,18 +151,18 @@ const VHElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlined
     ...props,
     get style() {
       return {
-        height: `${height.value}px` || `${props.vh || 100}vh`
+        height: height.value ? `${height.value}px` : `${props.vh || 100}vh`
       };
     },
     children: /* @__PURE__ */ qwik._jsxC(qwik.Slot, null, 3, "0M_0"),
     [qwik._IMMUTABLE]: {
       tag: qwik._IMMUTABLE,
       style: qwik._fnSignal((p0, p1) => ({
-        height: `${p0.value}px` || `${p1.vh || 100}vh`
+        height: p0.value ? `${p0.value}px` : `${p1.vh || 100}vh`
       }), [
         height,
         props
-      ], "{height:`${p0.value}px`||`${p1.vh||100}vh`}")
+      ], "{height:p0.value?`${p0.value}px`:`${p1.vh||100}vh`}")
     }
   }, 0, "0M_1");
 }, "VHElement_component_RxPbi9LjSx0"));

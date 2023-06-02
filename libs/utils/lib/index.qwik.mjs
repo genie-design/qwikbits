@@ -1,5 +1,6 @@
 import { componentQrl, inlinedQrl, _jsxBranch, _jsxC, Slot, useSignal, useVisibleTaskQrl, useLexicalScope, _IMMUTABLE, _fnSignal } from "@builder.io/qwik";
 import { Fragment } from "@builder.io/qwik/jsx-runtime";
+import { isBrowser } from "@builder.io/qwik/build";
 const not = {
   inert: ":not([inert]):not([inert] *)",
   negTabIndex: ':not([tabindex^="-"])',
@@ -128,7 +129,7 @@ const QwikHTMLElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl(
 function use100vh(vh) {
   const height = useSignal(void 0);
   const numerator = vh ?? 100;
-  if (typeof window !== "undefined")
+  if (isBrowser)
     window.addEventListener("resize", () => {
       height.value = window.innerHeight * (numerator / 100);
     });
@@ -148,18 +149,18 @@ const VHElement = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props
     ...props,
     get style() {
       return {
-        height: `${height.value}px` || `${props.vh || 100}vh`
+        height: height.value ? `${height.value}px` : `${props.vh || 100}vh`
       };
     },
     children: /* @__PURE__ */ _jsxC(Slot, null, 3, "0M_0"),
     [_IMMUTABLE]: {
       tag: _IMMUTABLE,
       style: _fnSignal((p0, p1) => ({
-        height: `${p0.value}px` || `${p1.vh || 100}vh`
+        height: p0.value ? `${p0.value}px` : `${p1.vh || 100}vh`
       }), [
         height,
         props
-      ], "{height:`${p0.value}px`||`${p1.vh||100}vh`}")
+      ], "{height:p0.value?`${p0.value}px`:`${p1.vh||100}vh`}")
     }
   }, 0, "0M_1");
 }, "VHElement_component_RxPbi9LjSx0"));

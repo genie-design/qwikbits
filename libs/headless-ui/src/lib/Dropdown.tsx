@@ -67,14 +67,12 @@ export const Dropdown = component$((props: DropdownProps) => {
           'showPopover' in popover &&
           typeof popover.showPopover === 'function'
         ) {
-          console.log('SHOW');
           popover.showPopover();
         } else if (
           !open.value &&
           'hidePopover' in popover &&
           typeof popover.hidePopover === 'function'
         ) {
-          console.log('HIDE');
           popover.hidePopover();
         }
       }
@@ -140,7 +138,6 @@ export const Dropdown = component$((props: DropdownProps) => {
           role="list"
           popover={props.popover ?? 'auto'}
           onToggle$={(e: ToggleEvent) => {
-            console.log(e);
             open.value = e.newState === 'open';
           }}
           {...props.contentProps}

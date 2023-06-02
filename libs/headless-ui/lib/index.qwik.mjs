@@ -931,13 +931,10 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
     if (root2.value) {
       const popover = root2.value.querySelector("[popover]");
       if (popover) {
-        if (open2.value && "showPopover" in popover && typeof popover.showPopover === "function") {
-          console.log("SHOW");
+        if (open2.value && "showPopover" in popover && typeof popover.showPopover === "function")
           popover.showPopover();
-        } else if (!open2.value && "hidePopover" in popover && typeof popover.hidePopover === "function") {
-          console.log("HIDE");
+        else if (!open2.value && "hidePopover" in popover && typeof popover.hidePopover === "function")
           popover.hidePopover();
-        }
       }
     }
   }, "Dropdown_component_useVisibleTask_1_hD9KLeuNPYg", [

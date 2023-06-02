@@ -1,7 +1,7 @@
-import { component$ } from "@builder.io/qwik";
-import CTA from "../genie-system/cta";
-import { useLocation } from "@builder.io/qwik-city";
-import { getNormalizedPathname } from "@qwikbits/utils";
+import { component$ } from '@builder.io/qwik';
+import CTA from '../genie-system/cta';
+import { useLocation } from '@builder.io/qwik-city';
+import { getNormalizedPathname } from '@qwikbits/utils';
 
 export type MenuProps = {
   items?: {
@@ -17,22 +17,20 @@ export default component$((props: MenuProps) => {
     <aside class="flex flex-wrap justify-center lg:justify-start lg:flex-nowrap lg:flex-col gap-4 lg:border-r border-slate-300 lg:pr-8">
       {props.items
         ? props.items?.map((item) => (
-            <>
-              <ul>
-                <li key={item.href}>
-                  <CTA
-                    href={item.href}
-                    class={{
-                      underline:
-                        getNormalizedPathname(loc.url.href) ===
-                        getNormalizedPathname(item.href, loc.url.origin),
-                    }}
-                  >
-                    {item.text}
-                  </CTA>
-                </li>
-              </ul>
-            </>
+            <ul key={item.href}>
+              <li>
+                <CTA
+                  href={item.href}
+                  class={{
+                    underline:
+                      getNormalizedPathname(loc.url.href) ===
+                      getNormalizedPathname(item.href, loc.url.origin),
+                  }}
+                >
+                  {item.text}
+                </CTA>
+              </li>
+            </ul>
           ))
         : null}
       <hr class="border-slate-300 border-b-2 w-full lg:hidden" />

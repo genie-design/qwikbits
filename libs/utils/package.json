@@ -1,6 +1,6 @@
 {
   "name": "@qwikbits/utils",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
   "types": "./lib-types/libs/utils/src/index.d.ts",

@@ -3,6 +3,7 @@ import { Slot } from '@builder.io/qwik';
 import { component$ } from '@builder.io/qwik';
 import type { QwikHTMLElementIntrinsic } from '@qwikbits/utils';
 import { QwikHTMLElement, serializeClass } from '@qwikbits/utils';
+import type { LinkProps } from '@builder.io/qwik-city';
 import { Link } from '@builder.io/qwik-city';
 import type { VariantProps } from 'class-variance-authority';
 import { cva } from 'class-variance-authority';
@@ -14,6 +15,7 @@ type CTAProps = {
   variantProps?: VariantProps<typeof cta>;
   typography?: VariantProps<typeof t8y>;
   props?: QwikHTMLElementIntrinsic;
+  onClick$?: LinkProps['onClick$'];
 };
 const cta = cva(['font-semibold'], {
   variants: {
@@ -58,12 +60,17 @@ export default component$((props: CTAProps) => {
   return (
     <>
       {href ? (
-        <Link {...props} class={classes} href={href}>
+        <Link onClick$={props.onClick$} {...props} class={classes} href={href}>
           {text}
           <Slot />
         </Link>
       ) : (
-        <QwikHTMLElement tag="button" {...props} class={classes}>
+        <QwikHTMLElement
+          onClick$={props.onClick$}
+          tag="button"
+          {...props}
+          class={classes}
+        >
           {text} <Slot />
         </QwikHTMLElement>
       )}
