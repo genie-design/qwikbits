@@ -1,7 +1,7 @@
-import { component$, useSignal } from '@builder.io/qwik';
-import { CodeBlock } from '@qwikbits/code-block';
-import Cta from '../../../components/genie-system/cta';
-import { Dropdown } from '@qwikbits/headless-ui';
+import { component$, useSignal } from "@builder.io/qwik";
+import { CodeBlock } from "@qwikbits/code-block";
+import Cta from "../../../components/genie-system/cta";
+import { Dropdown } from "@qwikbits/headless-ui";
 
 export default component$(() => {
   const open = useSignal(true);
@@ -21,11 +21,11 @@ export default component$(() => {
           <Dropdown
             label="Dropdown"
             triggerProps={{
-              class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
+              class: "bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2",
             }}
             contentProps={{
               class:
-                'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900',
+                "bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900",
             }}
           >
             Dropdown Content
@@ -34,23 +34,23 @@ export default component$(() => {
             label="Dropdown On Hover With Items"
             hoverMode
             triggerProps={{
-              class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
+              class: "bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2",
             }}
             contentProps={{
               class:
-                'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max flex flex-col gap-4 !z-[99]',
+                "bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max flex flex-col gap-4 !z-[99]",
             }}
             items={[
               {
-                label: 'Item Button',
+                label: "Item Button",
                 itemProps: {
-                  tag: 'button',
-                  class: 'bg-sky-900 text-white rounded px-2 py-1',
+                  tag: "button",
+                  class: "bg-sky-900 text-white rounded px-2 py-1",
                 },
               },
               {
-                label: 'Item Link',
-                itemProps: { href: '#', class: 'underline' },
+                label: "Item Link",
+                itemProps: { href: "#", class: "underline" },
               },
             ]}
           />
@@ -61,24 +61,24 @@ export default component$(() => {
             popover="manual"
             class="mb-24"
             triggerProps={{
-              class: 'bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2',
+              class: "bg-sky-900 text-white hover:bg-sky-700 rounded px-4 py-2",
             }}
             contentProps={{
               class:
-                'bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max',
+                "bg-slate-50 p-8 rounded mt-2 ml-2 text-sky-900 border-2 border-sky-900 w-max",
             }}
           >
             <Dropdown
               label="Dropdown Inside"
               rootProps={{
-                tag: 'li',
-                role: 'listitem',
-                class: 'list-none',
+                tag: "li",
+                role: "listitem",
+                class: "list-none",
               }}
-              triggerProps={{ class: 'underline bg-transparent' }}
+              triggerProps={{ class: "underline bg-transparent" }}
               contentProps={{
                 class:
-                  'left-full top-0 bottom-auto p-8 rounded bg-slate-50 mt-2 ml-2 text-sky-900',
+                  "left-full top-0 bottom-auto p-8 rounded bg-slate-50 mt-2 ml-2 text-sky-900",
               }}
             >
               Inner Content

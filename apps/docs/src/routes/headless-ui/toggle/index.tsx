@@ -1,8 +1,8 @@
-import { component$, useContext } from '@builder.io/qwik';
-import { CodeBlock } from '@qwikbits/code-block';
-import Cta from '../../../components/genie-system/cta';
-import { Toggle } from '@qwikbits/headless-ui';
-import { ThemeContext } from '../../layout';
+import { component$, useContext } from "@builder.io/qwik";
+import { CodeBlock } from "@qwikbits/code-block";
+import Cta from "../../../components/genie-system/cta";
+import { Toggle } from "@qwikbits/headless-ui";
+import { ThemeContext } from "../../layout";
 
 export default component$(() => {
   const lightMode = useContext(ThemeContext);
@@ -17,13 +17,13 @@ export default component$(() => {
         <div class="max-w-prose w-full grid grid-cols-1 gap-8 justify-items-start">
           <Toggle
             switchProps={{
-              style: { '-webkit-tap-highlight-color': 'rgba(0, 0, 0, 0)' },
+              style: { "-webkit-tap-highlight-color": "rgba(0, 0, 0, 0)" },
               class:
-                'inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors bg-slate-500 white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 aria-checked:bg-black',
+                "inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors bg-slate-500 white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 aria-checked:bg-black",
             }}
             thumbProps={{
               class:
-                'pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0',
+                "pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0",
             }}
           />
           <h4>Toggle Dark Mode</h4>
@@ -31,13 +31,13 @@ export default component$(() => {
             invertChecked
             checked={lightMode}
             switchProps={{
-              style: { '-webkit-tap-highlight-color': 'rgba(0, 0, 0, 0)' },
+              style: { "-webkit-tap-highlight-color": "rgba(0, 0, 0, 0)" },
               class:
-                'inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-black data-[state=unchecked]:bg-slate',
+                "inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-black data-[state=unchecked]:bg-slate",
             }}
             thumbProps={{
               class:
-                'i-lucide-sun-moon pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0',
+                "i-lucide-sun-moon pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0",
             }}
           />
         </div>

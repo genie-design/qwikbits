@@ -62,16 +62,19 @@ export const Dropdown = component$((props: DropdownProps) => {
     if (root.value) {
       const popover = root.value.querySelector('[popover]');
       if (popover) {
+        const isOpen = popover.matches(':popover-open')
         if (
           open.value &&
           'showPopover' in popover &&
-          typeof popover.showPopover === 'function'
+          typeof popover.showPopover === 'function' &&
+          !isOpen
         ) {
           popover.showPopover();
         } else if (
           !open.value &&
           'hidePopover' in popover &&
-          typeof popover.hidePopover === 'function'
+          typeof popover.hidePopover === 'function' &&
+          isOpen
         ) {
           popover.hidePopover();
         }
@@ -119,6 +122,7 @@ export const Dropdown = component$((props: DropdownProps) => {
         <QwikHTMLElement
           tag={props.triggerProps?.tag || 'button'}
           popovertarget={props.popoverId ?? popoverId}
+          popoverTargetAction='toggle'
           {...props.triggerProps}
           onMouseEnter$={(e) => {
             handleMouseEnter();

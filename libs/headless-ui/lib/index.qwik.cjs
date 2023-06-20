@@ -418,6 +418,10 @@ function queuePopoverToggleEventTask(element, oldState, newState) {
     }, 0)
   );
 }
+var ShadowRoot = globalThis.ShadowRoot || function() {
+};
+var HTMLDialogElement = globalThis.HTMLDialogElement || function() {
+};
 var topLayerElements = /* @__PURE__ */ new WeakMap();
 var autoPopoverList = /* @__PURE__ */ new WeakMap();
 var visibilityState = /* @__PURE__ */ new WeakMap();
@@ -488,12 +492,20 @@ function topMostAutoPopover(document2) {
   }
   return null;
 }
+function getRootNode(node) {
+  if (typeof node.getRootNode === "function") {
+    return node.getRootNode();
+  }
+  if (node.parentNode)
+    return getRootNode(node.parentNode);
+  return node;
+}
 function nearestInclusiveOpenPopover(node) {
   while (node) {
     if (node instanceof HTMLElement && node.popover === "auto" && visibilityState.get(node) === "showing") {
       return node;
     }
-    node = node.parentElement || node.getRootNode();
+    node = node.parentElement || getRootNode(node);
     if (node instanceof ShadowRoot)
       node = node.host;
     if (node instanceof Document)
@@ -505,7 +517,7 @@ function nearestInclusiveTargetPopoverForInvoker(node) {
     const nodePopover = node.popoverTargetElement;
     if (nodePopover)
       return nodePopover;
-    node = node.parentElement || node.getRootNode();
+    node = node.parentElement || getRootNode(node);
     if (node instanceof ShadowRoot)
       node = node.host;
     if (node instanceof Document)
@@ -737,6 +749,8 @@ function setInvokerAriaExpanded(el, force = false) {
     }
   }
 }
+var ShadowRoot2 = globalThis.ShadowRoot || function() {
+};
 function isSupported() {
   return typeof HTMLElement !== "undefined" && typeof HTMLElement.prototype === "object" && "popover" in HTMLElement.prototype;
 }
@@ -752,7 +766,7 @@ var nonEscapedPopoverSelector = /(^|[^\\]):popover-open\b/g;
 function apply() {
   window.ToggleEvent = window.ToggleEvent || ToggleEvent;
   function rewriteSelector(selector) {
-    if (selector.includes(":popover-open")) {
+    if (selector?.includes(":popover-open")) {
       selector = selector.replace(
         nonEscapedPopoverSelector,
         "$1.\\:popover-open"
@@ -857,9 +871,9 @@ function apply() {
             popoverTargetAssociatedElements.delete(this);
             return null;
           }
-          const root = this.getRootNode();
+          const root = getRootNode(this);
           const idref = this.getAttribute("popovertarget");
-          if ((root instanceof Document || root instanceof ShadowRoot) && idref) {
+          if ((root instanceof Document || root instanceof ShadowRoot2) && idref) {
             return root.getElementById(idref) || null;
           }
           return null;
@@ -889,8 +903,8 @@ function apply() {
     if (!(target instanceof Element) || target?.shadowRoot) {
       return;
     }
-    const root = target.getRootNode();
-    if (!(root instanceof ShadowRoot || root instanceof Document)) {
+    const root = getRootNode(target);
+    if (!(root instanceof ShadowRoot2 || root instanceof Document)) {
       return;
     }
     const invoker = target.closest("[popovertargetaction],[popovertarget]");
@@ -933,9 +947,10 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
     if (root2.value) {
       const popover = root2.value.querySelector("[popover]");
       if (popover) {
-        if (open2.value && "showPopover" in popover && typeof popover.showPopover === "function")
+        const isOpen = popover.matches(":popover-open");
+        if (open2.value && "showPopover" in popover && typeof popover.showPopover === "function" && !isOpen)
           popover.showPopover();
-        else if (!open2.value && "hidePopover" in popover && typeof popover.hidePopover === "function")
+        else if (!open2.value && "hidePopover" in popover && typeof popover.hidePopover === "function" && isOpen)
           popover.hidePopover();
       }
     }
@@ -996,6 +1011,7 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
           get popovertarget() {
             return props.popoverId ?? popoverId;
           },
+          popoverTargetAction: "toggle",
           ...props.triggerProps,
           onMouseEnter$: /* @__PURE__ */ qwik.inlinedQrl((e) => {
             const [handleMouseEnter2, props2] = qwik.useLexicalScope();
@@ -1032,6 +1048,7 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
               popoverId,
               props
             ], "p1.popoverId??p0"),
+            popoverTargetAction: qwik._IMMUTABLE,
             onMouseEnter$: qwik._IMMUTABLE,
             onMouseLeave$: qwik._IMMUTABLE
           }

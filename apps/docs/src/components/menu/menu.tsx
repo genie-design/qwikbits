@@ -1,7 +1,7 @@
-import { component$ } from '@builder.io/qwik';
-import CTA from '../genie-system/cta';
-import { useLocation } from '@builder.io/qwik-city';
-import { getNormalizedPathname } from '@qwikbits/utils';
+import { component$ } from "@builder.io/qwik";
+import CTA from "../genie-system/cta";
+import { useLocation } from "@builder.io/qwik-city";
+import { getNormalizedPathname } from "@qwikbits/utils";
 
 export type MenuProps = {
   items?: {

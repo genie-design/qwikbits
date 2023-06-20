@@ -9,8 +9,8 @@ import { isBrowser } from "@builder.io/qwik/build";
 import * as Sentry from "@sentry/browser";
 import "@unocss/reset/tailwind-compat.css";
 import "./global.css";
-import "./uno.css";
 import "cal-sans";
+import "./uno.css";
 import "virtual:uno.css";
 export default component$(() => {
   /*

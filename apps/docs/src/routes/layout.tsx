@@ -35,18 +35,16 @@ export default component$(() => {
       class={{
         light: lightMode.value,
         dark: !lightMode.value,
-        "font-sans flex flex-col text-lg": true,
+        "font-sans flex flex-col text-lg bg-slate-100 color-sky-950": true,
       }}
     >
       <Header />
       <main
         class={{
-          "grow bg-slate-100 color-sky-950": true,
+          "grow m-8 md:m-16 mb-24": true,
         }}
       >
-        <div class="mb-24">
-          <Slot />
-        </div>
+        <Slot />
       </main>
       {/* <Footer /> */}
     </VHElement>

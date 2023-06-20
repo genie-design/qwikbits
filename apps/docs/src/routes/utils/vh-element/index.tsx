@@ -1,6 +1,6 @@
-import { component$ } from '@builder.io/qwik';
-import { CodeBlock } from '@qwikbits/code-block';
-import Cta from '../../../components/genie-system/cta';
+import { component$ } from "@builder.io/qwik";
+import { CodeBlock } from "@qwikbits/code-block";
+import Cta from "../../../components/genie-system/cta";
 
 export default component$(() => {
   return (
@@ -24,6 +24,8 @@ export default component$(() => {
 export default component$(() => {
   return (
     <VHElement
+      vh={100}
+      styles={["min-height"]}
       class={{
         'font-sans flex flex-col text-lg': true,
       }}
