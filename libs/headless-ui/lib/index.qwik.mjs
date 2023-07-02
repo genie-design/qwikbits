@@ -27,7 +27,6 @@ const Collapse = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
     get open() {
       return state.open.value;
     },
-    class: serializeClass(props.class) + " " + serializeClass(props.rootProps?.class),
     children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
       ...props.wrappers?.rootChildren,
       children: [
@@ -72,21 +71,21 @@ const Collapse = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
               }
             }, 3, "bM_0"),
             [_IMMUTABLE]: {
+              "aria-controls": _fnSignal((p0) => p0.id, [
+                state
+              ]),
+              "aria-expanded": _fnSignal((p0) => p0.open?.value, [
+                state
+              ]),
+              id: _fnSignal((p0) => p0.id + "-trigger", [
+                state
+              ]),
+              onClick$: _IMMUTABLE,
+              onKeyDown$: _IMMUTABLE,
               style: _IMMUTABLE,
               tag: _fnSignal((p0) => p0.triggerProps?.tag || "summary", [
                 props
-              ], 'p0.triggerProps?.tag||"summary"'),
-              id: _fnSignal((p0) => p0.id + "-trigger", [
-                state
-              ], 'p0.id+"-trigger"'),
-              "aria-expanded": _fnSignal((p0) => p0.open?.value, [
-                state
-              ], "p0.open?.value"),
-              "aria-controls": _fnSignal((p0) => p0.id, [
-                state
-              ], "p0.id"),
-              onClick$: _IMMUTABLE,
-              onKeyDown$: _IMMUTABLE
+              ])
             }
           }, 0, "bM_1")
         }, 0, "bM_2"),
@@ -109,31 +108,32 @@ const Collapse = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
             ...props.contentProps,
             children: /* @__PURE__ */ _jsxC(Slot, null, 3, "bM_3"),
             [_IMMUTABLE]: {
-              id: _fnSignal((p0) => p0.id, [
-                state
-              ], "p0.id"),
-              tag: _fnSignal((p0) => p0.contentProps?.tag || "div", [
-                props
-              ], 'p0.contentProps?.tag||"div"'),
-              role: _IMMUTABLE,
               "aria-labelledby": _fnSignal((p0) => p0.id + "-trigger", [
                 state
-              ], 'p0.id+"-trigger"'),
+              ]),
               hidden: _fnSignal((p0) => !p0.open?.value, [
                 state
-              ], "!p0.open?.value")
+              ]),
+              id: _fnSignal((p0) => p0.id, [
+                state
+              ]),
+              role: _IMMUTABLE,
+              tag: _fnSignal((p0) => p0.contentProps?.tag || "div", [
+                props
+              ])
             }
           }, 0, "bM_4")
         }, 0, "bM_5")
       ]
     }, 0, "bM_6"),
+    class: serializeClass(props.class) + " " + serializeClass(props.rootProps?.class),
     [_IMMUTABLE]: {
-      tag: _fnSignal((p0) => p0.rootProps?.tag || "details", [
-        props
-      ], 'p0.rootProps?.tag||"details"'),
       open: _fnSignal((p0) => p0.open.value, [
         state
-      ], "p0.open.value")
+      ]),
+      tag: _fnSignal((p0) => p0.rootProps?.tag || "details", [
+        props
+      ])
     }
   }, 0, "bM_7");
 }, "Collapse_component_I1RQqLbnLYw"));
@@ -188,7 +188,6 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
       return props.rootProps?.tag || "div";
     },
     ...props.rootProps,
-    class: serializeClass(props.class) + " " + serializeClass(props.rootProps?.class),
     children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
       ...props.wrappers?.rootChildren,
       children: [
@@ -196,34 +195,34 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
           get tag() {
             return props.triggerProps?.tag || "button";
           },
-          type: "button",
           "aria-haspopup": "dialog",
+          type: "button",
           get "aria-expanded"() {
             return state.open.value;
           },
           ...props?.triggerProps,
-          onClick$: /* @__PURE__ */ inlinedQrl(() => {
-            const [state2] = useLexicalScope();
-            return state2.open.value = true;
-          }, "Dialog_component_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_uTuqsxdOhQ8", [
-            state
-          ]),
           children: /* @__PURE__ */ _jsxC(Slot, {
             name: "trigger",
             [_IMMUTABLE]: {
               name: _IMMUTABLE
             }
           }, 3, "M4_0"),
+          onClick$: /* @__PURE__ */ inlinedQrl(() => {
+            const [state2] = useLexicalScope();
+            return state2.open.value = true;
+          }, "Dialog_component_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_uTuqsxdOhQ8", [
+            state
+          ]),
           [_IMMUTABLE]: {
-            tag: _fnSignal((p0) => p0.triggerProps?.tag || "button", [
-              props
-            ], 'p0.triggerProps?.tag||"button"'),
-            type: _IMMUTABLE,
-            "aria-haspopup": _IMMUTABLE,
             "aria-expanded": _fnSignal((p0) => p0.open.value, [
               state
-            ], "p0.open.value"),
-            onClick$: _IMMUTABLE
+            ]),
+            "aria-haspopup": _IMMUTABLE,
+            onClick$: _IMMUTABLE,
+            tag: _fnSignal((p0) => p0.triggerProps?.tag || "button", [
+              props
+            ]),
+            type: _IMMUTABLE
           }
         }, 0, "M4_1"),
         /* @__PURE__ */ _jsxS("dialog", {
@@ -259,37 +258,37 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
                     },
                     type: "button",
                     ...props?.closeProps,
-                    onClick$: /* @__PURE__ */ inlinedQrl(() => {
-                      const [state2] = useLexicalScope();
-                      return state2.open.value = false;
-                    }, "Dialog_component_QwikHTMLElement_QwikHTMLElement_dialog_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_9fsSg0rbilI", [
-                      state
-                    ]),
                     children: /* @__PURE__ */ _jsxC(Slot, {
                       name: "close",
                       [_IMMUTABLE]: {
                         name: _IMMUTABLE
                       }
                     }, 3, "M4_3"),
+                    onClick$: /* @__PURE__ */ inlinedQrl(() => {
+                      const [state2] = useLexicalScope();
+                      return state2.open.value = false;
+                    }, "Dialog_component_QwikHTMLElement_QwikHTMLElement_dialog_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_9fsSg0rbilI", [
+                      state
+                    ]),
                     [_IMMUTABLE]: {
+                      onClick$: _IMMUTABLE,
                       tag: _fnSignal((p0) => p0.closeProps?.tag || "button", [
                         props
-                      ], 'p0.closeProps?.tag||"button"'),
-                      type: _IMMUTABLE,
-                      onClick$: _IMMUTABLE
+                      ]),
+                      type: _IMMUTABLE
                     }
                   }, 0, "M4_4")
                 ],
                 [_IMMUTABLE]: {
-                  tag: _fnSignal((p0) => p0.titleProps?.tag || "header", [
-                    props
-                  ], 'p0.titleProps?.tag||"header"'),
-                  id: _fnSignal((p0) => p0.titleId, [
-                    state
-                  ], "p0.titleId"),
                   class: _fnSignal((p0) => `${p0.titleProps?.class || ""} qb-dialog-header`, [
                     props
-                  ], '`${p0.titleProps?.class||""} qb-dialog-header`')
+                  ]),
+                  id: _fnSignal((p0) => p0.titleId, [
+                    state
+                  ]),
+                  tag: _fnSignal((p0) => p0.titleProps?.tag || "header", [
+                    props
+                  ])
                 }
               }, 0, "M4_5"),
               /* @__PURE__ */ _jsxC(QwikHTMLElement, {
@@ -307,12 +306,12 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
                   }
                 }, 3, "M4_6"),
                 [_IMMUTABLE]: {
-                  tag: _fnSignal((p0) => p0.descriptionProps?.tag || "p", [
-                    props
-                  ], 'p0.descriptionProps?.tag||"p"'),
                   id: _fnSignal((p0) => p0.descriptionId, [
                     state
-                  ], "p0.descriptionId")
+                  ]),
+                  tag: _fnSignal((p0) => p0.descriptionProps?.tag || "p", [
+                    props
+                  ])
                 }
               }, 0, "M4_7"),
               /* @__PURE__ */ _jsxC(QwikHTMLElement, {
@@ -342,19 +341,19 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
                   }
                 }, 3, "M4_11"),
                 [_IMMUTABLE]: {
-                  tag: _fnSignal((p0) => p0.footerProps?.tag || "footer", [
-                    props
-                  ], 'p0.footerProps?.tag||"footer"'),
                   class: _fnSignal((p0) => `${p0.footerProps?.class || ""} qb-dialog-footer`, [
                     props
-                  ], '`${p0.footerProps?.class||""} qb-dialog-footer`')
+                  ]),
+                  tag: _fnSignal((p0) => p0.footerProps?.tag || "footer", [
+                    props
+                  ])
                 }
               }, 0, "M4_12")
             ],
             [_IMMUTABLE]: {
               tag: _fnSignal((p0) => p0.contentProps?.tag || "article", [
                 props
-              ], 'p0.contentProps?.tag||"article"')
+              ])
             }
           }, 0, "M4_13"),
           onClick$: /* @__PURE__ */ inlinedQrl((e) => {
@@ -365,30 +364,31 @@ const Dialog = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
             state
           ])
         }, {
-          role: _fnSignal((p0) => p0.role, [
-            state
-          ], "p0.role"),
-          tabIndex: -1,
-          "aria-modal": "true",
-          "aria-hidden": _fnSignal((p0) => !p0.open.value, [
-            state
-          ], "!p0.open.value"),
-          hidden: _fnSignal((p0) => !p0.open.value, [
-            state
-          ], "!p0.open.value"),
-          "aria-labelledby": _fnSignal((p0) => p0.titleId, [
-            state
-          ], "p0.titleId"),
           "aria-describedby": _fnSignal((p0) => p0.descriptionId, [
             state
-          ], "p0.descriptionId")
+          ]),
+          "aria-hidden": _fnSignal((p0) => !p0.open.value, [
+            state
+          ]),
+          "aria-labelledby": _fnSignal((p0) => p0.titleId, [
+            state
+          ]),
+          "aria-modal": "true",
+          hidden: _fnSignal((p0) => !p0.open.value, [
+            state
+          ]),
+          role: _fnSignal((p0) => p0.role, [
+            state
+          ]),
+          tabIndex: -1
         }, 0, null)
       ]
     }, 0, "M4_14"),
+    class: serializeClass(props.class) + " " + serializeClass(props.rootProps?.class),
     [_IMMUTABLE]: {
       tag: _fnSignal((p0) => p0.rootProps?.tag || "div", [
         props
-      ], 'p0.rootProps?.tag||"div"')
+      ])
     }
   }, 0, "M4_15");
 }, "Dialog_component_TOBax2mZU8Q"));
@@ -998,7 +998,6 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
       };
     },
     ...props.rootProps,
-    class: serializeClass(props.class) + " " + serializeClass(props.rootProps?.class),
     children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
       ...props.wrappers?.rootChildren,
       children: [
@@ -1011,6 +1010,17 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
           },
           popoverTargetAction: "toggle",
           ...props.triggerProps,
+          children: [
+            _fnSignal((p0) => p0.label ? p0.label : "", [
+              props
+            ]),
+            /* @__PURE__ */ _jsxC(Slot, {
+              name: "trigger",
+              [_IMMUTABLE]: {
+                name: _IMMUTABLE
+              }
+            }, 3, "H9_0")
+          ],
           onMouseEnter$: /* @__PURE__ */ inlinedQrl((e) => {
             const [handleMouseEnter2, props2] = useLexicalScope();
             handleMouseEnter2();
@@ -1027,28 +1037,17 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
             handleMouseLeave,
             props
           ]),
-          children: [
-            _fnSignal((p0) => p0.label ? p0.label : "", [
-              props
-            ], 'p0.label?p0.label:""'),
-            /* @__PURE__ */ _jsxC(Slot, {
-              name: "trigger",
-              [_IMMUTABLE]: {
-                name: _IMMUTABLE
-              }
-            }, 3, "H9_0")
-          ],
           [_IMMUTABLE]: {
-            tag: _fnSignal((p0) => p0.triggerProps?.tag || "button", [
-              props
-            ], 'p0.triggerProps?.tag||"button"'),
+            onMouseEnter$: _IMMUTABLE,
+            onMouseLeave$: _IMMUTABLE,
+            popoverTargetAction: _IMMUTABLE,
             popovertarget: _fnSignal((p0, p1) => p1.popoverId ?? p0, [
               popoverId,
               props
-            ], "p1.popoverId??p0"),
-            popoverTargetAction: _IMMUTABLE,
-            onMouseEnter$: _IMMUTABLE,
-            onMouseLeave$: _IMMUTABLE
+            ]),
+            tag: _fnSignal((p0) => p0.triggerProps?.tag || "button", [
+              props
+            ])
           }
         }, 0, "H9_1"),
         /* @__PURE__ */ _jsxC(QwikHTMLElement, {
@@ -1069,6 +1068,46 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
             open
           ]),
           ...props.contentProps,
+          children: [
+            /* @__PURE__ */ _jsxC(Slot, null, 3, "H9_2"),
+            /* @__PURE__ */ _jsxC(Slot, {
+              name: "content",
+              [_IMMUTABLE]: {
+                name: _IMMUTABLE
+              }
+            }, 3, "H9_3"),
+            props.items?.map((item, i) => /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+              role: "listitem",
+              tag: item.itemWrapperProps?.tag || "li",
+              ...item.itemWrapperProps,
+              children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+                tag: item.itemProps?.tag || "a",
+                ...item.itemProps,
+                children: [
+                  /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+                    ...item.labelBeforeProps
+                  }, 0, "H9_4"),
+                  /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+                    ...item.labelWrapperProps,
+                    children: _wrapSignal(item, "label")
+                  }, 0, "H9_5"),
+                  /* @__PURE__ */ _jsxC(QwikHTMLElement, {
+                    ...item.labelAfterProps
+                  }, 0, "H9_6")
+                ],
+                class: serializeClass(item.class) + " " + serializeClass(item.itemProps?.class)
+              }, 0, "H9_7"),
+              [_IMMUTABLE]: {
+                role: _IMMUTABLE
+              }
+            }, 0, item.key ?? i)),
+            /* @__PURE__ */ _jsxC(Slot, {
+              name: "content_after",
+              [_IMMUTABLE]: {
+                name: _IMMUTABLE
+              }
+            }, 3, "H9_8")
+          ],
           onMouseEnter$: /* @__PURE__ */ inlinedQrl((e) => {
             const [handleMouseEnter2, props2] = useLexicalScope();
             handleMouseEnter2();
@@ -1085,77 +1124,38 @@ const Dropdown = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props)
             handleMouseLeave,
             props
           ]),
-          children: [
-            /* @__PURE__ */ _jsxC(Slot, null, 3, "H9_2"),
-            /* @__PURE__ */ _jsxC(Slot, {
-              name: "content",
-              [_IMMUTABLE]: {
-                name: _IMMUTABLE
-              }
-            }, 3, "H9_3"),
-            props.items?.map((item, i) => /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-              tag: item.itemWrapperProps?.tag || "li",
-              role: "listitem",
-              ...item.itemWrapperProps,
-              children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-                tag: item.itemProps?.tag || "a",
-                ...item.itemProps,
-                class: serializeClass(item.class) + " " + serializeClass(item.itemProps?.class),
-                children: [
-                  /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-                    ...item.labelBeforeProps
-                  }, 0, "H9_4"),
-                  /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-                    ...item.labelWrapperProps,
-                    children: _wrapSignal(item, "label")
-                  }, 0, "H9_5"),
-                  /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-                    ...item.labelAfterProps
-                  }, 0, "H9_6")
-                ]
-              }, 0, "H9_7"),
-              [_IMMUTABLE]: {
-                role: _IMMUTABLE
-              }
-            }, 0, item.key ?? i)),
-            /* @__PURE__ */ _jsxC(Slot, {
-              name: "content_after",
-              [_IMMUTABLE]: {
-                name: _IMMUTABLE
-              }
-            }, 3, "H9_8")
-          ],
           [_IMMUTABLE]: {
             id: _fnSignal((p0, p1) => p1.popoverId ?? p0, [
               popoverId,
               props
-            ], "p1.popoverId??p0"),
-            tag: _fnSignal((p0) => p0.contentProps?.tag || "ul", [
-              props
-            ], 'p0.contentProps?.tag||"ul"'),
-            role: _IMMUTABLE,
+            ]),
+            onMouseEnter$: _IMMUTABLE,
+            onMouseLeave$: _IMMUTABLE,
             popover: _fnSignal((p0) => p0.popover ?? "auto", [
               props
-            ], 'p0.popover??"auto"'),
-            onMouseEnter$: _IMMUTABLE,
-            onMouseLeave$: _IMMUTABLE
+            ]),
+            role: _IMMUTABLE,
+            tag: _fnSignal((p0) => p0.contentProps?.tag || "ul", [
+              props
+            ])
           }
         }, 0, "H9_9")
       ]
     }, 0, "H9_10"),
+    class: serializeClass(props.class) + " " + serializeClass(props.rootProps?.class),
     [_IMMUTABLE]: {
-      ref: _IMMUTABLE,
+      "aria-label": _fnSignal((p0) => p0.rootProps?.["aria-label"] || p0.label, [
+        props
+      ]),
       id: _fnSignal((p0, p1) => p1.id ?? p0, [
         id,
         props
-      ], "p1.id??p0"),
+      ]),
+      ref: _IMMUTABLE,
+      style: _IMMUTABLE,
       tag: _fnSignal((p0) => p0.rootProps?.tag || "div", [
         props
-      ], 'p0.rootProps?.tag||"div"'),
-      "aria-label": _fnSignal((p0) => p0.rootProps?.["aria-label"] || p0.label, [
-        props
-      ], 'p0.rootProps?.["aria-label"]||p0.label'),
-      style: _IMMUTABLE
+      ])
     }
   }, 0, "H9_11");
 }, "Dropdown_component_4xAkSjPnY6Y"));
@@ -1257,8 +1257,6 @@ const Tabs = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => 
         return props.rootProps?.tag || "div";
       },
       ...props.rootProps,
-      id,
-      class: serializeClass(props.class) + " " + serializeClass(props.rootProps?.class),
       children: [
         /* @__PURE__ */ _jsxC(QwikHTMLElement, {
           id: `tablist-${id}`,
@@ -1274,21 +1272,21 @@ const Tabs = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => 
             }, 3, "jt_1"),
             _fnSignal((p0) => p0.label ? p0.label : "", [
               props
-            ], 'p0.label?p0.label:""')
+            ])
           ],
           [_IMMUTABLE]: {
             tag: _IMMUTABLE
           }
         }, 0, "jt_2"),
         /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-          tag: "div",
           role: "tablist",
+          tag: "div",
           ...props?.tabListProps,
           "aria-labelledby": `tablist-${id}`,
           children: props.tabs?.map((tab, i) => /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-            role: "tab",
+            "aria-controls": tab?.contentProps?.id ?? `tabpanel-${id}-${i}`,
+            "aria-selected": selected.value === i ? "true" : "false",
             id: tab.tabProps?.id ?? `tab-${id}-${i}`,
-            tag: "button",
             onClick$: /* @__PURE__ */ inlinedQrl(() => {
               const [i2, selected2] = useLexicalScope();
               return selected2.value = i2;
@@ -1296,56 +1294,58 @@ const Tabs = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => 
               i,
               selected
             ]),
-            "aria-selected": selected.value === i ? "true" : "false",
-            "aria-controls": tab?.contentProps?.id ?? `tabpanel-${id}-${i}`,
+            role: "tab",
             tabIndex: i === 0 ? 0 : -1,
+            tag: "button",
             ...props?.allTabProps,
             ...tab.tabProps,
-            class: serializeClass(tab.class) + " " + serializeClass(tab.tabProps?.class) + " " + serializeClass(props.allTabProps?.class),
             children: [
               /* @__PURE__ */ _jsxC(Slot, {
                 name: tab.tabSlotName ?? `tab-${i + 1}`
               }, 3, "jt_3"),
               tab.tabLabel ? tab.tabLabel : ""
             ],
+            class: serializeClass(tab.class) + " " + serializeClass(tab.tabProps?.class) + " " + serializeClass(props.allTabProps?.class),
             [_IMMUTABLE]: {
               role: _IMMUTABLE,
               tag: _IMMUTABLE
             }
           }, 0, (tab.key ?? i) + "-tab")),
           [_IMMUTABLE]: {
-            tag: _IMMUTABLE,
-            role: _IMMUTABLE
+            role: _IMMUTABLE,
+            tag: _IMMUTABLE
           }
         }, 0, "jt_4"),
         /* @__PURE__ */ _jsxC(QwikHTMLElement, {
           ...props.wrappers?.content,
           children: props.tabs?.map((tab, i) => /* @__PURE__ */ _jsxC(QwikHTMLElement, {
-            tag: "div",
-            role: "tabpanel",
+            "aria-labelledby": tab.tabProps?.id ?? `tab-${id}-${i}`,
             hidden: selected.value !== i,
             id: tab.contentProps?.id ?? `tabpanel-${id}-${i}`,
-            "aria-labelledby": tab.tabProps?.id ?? `tab-${id}-${i}`,
+            role: "tabpanel",
+            tag: "div",
             ...props.allContentProps,
             ...tab.contentProps,
-            class: serializeClass(tab.contentProps?.class) + " " + serializeClass(props.allContentProps?.class),
             children: [
               /* @__PURE__ */ _jsxC(Slot, {
                 name: tab.contentSlotName ?? `tab-content-${i + 1}`
               }, 3, "jt_5"),
               tab.content ? tab.content : ""
             ],
+            class: serializeClass(tab.contentProps?.class) + " " + serializeClass(props.allContentProps?.class),
             [_IMMUTABLE]: {
-              tag: _IMMUTABLE,
-              role: _IMMUTABLE
+              role: _IMMUTABLE,
+              tag: _IMMUTABLE
             }
           }, 0, (tab.key ?? i) + "content"))
         }, 0, "jt_6")
       ],
+      class: serializeClass(props.class) + " " + serializeClass(props.rootProps?.class),
+      id,
       [_IMMUTABLE]: {
         tag: _fnSignal((p0) => p0.rootProps?.tag || "div", [
           props
-        ], 'p0.rootProps?.tag||"div"')
+        ])
       }
     }, 0, "jt_7")
   }, 1, "jt_8");
@@ -1367,7 +1367,6 @@ const Toggle = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
         return props.rootProps?.tag || "div";
       },
       ...props.rootProps,
-      class: serializeClass(props.class) + " " + serializeClass(props.rootProps?.class),
       children: /* @__PURE__ */ _jsxC(QwikHTMLElement, {
         ...props.wrappers?.rootChildren,
         children: [
@@ -1377,12 +1376,6 @@ const Toggle = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
               return props.labelProps?.tag || "label";
             },
             ...props.labelProps,
-            onClick$: /* @__PURE__ */ inlinedQrl(() => {
-              const [checked2] = useLexicalScope();
-              return checked2.value = !checked2.value;
-            }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_nP9lZ4mQF20", [
-              checked
-            ]),
             children: [
               /* @__PURE__ */ _jsxC(Slot, {
                 name: "label",
@@ -1392,12 +1385,18 @@ const Toggle = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
               }, 3, "30_0"),
               _fnSignal((p0) => p0.label ? p0.label : "", [
                 props
-              ], 'p0.label?p0.label:""')
+              ])
             ],
+            onClick$: /* @__PURE__ */ inlinedQrl(() => {
+              const [checked2] = useLexicalScope();
+              return checked2.value = !checked2.value;
+            }, "Toggle_component__Fragment_QwikHTMLElement_QwikHTMLElement_QwikHTMLElement_onClick_nP9lZ4mQF20", [
+              checked
+            ]),
             [_IMMUTABLE]: {
               tag: _fnSignal((p0) => p0.labelProps?.tag || "label", [
                 props
-              ], 'p0.labelProps?.tag||"label"')
+              ])
             }
           }, 0, "30_1"),
           /* @__PURE__ */ _jsxC(QwikHTMLElement, {
@@ -1452,32 +1451,32 @@ const Toggle = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
                 [_IMMUTABLE]: {
                   "data-state": _fnSignal((p0) => p0.value ? "checked" : "off", [
                     isChecked
-                  ], 'p0.value?"checked":"off"'),
+                  ]),
                   tag: _fnSignal((p0) => p0.switchProps?.tag || "span", [
                     props
-                  ], 'p0.switchProps?.tag||"span"')
+                  ])
                 }
               }, 0, "30_4")
             ],
             [_IMMUTABLE]: {
-              type: _fnSignal((p0) => p0.switchProps?.type || "button", [
-                props
-              ], 'p0.switchProps?.type||"button"'),
-              role: _fnSignal((p0) => p0.switchProps?.role || "switch", [
-                props
-              ], 'p0.switchProps?.role||"switch"'),
-              "aria-label": _fnSignal((p0) => p0.switchProps?.["aria-label"] || "Toggle Switch", [
-                props
-              ], 'p0.switchProps?.["aria-label"]||"Toggle Switch"'),
               "aria-checked": _fnSignal((p0) => p0.value, [
                 isChecked
-              ], "p0.value"),
+              ]),
+              "aria-label": _fnSignal((p0) => p0.switchProps?.["aria-label"] || "Toggle Switch", [
+                props
+              ]),
               "data-state": _fnSignal((p0) => p0.value ? "checked" : "unchecked", [
                 isChecked
-              ], 'p0.value?"checked":"unchecked"'),
+              ]),
+              role: _fnSignal((p0) => p0.switchProps?.role || "switch", [
+                props
+              ]),
               tag: _fnSignal((p0) => p0.switchProps?.tag || "button", [
                 props
-              ], 'p0.switchProps?.tag||"button"')
+              ]),
+              type: _fnSignal((p0) => p0.switchProps?.type || "button", [
+                props
+              ])
             }
           }, 0, "30_5"),
           /* @__PURE__ */ _jsxQ("input", {
@@ -1488,21 +1487,22 @@ const Toggle = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) =
               checked
             ])
           }, {
-            type: "checkbox",
             "aria-hidden": "true",
             checked: _fnSignal((p0) => p0.value, [
               isChecked
-            ], "p0.value"),
+            ]),
             style: "transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px; width: 42px; height: 25px;",
             tabIndex: -1,
+            type: "checkbox",
             value: "on"
           }, null, 2, null)
         ]
       }, 0, "30_6"),
+      class: serializeClass(props.class) + " " + serializeClass(props.rootProps?.class),
       [_IMMUTABLE]: {
         tag: _fnSignal((p0) => p0.rootProps?.tag || "div", [
           props
-        ], 'p0.rootProps?.tag||"div"')
+        ])
       }
     }, 0, "30_7")
   }, 1, "30_8");
