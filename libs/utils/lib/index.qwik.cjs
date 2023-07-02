@@ -157,8 +157,8 @@ const VHElement = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlined
   return /* @__PURE__ */ qwik._jsxC(QwikHTMLElement, {
     tag: "div",
     ...props,
-    style,
     children: /* @__PURE__ */ qwik._jsxC(qwik.Slot, null, 3, "0M_0"),
+    style,
     [qwik._IMMUTABLE]: {
       tag: qwik._IMMUTABLE
     }
