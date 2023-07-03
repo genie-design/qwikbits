@@ -1353,7 +1353,8 @@ const Tabs = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((
   }, 1, "jt_8");
 }, "Tabs_component_z8IYuaPWXhI"));
 const Toggle = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((props) => {
-  const checked = props.checked ?? qwik.useSignal(false);
+  const checkedDefault = qwik.useSignal(false);
+  const checked = props.checked ?? checkedDefault;
   const isChecked = qwik.useComputedQrl(/* @__PURE__ */ qwik.inlinedQrl(() => {
     const [checked2, props2] = qwik.useLexicalScope();
     return props2.invertChecked ? !checked2.value : checked2.value;

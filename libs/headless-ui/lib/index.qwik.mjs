@@ -1351,7 +1351,8 @@ const Tabs = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => 
   }, 1, "jt_8");
 }, "Tabs_component_z8IYuaPWXhI"));
 const Toggle = /* @__PURE__ */ componentQrl(/* @__PURE__ */ inlinedQrl((props) => {
-  const checked = props.checked ?? useSignal(false);
+  const checkedDefault = useSignal(false);
+  const checked = props.checked ?? checkedDefault;
   const isChecked = useComputedQrl(/* @__PURE__ */ inlinedQrl(() => {
     const [checked2, props2] = useLexicalScope();
     return props2.invertChecked ? !checked2.value : checked2.value;

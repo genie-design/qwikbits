@@ -27,7 +27,8 @@ export type ToggleProps = {
   };
 };
 export const Toggle = component$((props: ToggleProps) => {
-  const checked = props.checked ?? useSignal(false);
+  const checkedDefault = useSignal(false);
+  const checked = props.checked ?? checkedDefault; 
   const isChecked = useComputed$(() => {
     return props.invertChecked ? !checked.value : checked.value;
   });

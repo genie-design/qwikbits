@@ -1,6 +1,6 @@
 {
   "name": "@qwikbits/utils",
-  "version": "0.6.8",
+  "version": "0.6.9",
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
   "types": "./lib-types/libs/utils/src/index.d.ts",
@@ -12,6 +12,7 @@
     }
   },
   "scripts": {
+    "build": "npx qwik build",
     "build.lib": "npx vite build --mode lib",
     "build.types": "npx tsc --emitDeclarationOnly --outDir lib-types -p tsconfig.types.json",
     "publish": "pnpm publish --access public"
