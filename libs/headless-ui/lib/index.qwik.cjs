@@ -75,19 +75,19 @@ const Collapse = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
             [qwik._IMMUTABLE]: {
               "aria-controls": qwik._fnSignal((p0) => p0.id, [
                 state
-              ]),
+              ], "p0.id"),
               "aria-expanded": qwik._fnSignal((p0) => p0.open?.value, [
                 state
-              ]),
+              ], "p0.open?.value"),
               id: qwik._fnSignal((p0) => p0.id + "-trigger", [
                 state
-              ]),
+              ], 'p0.id+"-trigger"'),
               onClick$: qwik._IMMUTABLE,
               onKeyDown$: qwik._IMMUTABLE,
               style: qwik._IMMUTABLE,
               tag: qwik._fnSignal((p0) => p0.triggerProps?.tag || "summary", [
                 props
-              ])
+              ], 'p0.triggerProps?.tag||"summary"')
             }
           }, 0, "bM_1")
         }, 0, "bM_2"),
@@ -112,17 +112,17 @@ const Collapse = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
             [qwik._IMMUTABLE]: {
               "aria-labelledby": qwik._fnSignal((p0) => p0.id + "-trigger", [
                 state
-              ]),
+              ], 'p0.id+"-trigger"'),
               hidden: qwik._fnSignal((p0) => !p0.open?.value, [
                 state
-              ]),
+              ], "!p0.open?.value"),
               id: qwik._fnSignal((p0) => p0.id, [
                 state
-              ]),
+              ], "p0.id"),
               role: qwik._IMMUTABLE,
               tag: qwik._fnSignal((p0) => p0.contentProps?.tag || "div", [
                 props
-              ])
+              ], 'p0.contentProps?.tag||"div"')
             }
           }, 0, "bM_4")
         }, 0, "bM_5")
@@ -132,10 +132,10 @@ const Collapse = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
     [qwik._IMMUTABLE]: {
       open: qwik._fnSignal((p0) => p0.open.value, [
         state
-      ]),
+      ], "p0.open.value"),
       tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "details", [
         props
-      ])
+      ], 'p0.rootProps?.tag||"details"')
     }
   }, 0, "bM_7");
 }, "Collapse_component_I1RQqLbnLYw"));
@@ -218,12 +218,12 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
           [qwik._IMMUTABLE]: {
             "aria-expanded": qwik._fnSignal((p0) => p0.open.value, [
               state
-            ]),
+            ], "p0.open.value"),
             "aria-haspopup": qwik._IMMUTABLE,
             onClick$: qwik._IMMUTABLE,
             tag: qwik._fnSignal((p0) => p0.triggerProps?.tag || "button", [
               props
-            ]),
+            ], 'p0.triggerProps?.tag||"button"'),
             type: qwik._IMMUTABLE
           }
         }, 0, "M4_1"),
@@ -276,7 +276,7 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
                       onClick$: qwik._IMMUTABLE,
                       tag: qwik._fnSignal((p0) => p0.closeProps?.tag || "button", [
                         props
-                      ]),
+                      ], 'p0.closeProps?.tag||"button"'),
                       type: qwik._IMMUTABLE
                     }
                   }, 0, "M4_4")
@@ -284,13 +284,13 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
                 [qwik._IMMUTABLE]: {
                   class: qwik._fnSignal((p0) => `${p0.titleProps?.class || ""} qb-dialog-header`, [
                     props
-                  ]),
+                  ], '`${p0.titleProps?.class||""} qb-dialog-header`'),
                   id: qwik._fnSignal((p0) => p0.titleId, [
                     state
-                  ]),
+                  ], "p0.titleId"),
                   tag: qwik._fnSignal((p0) => p0.titleProps?.tag || "header", [
                     props
-                  ])
+                  ], 'p0.titleProps?.tag||"header"')
                 }
               }, 0, "M4_5"),
               /* @__PURE__ */ qwik._jsxC(utils.QwikHTMLElement, {
@@ -310,10 +310,10 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
                 [qwik._IMMUTABLE]: {
                   id: qwik._fnSignal((p0) => p0.descriptionId, [
                     state
-                  ]),
+                  ], "p0.descriptionId"),
                   tag: qwik._fnSignal((p0) => p0.descriptionProps?.tag || "p", [
                     props
-                  ])
+                  ], 'p0.descriptionProps?.tag||"p"')
                 }
               }, 0, "M4_7"),
               /* @__PURE__ */ qwik._jsxC(utils.QwikHTMLElement, {
@@ -345,17 +345,17 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
                 [qwik._IMMUTABLE]: {
                   class: qwik._fnSignal((p0) => `${p0.footerProps?.class || ""} qb-dialog-footer`, [
                     props
-                  ]),
+                  ], '`${p0.footerProps?.class||""} qb-dialog-footer`'),
                   tag: qwik._fnSignal((p0) => p0.footerProps?.tag || "footer", [
                     props
-                  ])
+                  ], 'p0.footerProps?.tag||"footer"')
                 }
               }, 0, "M4_12")
             ],
             [qwik._IMMUTABLE]: {
               tag: qwik._fnSignal((p0) => p0.contentProps?.tag || "article", [
                 props
-              ])
+              ], 'p0.contentProps?.tag||"article"')
             }
           }, 0, "M4_13"),
           onClick$: /* @__PURE__ */ qwik.inlinedQrl((e) => {
@@ -368,20 +368,20 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
         }, {
           "aria-describedby": qwik._fnSignal((p0) => p0.descriptionId, [
             state
-          ]),
+          ], "p0.descriptionId"),
           "aria-hidden": qwik._fnSignal((p0) => !p0.open.value, [
             state
-          ]),
+          ], "!p0.open.value"),
           "aria-labelledby": qwik._fnSignal((p0) => p0.titleId, [
             state
-          ]),
+          ], "p0.titleId"),
           "aria-modal": "true",
           hidden: qwik._fnSignal((p0) => !p0.open.value, [
             state
-          ]),
+          ], "!p0.open.value"),
           role: qwik._fnSignal((p0) => p0.role, [
             state
-          ]),
+          ], "p0.role"),
           tabIndex: -1
         }, 0, null)
       ]
@@ -390,7 +390,7 @@ const Dialog = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
     [qwik._IMMUTABLE]: {
       tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "div", [
         props
-      ])
+      ], 'p0.rootProps?.tag||"div"')
     }
   }, 0, "M4_15");
 }, "Dialog_component_TOBax2mZU8Q"));
@@ -1015,7 +1015,7 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
           children: [
             qwik._fnSignal((p0) => p0.label ? p0.label : "", [
               props
-            ]),
+            ], 'p0.label?p0.label:""'),
             /* @__PURE__ */ qwik._jsxC(qwik.Slot, {
               name: "trigger",
               [qwik._IMMUTABLE]: {
@@ -1046,10 +1046,10 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
             popovertarget: qwik._fnSignal((p0, p1) => p1.popoverId ?? p0, [
               popoverId,
               props
-            ]),
+            ], "p1.popoverId??p0"),
             tag: qwik._fnSignal((p0) => p0.triggerProps?.tag || "button", [
               props
-            ])
+            ], 'p0.triggerProps?.tag||"button"')
           }
         }, 0, "H9_1"),
         /* @__PURE__ */ qwik._jsxC(utils.QwikHTMLElement, {
@@ -1130,16 +1130,16 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
             id: qwik._fnSignal((p0, p1) => p1.popoverId ?? p0, [
               popoverId,
               props
-            ]),
+            ], "p1.popoverId??p0"),
             onMouseEnter$: qwik._IMMUTABLE,
             onMouseLeave$: qwik._IMMUTABLE,
             popover: qwik._fnSignal((p0) => p0.popover ?? "auto", [
               props
-            ]),
+            ], 'p0.popover??"auto"'),
             role: qwik._IMMUTABLE,
             tag: qwik._fnSignal((p0) => p0.contentProps?.tag || "ul", [
               props
-            ])
+            ], 'p0.contentProps?.tag||"ul"')
           }
         }, 0, "H9_9")
       ]
@@ -1148,16 +1148,16 @@ const Dropdown = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQ
     [qwik._IMMUTABLE]: {
       "aria-label": qwik._fnSignal((p0) => p0.rootProps?.["aria-label"] || p0.label, [
         props
-      ]),
+      ], 'p0.rootProps?.["aria-label"]||p0.label'),
       id: qwik._fnSignal((p0, p1) => p1.id ?? p0, [
         id,
         props
-      ]),
+      ], "p1.id??p0"),
       ref: qwik._IMMUTABLE,
       style: qwik._IMMUTABLE,
       tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "div", [
         props
-      ])
+      ], 'p0.rootProps?.tag||"div"')
     }
   }, 0, "H9_11");
 }, "Dropdown_component_4xAkSjPnY6Y"));
@@ -1274,7 +1274,7 @@ const Tabs = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((
             }, 3, "jt_1"),
             qwik._fnSignal((p0) => p0.label ? p0.label : "", [
               props
-            ])
+            ], 'p0.label?p0.label:""')
           ],
           [qwik._IMMUTABLE]: {
             tag: qwik._IMMUTABLE
@@ -1347,7 +1347,7 @@ const Tabs = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl((
       [qwik._IMMUTABLE]: {
         tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "div", [
           props
-        ])
+        ], 'p0.rootProps?.tag||"div"')
       }
     }, 0, "jt_7")
   }, 1, "jt_8");
@@ -1388,7 +1388,7 @@ const Toggle = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
               }, 3, "30_0"),
               qwik._fnSignal((p0) => p0.label ? p0.label : "", [
                 props
-              ])
+              ], 'p0.label?p0.label:""')
             ],
             onClick$: /* @__PURE__ */ qwik.inlinedQrl(() => {
               const [checked2] = qwik.useLexicalScope();
@@ -1399,7 +1399,7 @@ const Toggle = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
             [qwik._IMMUTABLE]: {
               tag: qwik._fnSignal((p0) => p0.labelProps?.tag || "label", [
                 props
-              ])
+              ], 'p0.labelProps?.tag||"label"')
             }
           }, 0, "30_1"),
           /* @__PURE__ */ qwik._jsxC(utils.QwikHTMLElement, {
@@ -1454,32 +1454,32 @@ const Toggle = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
                 [qwik._IMMUTABLE]: {
                   "data-state": qwik._fnSignal((p0) => p0.value ? "checked" : "off", [
                     isChecked
-                  ]),
+                  ], 'p0.value?"checked":"off"'),
                   tag: qwik._fnSignal((p0) => p0.switchProps?.tag || "span", [
                     props
-                  ])
+                  ], 'p0.switchProps?.tag||"span"')
                 }
               }, 0, "30_4")
             ],
             [qwik._IMMUTABLE]: {
               "aria-checked": qwik._fnSignal((p0) => p0.value, [
                 isChecked
-              ]),
+              ], "p0.value"),
               "aria-label": qwik._fnSignal((p0) => p0.switchProps?.["aria-label"] || "Toggle Switch", [
                 props
-              ]),
+              ], 'p0.switchProps?.["aria-label"]||"Toggle Switch"'),
               "data-state": qwik._fnSignal((p0) => p0.value ? "checked" : "unchecked", [
                 isChecked
-              ]),
+              ], 'p0.value?"checked":"unchecked"'),
               role: qwik._fnSignal((p0) => p0.switchProps?.role || "switch", [
                 props
-              ]),
+              ], 'p0.switchProps?.role||"switch"'),
               tag: qwik._fnSignal((p0) => p0.switchProps?.tag || "button", [
                 props
-              ]),
+              ], 'p0.switchProps?.tag||"button"'),
               type: qwik._fnSignal((p0) => p0.switchProps?.type || "button", [
                 props
-              ])
+              ], 'p0.switchProps?.type||"button"')
             }
           }, 0, "30_5"),
           /* @__PURE__ */ qwik._jsxQ("input", {
@@ -1493,7 +1493,7 @@ const Toggle = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
             "aria-hidden": "true",
             checked: qwik._fnSignal((p0) => p0.value, [
               isChecked
-            ]),
+            ], "p0.value"),
             style: "transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px; width: 42px; height: 25px;",
             tabIndex: -1,
             type: "checkbox",
@@ -1505,7 +1505,7 @@ const Toggle = /* @__PURE__ */ qwik.componentQrl(/* @__PURE__ */ qwik.inlinedQrl
       [qwik._IMMUTABLE]: {
         tag: qwik._fnSignal((p0) => p0.rootProps?.tag || "div", [
           props
-        ])
+        ], 'p0.rootProps?.tag||"div"')
       }
     }, 0, "30_7")
   }, 1, "30_8");
