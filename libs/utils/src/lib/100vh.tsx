@@ -27,13 +27,16 @@ export const VHElement = component$((props: HeightScreenElementProps) => {
   const styleValue = height.value
     ? `${height.value}px`
     : `${props.vh || 100}vh`;
-  const style = styles.reduce((acc, s) => {
-    acc[s] = styleValue;
-    return acc;
-  }, {} as Record<string, string>);
+  const style = styles.reduce(
+    (acc, s) => {
+      acc[s] = styleValue;
+      return acc;
+    },
+    {} as Record<string, string>,
+  );
   return (
-    <QwikHTMLElement tag={'div'} {...props} style={style}>
+    <div {...props} style={style}>
       <Slot />
-    </QwikHTMLElement>
+    </div>
   );
 });
